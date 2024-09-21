@@ -4,7 +4,7 @@
 
 h2 {
   font-size: 2em;
-  margin: 1em;
+  margin: 1em 0;
   color: #2e2e2d;
   font-weight: bold;
 }
@@ -12,18 +12,41 @@ h2 {
 .images-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 4em;
+  gap: 5em;
   justify-items: center;
-  margin: 2em;
+  margin: 2em 0;
 }
 
-.images-grid img {
-  width: 12em;
+.photo-container {
+  position: relative;
+  width: 12rem;
+  overflow: hidden;
+}
+
+.photo-container img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  display: none;
+  width: 7rem;
+  height: 7rem;
+}
+
+.photo-container:hover .play-icon {
+  display: block;
 }
 
 .divider {
-  margin: 3em 2em;
+  margin: 3em 0em;
   border: 0;
-  height: 0.7px;
+  height: 1px;
   background: #e2e1e1;
 }

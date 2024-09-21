@@ -1,4 +1,5 @@
-import "./MainContent.css";
+import React from "react";
+import "./MainContent.css"; 
 
 function MainContent() {
   return (
@@ -6,24 +7,74 @@ function MainContent() {
       <section>
         <h2>More of what you like</h2>
         <div className="images-grid">
-          <img src="/public/music3.png" alt="image" />
-          <img src="/public/music2.png" alt="image" />
-          <img src="/public/music3.png" alt="image" />
-          <img src="/public/music2.png" alt="image" />
-          <img src="/public/music3.png" alt="image" />
+          <div className="photo-container">
+            <img src="/public/music3.png" alt="image" />
+            <div className="play-icon">
+              <img src="/public/play.png" alt="play-icon" />
+            </div>
+          </div>
+          <div className="photo-container">
+            <img src="/public/music2.png" alt="image" />
+            <div className="play-icon">
+              <img src="/public/play.png" alt="play-icon" />
+            </div>
+          </div>
+          <div className="photo-container">
+            <img src="/public/music3.png" alt="image" />
+            <div className="play-icon">
+              <img src="/public/play.png" alt="play-icon" />
+            </div>
+          </div>
+          <div className="photo-container">
+            <img src="/public/music2.png" alt="image" />
+            <div className="play-icon">
+              <img src="/public/play.png" alt="play-icon" />
+            </div>
+          </div>
+          <div className="photo-container">
+            <img src="/public/music3.png" alt="image" />
+            <div className="play-icon">
+              <img src="/public/play.png" alt="play-icon" />
+            </div>
+          </div>
         </div>
       </section>
 
       <hr className="divider" />
 
-      <section className="section-recently-played">
+      <section>
         <h2>Recently Played</h2>
         <div className="images-grid">
-          <img src="/public/music1.png" alt="image" />
-          <img src="/public/music2.png" alt="image" />
-          <img src="/public/music1.png" alt="image" />
-          <img src="/public/music2.png" alt="image" />
-          <img src="/public/music1.png" alt="image" />
+          <div className="photo-container">
+            <img src="/public/music1.png" alt="image" />
+            <div className="play-icon">
+              <img src="/public/play.png" alt="play-icon" />
+            </div>
+          </div>
+          <div className="photo-container">
+            <img src="/public/music2.png" alt="image" />
+            <div className="play-icon">
+              <img src="/public/play.png" alt="play-icon" />
+            </div>
+          </div>
+          <div className="photo-container">
+            <img src="/public/music1.png" alt="image" />
+            <div className="play-icon">
+              <img src="/public/play.png" alt="play-icon" />
+            </div>
+          </div>
+          <div className="photo-container">
+            <img src="/public/music2.png" alt="image" />
+            <div className="play-icon">
+              <img src="/public/play.png" alt="play-icon" />
+            </div>
+          </div>
+          <div className="photo-container">
+            <img src="/public/music1.png" alt="image" />
+            <div className="play-icon">
+              <img src="/public/play.png" alt="play-icon" />
+            </div>
+          </div>
         </div>
       </section>
     </main>
