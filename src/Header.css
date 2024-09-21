@@ -1,0 +1,83 @@
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #2e2e2d;
+  padding: 1em 2em;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.logo img {
+  width: 90px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 2em;
+}
+
+.nav-left li a,
+.nav-right li :not(.try-next-pro) {
+  color: #d3d1d1;
+  font-size: 1.2em;
+}
+
+.try-next-pro {
+  color: rgb(221, 106, 44);
+  font-size: 1.2em;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-input {
+  width: 300px;
+  padding: 0.5em;
+  outline: none;
+  border: none;
+  opacity: 0.9;
+}
+
+.search img {
+  position: absolute;
+  right: 5px;
+  cursor: pointer;
+  width: 20px;
+  height: auto;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1em;
+}
+
+button {
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+  padding: 0.7em 1.3em;
+}
+
+.auth-buttons :nth-child(1) {
+  background-color: transparent;
+  color: #d3d1d1;
+  border: 1px solid #fff;
+}
+
+.auth-buttons :nth-child(2) {
+  background-color: rgb(221, 106, 44);
+  color: #fff;
+}
+
+/* responsive */
