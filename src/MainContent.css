@@ -1,0 +1,29 @@
+.main-content {
+  padding: 1em 7em;
+}
+
+h2 {
+  font-size: 2em;
+  margin: 1em;
+  color: #2e2e2d;
+  font-weight: bold;
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 4em;
+  justify-items: center;
+  margin: 2em;
+}
+
+.images-grid img {
+  width: 12em;
+}
+
+.divider {
+  margin: 3em 2em;
+  border: 0;
+  height: 0.7px;
+  background: #e2e1e1;
+}
