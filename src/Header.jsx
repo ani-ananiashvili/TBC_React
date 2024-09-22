@@ -27,7 +27,9 @@ function Header() {
 
         <ul className="nav-right">
           <li>
-            <a  className="try-next-pro" href="#">Try Next Pro</a>
+            <a className="try-next-pro" href="#">
+              Try Next Pro
+            </a>
           </li>
           <li>
             <a href="#">For Artists</a>
@@ -37,10 +39,14 @@ function Header() {
           </li>
         </ul>
       </nav>
-
-      <div className="auth-buttons">
-        <button>Sign In</button>
-        <button>Sign Up</button>
+      <div className="bar-auth">
+        <a className="burger-bar" href="#">
+          <img src="/public/burger-bar.png" alt="burger-bar" />
+        </a>
+        <div className="auth-buttons">
+          <button>Sign In</button>
+          <button>Sign Up</button>
+        </div>
       </div>
     </header>
   );

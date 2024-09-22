@@ -1,23 +1,26 @@
 .footer {
   background-color: #f8f9fa;
-  padding: 1em 0em 3em;  
+  padding: 1em 0 3em;
 }
 
 .footer-content {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  gap: 50px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+
+.go-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .footer h2 {
   font-size: 1.7em;
-}
-
-.go-mobile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin-bottom: 1em;
 }
 
 .mobile-img {
@@ -27,24 +30,99 @@
 
 .mobile-img a img {
   width: 150px;
+  height: auto;
 }
 
 .footer-links {
-    display: flex;
-    gap: 100px;
+  display: flex;
+  gap: 2em;
+  flex-wrap: wrap;
 }
 
 .footer-links li {
-  margin: 1.3em 0em 0em;
+  margin: 1.3em 0 0;
   font-size: 1.08em;
 }
 
 .footer-links a {
   color: #000;
+  text-decoration: none;
 }
 
 .footer-links a:hover {
-    color: rgb(221, 106, 44);
-    text-decoration: underline;
+  color: rgb(221, 106, 44);
+  text-decoration: underline;
 }
 
+/* responsive */
+
+@media (max-width: 1440px) {
+  .footer-content {
+    gap: 50px;
+  }
+
+  .footer-links {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .footer h2 {
+    font-size: 1.5em;
+  }
+
+  .mobile-img a img {
+    width: 130px;
+  }
+
+  .footer-links li {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 992px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+    gap: 2em;
+  }
+
+  .footer-links li {
+    margin: 0.8em 0;
+  }
+
+  .mobile-img a img {
+    width: 120px;
+  }
+
+  .footer-content {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer h2 {
+    font-size: 1.3em;
+  }
+
+  .footer-links li {
+    font-size: 0.95em;
+  }
+
+  .mobile-img a img {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.11em;
+  }
+}

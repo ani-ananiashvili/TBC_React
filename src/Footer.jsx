@@ -25,19 +25,19 @@ function Footer() {
               <a href="#">Privacy</a>
             </li>
             <li>
-              <a href="#">Cookie Policy</a>
+              <a href="#">Artist Resources</a>
             </li>
           </ul>
 
           <ul>
             <li>
-              <a href="#">Cookie Manager</a>
-            </li>
-            <li>
               <a href="#">Imprint</a>
             </li>
             <li>
-              <a href="#">Artist Resources</a>
+              <a href="#">Cookie Policy</a>
+            </li>
+            <li>
+              <a href="#">Cookie Manager</a>
             </li>
           </ul>
 
