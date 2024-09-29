@@ -32,10 +32,10 @@ function Header() {
             </a>
           </li>
           <li>
-            <a href="#">For Artists</a>
+            <a href="#">Contact</a>
           </li>
           <li>
-            <a href="#">Upload</a>
+            <a href="#">About</a>
           </li>
         </ul>
       </nav>
