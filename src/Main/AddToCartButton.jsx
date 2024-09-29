@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function AddToCartButton({ buttonColor }) {
   return (
     <button className="add-to-cart" style={{ backgroundColor: buttonColor }}>
@@ -5,5 +7,9 @@ function AddToCartButton({ buttonColor }) {
     </button>
   );
 }
+
+AddToCartButton.propTypes = {
+  buttonColor: PropTypes.string.isRequired,
+};
 
 export default AddToCartButton;

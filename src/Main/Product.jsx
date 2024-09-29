@@ -1,8 +1,9 @@
-import ProductTitle from "./ProductTitle";
-import ProductDescription from "./ProductDescription";
-import ProductImage from "./ProductImage";
-import AddToCartButton from "./AddToCartButton";
-import "./Product.css";
+import PropTypes from 'prop-types';
+import ProductTitle from './ProductTitle';
+import ProductDescription from './ProductDescription';
+import ProductImage from './ProductImage';
+import AddToCartButton from './AddToCartButton';
+import './Product.css';
 
 function Product({ title, description, image, price, buttonColor }) {
   return (
@@ -15,5 +16,13 @@ function Product({ title, description, image, price, buttonColor }) {
     </div>
   );
 }
+
+Product.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  buttonColor: PropTypes.string.isRequired,
+};
 
 export default Product;
