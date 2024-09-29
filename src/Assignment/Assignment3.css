@@ -1,0 +1,21 @@
+.object {
+  margin: 50px;
+}
+
+
+table {
+    width: 50%;
+    margin: 0 auto;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #d8d8d8;
+
+  }
+  
+  th {
+    background-color: #f4f4f4;
+    text-align: center;
+  }
+  
