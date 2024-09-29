@@ -3,8 +3,8 @@ import "./App.css";
 import Header from "./Header/Header";
 import MainContent from "./Main/MainContent";
 import Footer from "./Footer/Footer";
-import Contact from "./Contact";
-import About from "./About";
+import Contact from "./Contact/Contact";
+// import About from "./About/About";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainContent />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
+        {/* <Route path="/about" element={<About />} /> */}
       </Routes>
       <Footer />
     </Router>
