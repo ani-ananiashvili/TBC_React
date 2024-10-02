@@ -7,6 +7,8 @@ import Contact from "./Contact/Contact";
 import About from "./About/About";
 import Assignment3 from "./Assignment/Assignment3";
 import Blog from "./Blog/Blog";
+import Profile from "./Profile/Profile";
+
 
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/assignment3" element={<Assignment3 />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </Router>

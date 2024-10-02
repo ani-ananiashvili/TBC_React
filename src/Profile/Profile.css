@@ -1,0 +1,44 @@
+.profile-container {
+    padding: 50px 100px;
+    max-width: 650px;
+    margin: 0 auto;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center; 
+  }
+  
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+    margin: 10px 4px;
+    display: block;
+  }
+  
+  .profile-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgb(221, 106, 44);
+    outline: none;
+    background-color: #ffffff;
+  }
+  
+  .profile-photo {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 40px; 
+  }
+  
