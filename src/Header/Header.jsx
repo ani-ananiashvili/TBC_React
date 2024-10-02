@@ -10,13 +10,13 @@ function Header() {
       <nav className="nav">
         <ul className="nav-left">
           <li>
-            <a href="#">Home</a>
+            <a href="/">Home</a>
           </li>
           <li>
-            <a href="#">Feed</a>
+            <a href="/profile">Profile</a>
           </li>
           <li>
-            <a href="#">Library</a>
+            <a href="/">Library</a>
           </li>
         </ul>
 
@@ -27,7 +27,7 @@ function Header() {
 
         <ul className="nav-right">
           <li>
-            <a className="try-next-pro" href="#">
+            <a className="try-next-pro" href="/">
               Try Next Pro
             </a>
           </li>

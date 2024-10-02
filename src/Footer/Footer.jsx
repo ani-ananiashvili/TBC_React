@@ -19,37 +19,37 @@ function Footer() {
         <div className="footer-links">
           <ul>
             <li>
-              <a href="#">Legal</a>
+              <a href="/">Legal</a>
             </li>
             <li>
-              <a href="#">Privacy</a>
+              <a href="/">Privacy</a>
             </li>
             <li>
-              <a href="#">Artist Resources</a>
-            </li>
-          </ul>
-
-          <ul>
-            <li>
-              <a href="#">Imprint</a>
-            </li>
-            <li>
-              <a href="#">Cookie Policy</a>
-            </li>
-            <li>
-              <a href="#">Cookie Manager</a>
+              <a href="/">Artist Resources</a>
             </li>
           </ul>
 
           <ul>
             <li>
-              <a href="#">Blog</a>
+              <a href="/">Imprint</a>
             </li>
             <li>
-              <a href="#">Charts</a>
+              <a href="/">Cookie Policy</a>
             </li>
             <li>
-              <a href="#">Transparency Reports</a>
+              <a href="/">Cookie Manager</a>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <a href="/blog">Blog</a>
+            </li>
+            <li>
+              <a href="/">Charts</a>
+            </li>
+            <li>
+              <a href="/">Transparency Reports</a>
             </li>
           </ul>
         </div>
