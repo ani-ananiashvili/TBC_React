@@ -6,6 +6,8 @@ import Footer from "./Footer/Footer";
 import Contact from "./Contact/Contact";
 import About from "./About/About";
 import Assignment3 from "./Assignment/Assignment3";
+import Blog from "./Blog/Blog";
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/assignment3" element={<Assignment3 />} />
+        <Route path="/blog" element={<Blog />} />
       </Routes>
       <Footer />
     </Router>
