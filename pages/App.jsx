@@ -1,15 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
-import Header from "./Header/Header";
-import MainContent from "./Main/MainContent";
-import Footer from "./Footer/Footer";
+import "../styles/App.css";
+import Header from "../components/Header/Header";
+import MainContent from "../components/Main/MainContent";
+import Footer from "../components/Footer/Footer";
 import Contact from "./Contact/Contact";
 import About from "./About/About";
 import Assignment3 from "./Assignment/Assignment3";
 import Blog from "./Blog/Blog";
 import Profile from "./Profile/Profile";
-
-
 
 function App() {
   return (
