@@ -1,47 +1,49 @@
 import "./Header.css";
+import Link from 'next/link';
 
 function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <img src="/public/logo-soundcloud.png" alt="logo" />
+        <img src="/logo-soundcloud.png" alt="logo" />
       </div>
 
       <nav className="nav">
         <ul className="nav-left">
           <li>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
           </li>
           <li>
-            <a href="/profile">Profile</a>
+            <Link href="/profile">Profile</Link>
           </li>
           <li>
-            <a href="/">Library</a>
+            <Link href="/">Library</Link>
           </li>
         </ul>
 
         <div className="search">
           <input type="text" placeholder="Search" className="search-input" />
-          <img src="/public/search.svg" alt="search-icon" />
+          <img src="/search.svg" alt="search-icon" />
         </div>
 
         <ul className="nav-right">
           <li>
-            <a className="try-next-pro" href="/">
+            <Link href="/" className="try-next-pro">
               Try Next Pro
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/contact">Contact</a>
+            <Link href="/contact">Contact</Link>
           </li>
           <li>
-            <a href="/about">About</a>
+            <Link href="/about">About</Link>
           </li>
         </ul>
       </nav>
+
       <div className="bar-auth">
         <a className="burger-bar" href="#">
-          <img src="/public/burger-bar.png" alt="burger-bar" />
+          <img src="/burger-bar.png" alt="burger-bar" />
         </a>
         <div className="auth-buttons">
           <button>Sign In</button>
