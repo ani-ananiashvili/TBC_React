@@ -5,7 +5,7 @@ function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <img src="./assets/logo-soundcloud.png" alt="logo" />
+        <img src="/assets/logo-soundcloud.png" alt="logo" />
       </div>
 
       <nav className="nav">
@@ -23,7 +23,7 @@ function Header() {
 
         <div className="search">
           <input type="text" placeholder="Search" className="search-input" />
-          <img src="./assets/search.svg" alt="search-icon" />
+          <img src="/assets/search.svg" alt="search-icon" />
         </div>
 
         <ul className="nav-right">
@@ -43,7 +43,7 @@ function Header() {
 
       <div className="bar-auth">
         <a className="burger-bar" href="#">
-          <img src="./assets/burger-bar.png" alt="burger-bar" />
+          <img src="/assets/burger-bar.png" alt="burger-bar" />
         </a>
         <div className="auth-buttons">
           <button>Sign In</button>

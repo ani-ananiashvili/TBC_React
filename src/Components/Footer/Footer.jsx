@@ -8,10 +8,10 @@ function Footer() {
           <h2>Go mobile</h2>
           <div className="mobile-img">
             <a href="#">
-              <img src="./assets/app-store.png" alt="App Store" />
+              <img src="/assets/app-store.png" alt="App Store" />
             </a>
             <a href="#">
-              <img src="./assets/google-play.png" alt="Google Play" />
+              <img src="/assets/google-play.png" alt="Google Play" />
             </a>
           </div>
         </div>
