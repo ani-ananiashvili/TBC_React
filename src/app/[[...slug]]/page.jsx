@@ -1,10 +1,18 @@
-import '../../App.css'
-import { ClientOnly } from './client'
- 
+import "../../App.css";
+import { ClientOnly } from "./client";
+
 export function generateStaticParams() {
-  return [ {slug: [""]}, {slug: ["blog"]}, {slug: ["about"]}, {slug: ["contact"]}, {slug: ["profile"]}]
+  return [
+    { slug: [""] },
+    { slug: ["profile"] },
+    { slug: ["contact"] },
+    { slug: ["about"] },
+    { slug: ["blog"] },
+    { slug: ["assignment"] },
+
+  ];
 }
- 
+
 export default function Page() {
-  return <ClientOnly />
+  return <ClientOnly />;
 }
