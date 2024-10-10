@@ -1,6 +1,7 @@
-"use client";
+"use client"; 
 
 import { useEffect, useState } from "react";
+import Link from 'next/link'; 
 import './Products.css'; 
 
 const Products = () => {
@@ -22,10 +23,13 @@ const Products = () => {
       <div className="product-grid">
         {products.map((product) => (
           <div key={product.id} className="product-card">
-            <img src={product.thumbnail} alt={product.title} />
-            <h2>{product.title}</h2>
-            <p>{product.description}</p>
-            <p>Price: ${product.price}</p>
+     <Link href={`/products/${product.id}`}>
+  <img src={product.thumbnail} alt={product.title} />
+  <h2>{product.title}</h2>
+  <p>{product.description}</p>
+  <p>Price: ${product.price}</p>
+</Link>
+
           </div>
         ))}
       </div>
