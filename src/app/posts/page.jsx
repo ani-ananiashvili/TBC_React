@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Ensure this is a client component
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -6,16 +6,35 @@ import "./index.css";
 
 const PostsFetch = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // State to handle errors
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("https://dummyjson.com/posts");
-      const data = await response.json();
-      setPosts(data.posts);
+      try {
+        const response = await fetch("https://dummyjson.com/posts");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setPosts(data.posts);
+      } catch (err) {
+        setError(err.message); // Set error message in case of failure
+      } finally {
+        setLoading(false); // Set loading to false whether success or failure
+      }
     };
 
     fetchPosts();
   }, []);
+
+  if (loading) {
+    return <p>Loading posts...</p>; // Loading state
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>; // Display error if any
+  }
 
   return (
     <div className="posts-container">
