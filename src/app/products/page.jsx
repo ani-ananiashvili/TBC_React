@@ -1,8 +1,8 @@
-"use client"; 
+"use client";
 
 import { useEffect, useState } from "react";
-import Link from 'next/link'; 
-import './Products.css'; 
+import Link from "next/link";
+import "./Products.css";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -11,7 +11,7 @@ const Products = () => {
     async function fetchProducts() {
       const response = await fetch("https://dummyjson.com/products");
       const data = await response.json();
-      setProducts(data.products); 
+      setProducts(data.products);
     }
 
     fetchProducts();
@@ -19,17 +19,16 @@ const Products = () => {
 
   return (
     <div>
-      <h1>Product List</h1>
+      <h1 className="product-title">Product List - Shop With Us!</h1>
       <div className="product-grid">
         {products.map((product) => (
           <div key={product.id} className="product-card">
-     <Link href={`/products/${product.id}`}>
-  <img src={product.thumbnail} alt={product.title} />
-  <h2>{product.title}</h2>
-  <p>{product.description}</p>
-  <p>Price: ${product.price}</p>
-</Link>
-
+            <Link href={`/products/${product.id}`}>
+              <img src={product.thumbnail} alt={product.title} />
+              <h2>{product.title}</h2>
+              <p>{product.description}</p>
+              <p>Price: ${product.price}</p>
+            </Link>
           </div>
         ))}
       </div>
