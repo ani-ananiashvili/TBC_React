@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import '../../App.css';
+import '../../global.css';
 
 const App = dynamic(() => import('../../App'), { ssr: false });
 

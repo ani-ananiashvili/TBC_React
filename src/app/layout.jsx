@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
-import '../app.css'
+import '../global.css'
 
 
 export default function RootLayout({ children }) {
