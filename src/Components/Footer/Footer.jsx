@@ -31,10 +31,10 @@ function Footer() {
 
           <ul>
             <li>
-              <a href="/">Imprint</a>
+              <a href="/posts">Posts</a>
             </li>
             <li>
-              <a href="/">Cookie Policy</a>
+              <a href="/products">Products</a>
             </li>
             <li>
               <a href="/">Cookie Manager</a>
