@@ -2,20 +2,32 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Spinner from "../components/Spinner/Spinner";
 import "./Products.css";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetch("https://dummyjson.com/products");
-      const data = await response.json();
-      setProducts(data.products);
+      try {
+        const response = await fetch("https://dummyjson.com/products");
+        const data = await response.json();
+        setProducts(data.products);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchProducts();
   }, []);
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div>

@@ -19,6 +19,10 @@
   cursor: pointer;
 }
 
+.product-card img {
+  width: 270px;
+}
+
 .product-card:hover {
   transform: scale(1.03);
 }
