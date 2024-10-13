@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { fetchPostsData } from "./fetchPostsData"; 
 import Spinner from "../components/Spinner/Spinner";
 import "./index.css";
 
@@ -13,11 +14,7 @@ const PostsFetch = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("https://dummyjson.com/posts");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
+        const data = await fetchPostsData(); 
         setPosts(data.posts);
       } catch (err) {
         setError(err.message);

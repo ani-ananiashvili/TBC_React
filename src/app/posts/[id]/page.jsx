@@ -1,22 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { fetchPostData } from "./fetchPostData";
 import "./index.css";
+
 const PostPage = ({ params }) => {
   const [post, setPost] = useState(null);
   const { id } = params;
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await fetch(`https://dummyjson.com/posts/${id}`);
-      const data = await response.json();
+      const data = await fetchPostData(id);
       setPost(data);
     };
-
     fetchPost();
   }, [id]);
 
-  if (!post) return <div>Loading...</div>;
+  if (!post) return <div className="loading">Loading...</div>;
 
   return (
     <div className="post-page">
