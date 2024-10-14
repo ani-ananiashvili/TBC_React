@@ -5,16 +5,16 @@
   color: #333;
 }
 
-.search-sort-section {
+.product-search-sort {
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px 0px;
+  padding: 20px 0;
 }
 
-.search-sort-section input {
+.product-search-input {
   width: 50%;
   padding: 10px;
   border: 1px solid #ddd;
@@ -22,18 +22,18 @@
   outline: none;
 }
 
-.sort-section {
+.product-sort {
   display: flex;
   align-items: center;
 }
 
-.sort-label {
+.product-sort-label {
   font-size: 1rem;
   margin-right: 10px;
   color: #333;
 }
 
-.sort-section select {
+.product-sort-select {
   padding: 10px;
   border: 1px solid #ddd;
   font-size: 1rem;
@@ -84,5 +84,4 @@
   font-size: 1.2rem;
   color: #666;
   margin: 20px 0;
-  text-align: center;
 }
