@@ -6,15 +6,29 @@ import "./index.css";
 
 const PostPage = ({ params }) => {
   const [post, setPost] = useState(null);
+  const [error, setError] = useState(null);
   const { id } = params;
 
   useEffect(() => {
     const fetchPost = async () => {
       const data = await fetchPostData(id);
-      setPost(data);
+
+      if (!data) {
+        setError("Post Not Found...");
+      } else {
+        setPost(data);
+      }
     };
     fetchPost();
   }, [id]);
+
+  if (error) {
+    return (
+      <div className="error-message">
+        <h2>{error}</h2>
+      </div>
+    );
+  }
 
   if (!post) return <div className="loading">Loading...</div>;
 
