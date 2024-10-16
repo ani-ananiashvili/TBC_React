@@ -1,40 +1,33 @@
-import './index.css'
+import { notFound } from "next/navigation";
+import { fetchPostsData } from "../fetchPostsData";
+import "./index.css";
 
 
-const fetchPostData = async (id) => {
-  const response = await fetch(`https://dummyjson.com/posts/${id}`);
-  if (!response.ok) {
-    throw new Error("Post not found.");
-  }
-  const data = await response.json();
-  return data;
-};
+export default async function PostPage({ params }) {
+  const postId = parseInt(params.id);
 
-const PostPage = async ({ params }) => {
-  const { id } = params;
+  const data = await fetchPostsData();
 
-  let post;
+  const post = data.posts.find((post) => post.id === postId);
 
-  try {
-    post = await fetchPostData(id);
-  } catch (error) {
-    return (
-      <div className="error-message">
-        <h2>{error.message}</h2>
-      </div>
-    );
+  if (!post) {
+    return notFound();
   }
 
   return (
     <div className="post-page">
-      <h1>{post.title}</h1>
-      <p>{post.body}</p>
+      <h1 className="post-title">{post.title}</h1>
+      <p className="post-body">{post.body}</p>
       <div className="post-footer">
-        <p className="tags">Tags: {post.tags.join(", ")}</p>
-        <p className="post-views">Views: {post.views}</p>
+        <span className="post-tags">
+          {post.tags?.map((tag, index) => (
+            <span key={index} className="tag-item">
+              {tag}
+            </span>
+          ))}
+        </span>
+        <span className="post-views">{post.views} views</span>
       </div>
     </div>
   );
-};
-
-export default PostPage;
+}

@@ -1,0 +1,17 @@
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  outline: none;
+}
+.search-bar:focus {
+  border-color: rgb(221, 106, 44);
+}
+
+.not-found {
+  font-size: 1.5rem;
+  color: #666;
+}
+
+
