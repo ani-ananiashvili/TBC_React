@@ -1,36 +1,29 @@
-"use client";
+import './index.css'
 
-import { useEffect, useState } from "react";
-import { fetchPostData } from "./fetchPostData";
-import "./index.css";
 
-const PostPage = ({ params }) => {
-  const [post, setPost] = useState(null);
-  const [error, setError] = useState(null);
+const fetchPostData = async (id) => {
+  const response = await fetch(`https://dummyjson.com/posts/${id}`);
+  if (!response.ok) {
+    throw new Error("Post not found.");
+  }
+  const data = await response.json();
+  return data;
+};
+
+const PostPage = async ({ params }) => {
   const { id } = params;
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      const data = await fetchPostData(id);
+  let post;
 
-      if (!data) {
-        setError("Post Not Found...");
-      } else {
-        setPost(data);
-      }
-    };
-    fetchPost();
-  }, [id]);
-
-  if (error) {
+  try {
+    post = await fetchPostData(id);
+  } catch (error) {
     return (
       <div className="error-message">
-        <h2>{error}</h2>
+        <h2>{error.message}</h2>
       </div>
     );
   }
-
-  if (!post) return <div className="loading">Loading...</div>;
 
   return (
     <div className="post-page">

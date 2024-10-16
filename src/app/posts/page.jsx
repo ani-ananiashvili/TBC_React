@@ -1,37 +1,24 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { fetchPostsData } from "./fetchPostsData"; 
-import Spinner from "../components/Spinner/Spinner";
-import "./index.css";
+import './index.css'
 
-const PostsFetch = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const data = await fetchPostsData(); 
-        setPosts(data.posts);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
-  if (loading) {
-    return <Spinner />;
+const fetchPostsData = async () => {
+  const response = await fetch("https://dummyjson.com/posts");
+  if (!response.ok) {
+    throw new Error("Failed to fetch posts.");
   }
+  const data = await response.json();
+  return data;
+};
 
-  if (error) {
-    return <p>Error: {error}</p>;
+const PostsFetch = async () => {
+  let posts = [];
+
+  try {
+    const data = await fetchPostsData();
+    posts = data.posts;
+  } catch (error) {
+    return <p>Error loading posts: {error.message}</p>;
   }
 
   return (
