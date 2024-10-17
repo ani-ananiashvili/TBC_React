@@ -1,16 +1,21 @@
-// server component
+import './index.css'
 
-import ProductDetails from "../components/ProductDetails";
-import "./index.css";
+async function ProductDetail({ params }) {
+  const response = await fetch(`https://dummyjson.com/products/${params.id}`);
+  const product = await response.json();
 
-export default async function ProductPage({ params }) {
-  const { id } = params;
-
-  const res = await fetch(`https://dummyjson.com/products/${id}`);
-  if (!res.ok) {
-    return <p className="product-not-found">Product not found...</p>;
+  if (!product) {
+    return <p>Product Not Found...</p>;
   }
-  const product = await res.json();
 
-  return <ProductDetails product={product} />;
+  return (
+    <div className="product-detail-card">
+      <h1>{product.title}</h1>
+      <img src={product.images[0]} alt={product.title} />
+      <p>{product.description}</p>
+      <p>Price: ${product.price}</p>
+    </div>
+  );
 }
+
+export default ProductDetail;

@@ -1,0 +1,36 @@
+.sort-component {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .sort-component label {
+    margin-right: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .sort-component select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    outline: none;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+  
+  .sort-component select:focus,
+  .sort-component select:hover {
+    border-color: rgb(221, 106, 44); 
+  }
+  
+  .sort-component option {
+    padding: 10px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
