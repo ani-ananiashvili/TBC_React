@@ -1,70 +1,13 @@
-.posts-page h1 {
+.page-title {
   text-align: center;
   font-size: 2rem;
   margin: 20px 0;
   color: #333;
 }
 
-.posts-list {
-  padding: 20px;
-  background-color: #fff;
-}
-
-.posts-list .post-item {
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  padding: 20px;
+.not-found {
+  text-align: center;
   color: #333;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.posts-list .post-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border-color: #333;
-}
-
-.posts-list h2 {
-  font-size: 1.6em;
-  margin: 10px 0;
-  color: rgb(221, 106, 44);
-}
-
-.posts-list p {
-  font-size: 1em;
-  margin: 10px 0;
-  color: #555;
-}
-
-.posts-list a {
-  color: rgb(221, 106, 44);
-  font-size: 1em;
-  font-weight: bold;
-  margin-top: 10px;
-  display: inline-block;
-}
-
-.posts-list a:hover {
-  color: #333;
-}
-
-@media (max-width: 768px) {
-  .posts-list {
-    padding: 10px;
-  }
-
-  .posts-list .post-item {
-    padding: 15px;
-  }
-
-  .posts-list h2 {
-    font-size: 1.4em;
-  }
-
-  .posts-list p {
-    font-size: 0.9em;
-  }
+  font-size: 1.3em;
+  margin-top: 25px;
 }

@@ -1,0 +1,50 @@
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+  }
+  
+  .post-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px; 
+  }
+  
+  .post-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-title {
+    font-size: 1.3em;
+    color: rgb(221, 106, 44);
+    font-weight: bold;
+  }
+  
+  .post-body {
+    text-align: justify;
+    margin: 15px 0px;
+  }
+  
+  .post-title a {
+    color: inherit;
+  }
+  
+  .read-more-btn {
+    background-color: #4e4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .read-more-btn:hover {
+    background-color: rgb(221, 106, 44);
+  }
+  

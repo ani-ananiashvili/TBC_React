@@ -1,17 +1,21 @@
-.search-bar {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-  outline: none;
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0 40px;
 }
-.search-bar:focus {
+
+.searchInput {
+  width: 800px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.searchInput:focus {
+  outline: none;
   border-color: rgb(221, 106, 44);
 }
 
-.not-found {
-  font-size: 1.5rem;
-  color: #666;
+.searchInput::placeholder {
+  color: #aaa;
 }
-
-

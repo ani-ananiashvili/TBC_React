@@ -1,21 +1,28 @@
-import { fetchPostsData } from "./fetchPostsData";  
-import "./index.css";  
+import SearchBar from "../components/SearchBar/SearchBar";
+import PostList from "../components/PostList/PostList";
+import "./index.css";
 
-export default async function PostsPage() {
-  const data = await fetchPostsData();
+export default async function PostsPage({ searchParams }) {
+  const searchTerm = searchParams.search || "";
+
+  let url = "https://dummyjson.com/posts";
+  if (searchTerm) {
+    url = `https://dummyjson.com/posts/search?q=${searchTerm}`;
+  }
+
+  const res = await fetch(url);
+  const data = await res.json();
+  const posts = data.posts || [];
 
   return (
     <div className="posts-page">
-      <h1>All Posts</h1>
-      <div className="posts-list">
-        {data.posts.map((post) => (
-          <div key={post.id} className="post-item">
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
-            <a href={`/posts/${post.id}`}>Read More</a> 
-          </div>
-        ))}
-      </div>
+      <h1 className="page-title">Blog Posts</h1>
+      <SearchBar />
+      {posts.length > 0 ? (
+        <PostList posts={posts} />
+      ) : (
+        <p className="not-found">Post Not Found...</p>
+      )}
     </div>
   );
 }
