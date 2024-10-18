@@ -1,35 +1,69 @@
+'use client'
+
+import { useState, useEffect } from "react";
 import SearchBar from "../components/Search/SearchBar";
 import SortComponent from "../components/Sort/SortComponent";
 import "./products.css";
 import Link from "next/link";
+import Spinner from "../components/Spinner/Spinner";
 
-async function ProductFetch({ searchParams }) {
-  const searchTerm = searchParams.search || "";
-  const sortOptions = searchParams.sortBy || "";
-  const [sortOption, sortOrder] = sortOptions.split("-");
+async function fetchProducts(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.products || [];
+}
 
-  let url = "https://dummyjson.com/products";
-  if (searchTerm) {
-    url = `https://dummyjson.com/products/search?q=${searchTerm}`;
-  }
-  if (sortOption) {
-    url = `https://dummyjson.com/products?sortBy=${sortOption}&order=${sortOrder}`;
-  }
+const ProductFetch = ({ searchParams }) => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOption, setSortOption] = useState("");
 
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    const products = data.products || [];
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
 
-    return (
-      <div className="product-page container">
-        <h1>Our Products</h1>
+      let url = "https://dummyjson.com/products";
+      if (searchTerm) {
+        url = `https://dummyjson.com/products/search?q=${searchTerm}`;
+      }
+      if (sortOption) {
+        url = `https://dummyjson.com/products?sortBy=${sortOption.split("-")[0]}&order=${sortOption.split("-")[1]}`;
+      }
 
-        <div className="search-sort-container">
-          <SearchBar searchType={"products"} />
-          <SortComponent />
-        </div>
+      try {
+        const fetchedProducts = await fetchProducts(url);
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchData();
+  }, [searchTerm, sortOption]);
+
+  const handleSearch = (value) => {
+    setSearchTerm(value);
+  };
+
+  const handleSort = (value) => {
+    setSortOption(value);
+  };
+
+  return (
+    <div className="product-page container">
+      <h1>Our Products</h1>
+
+      <div className="search-sort-container">
+        <SearchBar onSearch={handleSearch} />
+        <SortComponent onSort={handleSort} />
+      </div>
+
+      {loading ? (
+        <Spinner />
+      ) : (
         <div className="product-grid">
           {products.length > 0 ? (
             products.map((item) => (
@@ -54,16 +88,9 @@ async function ProductFetch({ searchParams }) {
             <p className="no-products">Product Not Found...</p>
           )}
         </div>
-      </div>
-    );
-  } catch (error) {
-    console.error("Error fetching data: ", error);
-    return (
-      <div className="error-message">
-        <p>Something Went Wrong! Please, Try Again Later...</p>
-      </div>
-    );
-  }
-}
+      )}
+    </div>
+  );
+};
 
 export default ProductFetch;

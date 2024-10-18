@@ -1,14 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import debounce from "lodash.debounce";
 
-const SearchBar = ({ searchType }) => {
+const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      console.log("Searching for: ", searchTerm);
-    }
+  // Debounced search handler
+  const debouncedSearch = useCallback(
+    debounce((searchValue) => {
+      onSearch(searchValue);
+    }, 500), // 500ms delay
+    []
+  );
+
+  useEffect(() => {
+    debouncedSearch(searchTerm);
+    return () => {
+      debouncedSearch.cancel(); // Cleanup debounce on unmount
+    };
+  }, [searchTerm, debouncedSearch]);
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
   };
 
   return (
@@ -16,9 +30,8 @@ const SearchBar = ({ searchType }) => {
       <input
         type="text"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onKeyPress={handleKeyPress}
-        placeholder={`Search ${searchType}...`}
+        onChange={handleInputChange}
+        placeholder="Search products..."
         className="searchInput"
       />
     </div>
