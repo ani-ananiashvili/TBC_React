@@ -1,25 +1,28 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import "./SearchBar.css";
 
-const SortComponent = ({ onSort }) => {
-  const handleSortChange = (e) => {
-    const sortValue = e.target.value;
-    onSort(sortValue);
+export default function SearchBar() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    router.push(`/posts?search=${value}`);
   };
 
   return (
-    <div className="sort-component">
-      <label>Sort by:</label>
-      <select onChange={handleSortChange}>
-        <option value="">Select</option>
-        <option value="price-asc">Price (Low to High)</option>
-        <option value="price-desc">Price (High to Low)</option>
-        <option value="title-asc">Title (A to Z)</option>
-        <option value="title-desc">Title (Z to A)</option>
-      </select>
+    <div className="search-container">
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={handleSearchChange}
+        placeholder="Search Posts..."
+        className="searchInput"
+      />
     </div>
   );
-};
-
-export default SortComponent;
+}
