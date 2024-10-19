@@ -1,28 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import debounce from "lodash.debounce";
+import { useRouter } from "next/navigation";
 
-const SearchBar = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const SearchBar = ({ searchTerm }) => {
+  const router = useRouter();
 
-  // Debounced search handler
-  const debouncedSearch = useCallback(
-    debounce((searchValue) => {
-      onSearch(searchValue);
-    }, 500), // 500ms delay
-    []
-  );
-
-  useEffect(() => {
-    debouncedSearch(searchTerm);
-    return () => {
-      debouncedSearch.cancel(); // Cleanup debounce on unmount
-    };
-  }, [searchTerm, debouncedSearch]);
-
-  const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    router.push(`/products?q=${value}`);
   };
 
   return (
@@ -30,7 +15,7 @@ const SearchBar = ({ onSearch }) => {
       <input
         type="text"
         value={searchTerm}
-        onChange={handleInputChange}
+        onChange={handleSearchChange}
         placeholder="Search products..."
         className="searchInput"
       />

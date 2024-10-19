@@ -1,25 +1,27 @@
 "use client";
 
-import "./SortComponent.css";
+import { useRouter } from "next/navigation";
+import './SortComponent.css'
 
-const Sort = () => {
+const SortComponent = ({ sortOption }) => {
+  const router = useRouter();
+
+  const handleSortChange = (e) => {
+    const value = e.target.value;
+    router.push(`/products?sortBy=${value}`);
+  };
+
   return (
     <div className="sort-component">
       <label>Sort by:</label>
-      <select
-        onChange={(e) => {
-          const sortValue = e.target.value;
-          window.location.href = `/?sortBy=${sortValue}`;
-        }}
-      >
-        <option value="">Select</option>
-        <option value="price-asc">Price (Low to High)</option>
-        <option value="price-desc">Price (High to Low)</option>
-        <option value="title-asc">Title (A to Z)</option>
-        <option value="title-desc">Title (Z to A)</option>
+      <select value={sortOption} onChange={handleSortChange}>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="title-asc">Title: A-Z</option>
+        <option value="title-desc">Title: Z-A</option>
       </select>
     </div>
   );
 };
 
-export default Sort;
+export default SortComponent;
