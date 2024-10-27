@@ -1,0 +1,25 @@
+.post-filter {
+  display: flex;
+  justify-content: center; 
+  margin: 20px 0; 
+}
+
+.post-filter input {
+  width: 100%; 
+  max-width: 500px; 
+  padding: 10px 15px; 
+  border: 2px solid #ccc; 
+  border-radius: 5px; 
+  font-size: 16px; 
+  transition: border-color 0.3s; 
+}
+
+.post-filter input:focus {
+  border-color: rgb(221, 106, 44); 
+  outline: none; 
+}
+
+.post-filter input::placeholder {
+  color: #aaa; 
+  font-style: italic; 
+}
