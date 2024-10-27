@@ -9,6 +9,13 @@
     align-items: center; 
   }
   
+  .profile-header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    ;
+  }
+  
   .profile-form {
     display: flex;
     flex-direction: column;
@@ -35,10 +42,9 @@
   }
   
   .profile-photo {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
-    border-radius: 50%;
-    margin-right: 40px; 
+    margin-right: 100px; 
   }
   
