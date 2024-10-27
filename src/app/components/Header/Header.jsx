@@ -1,7 +1,19 @@
+"use client"; 
+
 import "./Header.css";
 import Link from 'next/link';
+import useAuth from "../../hooks/useAuth"; 
+import { useRouter } from "next/navigation"; 
 
 function Header() {
+  const { isAuthenticated, logout } = useAuth(); 
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/login"); 
+  };
+
   return (
     <header className="header">
       <div className="logo">
@@ -46,8 +58,18 @@ function Header() {
           <img src="/assets/burger-bar.png" alt="burger-bar" />
         </a>
         <div className="auth-buttons">
-          <button>Sign In</button>
-          <button>Sign Up</button>
+          {isAuthenticated ? ( 
+            <button onClick={handleLogout}>Sign Out</button>
+          ) : (
+            <>
+              <Link href="/login">
+                <button>Sign In</button>
+              </Link>
+              <Link href="/signup">
+                <button>Sign Up</button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>
@@ -55,3 +77,5 @@ function Header() {
 }
 
 export default Header;
+
+

@@ -11,6 +11,7 @@ export function generateStaticParams() {
     { slug: ["assignment"] },
     { slug: ["products"] },
     { slug: ["posts"] },
+    { slug: ["login"] },
 
 
 
