@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import PostFilter from "../../components/PostSearch/PostSearch";
 import PostList from "../../components/PostList/PostList";
 import PostForm from "../../components/forms/PostForm"; 
+import { addPostToLocalStorage, deletePostFromLocalStorage } from "../../components/functions/postActions"; 
 import "./index.css";
 
 export default function PostsPage({ searchParams }) {
@@ -16,15 +17,13 @@ export default function PostsPage({ searchParams }) {
   }, []);
 
   const handleAddPost = (newPost) => {
-    const updatedPosts = [newPost, ...posts]; 
+    const updatedPosts = addPostToLocalStorage(newPost, posts); 
     setPosts(updatedPosts);
-    localStorage.setItem("posts", JSON.stringify(updatedPosts)); 
   };
 
   const handleDeletePost = (postId) => {
-    const updatedPosts = posts.filter((post) => post.id !== postId);
+    const updatedPosts = deletePostFromLocalStorage(postId, posts);
     setPosts(updatedPosts);
-    localStorage.setItem("posts", JSON.stringify(updatedPosts));
   };
 
   const filteredPosts = posts.filter((post) =>
