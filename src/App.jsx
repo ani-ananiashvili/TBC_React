@@ -1,14 +1,16 @@
-import './global.css';
-import Home from "./app/home/page"
+import "./global.css";
+import { useRouter } from "next/navigation";
+import useAuth from "./app/hooks/useAuth";
 
-function App() {
- 
-  return (
-    <>
-    <Home />
-    
-    </>
-  )
+export default function App() {
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+
+  if (isAuthenticated) {
+    router.push("/home");
+  } else {
+    router.push("/login");
+  }
+
+  return null;
 }
-
-export default App;

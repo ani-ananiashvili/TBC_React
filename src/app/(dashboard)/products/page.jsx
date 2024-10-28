@@ -1,5 +1,5 @@
-import SearchBar from "../components/Search/SearchBar";
-import SortComponent from "../components/Sort/SortComponent";
+import SearchBar from "../../components/Search/SearchBar";
+import SortComponent from "../../components/Sort/SortComponent";
 import "./products.css";
 import Link from "next/link";
 

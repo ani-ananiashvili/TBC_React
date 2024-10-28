@@ -1,5 +1,5 @@
-import PostFilter from "../components/PostSearch/PostSearch";
-import PostList from "../components/PostList/PostList";
+import PostFilter from "../../components/PostSearch/PostSearch";
+import PostList from "../../components/PostList/PostList";
 import "./index.css";
 
 export default async function PostsPage({ searchParams }) {

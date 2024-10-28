@@ -1,23 +1,18 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import "../../global.css";
 import { ClientOnly } from "./client";
 
-export function generateStaticParams() {
-  return [
-    { slug: [""] },
-    { slug: ["profile"] },
-    { slug: ["contact"] },
-    { slug: ["about"] },
-    { slug: ["blog"] },
-    { slug: ["assignment"] },
-    { slug: ["products"] },
-    { slug: ["posts"] },
-    { slug: ["login"] },
+export default function Page({ params }) {
+  const router = useRouter();
 
+  useEffect(() => {
+    if (params?.slug === "login") {
+      router.push("/login");
+    }
+  }, [params, router]);
 
-
-  ];
-}
-
-export default function Page() {
   return <ClientOnly />;
 }

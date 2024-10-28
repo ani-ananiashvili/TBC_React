@@ -1,18 +1,33 @@
-"use client"; 
+"use client";
 
 import "./Header.css";
-import Link from 'next/link';
-import useAuth from "../../hooks/useAuth"; 
-import { useRouter } from "next/navigation"; 
+import Link from "next/link";
+import useAuth from "../../hooks/useAuth";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 function Header() {
-  const { isAuthenticated, logout } = useAuth(); 
+  const { isAuthenticated, logout } = useAuth();
   const router = useRouter();
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
+
+  useEffect(() => {
+    // Simulate an async check for auth state
+    const checkAuthStatus = async () => {
+      // Assuming your useAuth hook takes time to load authentication status
+      setIsAuthChecked(true); // Mark auth status as checked once loaded
+    };
+
+    checkAuthStatus();
+  }, []);
 
   const handleLogout = () => {
     logout();
-    router.push("/login"); 
+    router.push("/login");
   };
+
+  // Render nothing until auth state is checked to avoid hydration mismatch
+  if (!isAuthChecked) return null;
 
   return (
     <header className="header">
@@ -58,7 +73,7 @@ function Header() {
           <img src="/assets/burger-bar.png" alt="burger-bar" />
         </a>
         <div className="auth-buttons">
-          {isAuthenticated ? ( 
+          {isAuthenticated ? (
             <button onClick={handleLogout}>Sign Out</button>
           ) : (
             <>
@@ -77,5 +92,3 @@ function Header() {
 }
 
 export default Header;
-
-

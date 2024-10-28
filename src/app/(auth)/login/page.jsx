@@ -1,9 +1,8 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import useAuth from "../hooks/useAuth";
-import './Login.css'; 
+import useAuth from "../../hooks/useAuth";
+import './Login.css'
 
 export default function LoginPage() {
   const router = useRouter();
@@ -15,7 +14,7 @@ export default function LoginPage() {
     e.preventDefault();
     const success = await login(username, password);
     if (success) {
-      router.push("/"); 
+      router.push("/home"); 
     }
   };
 
