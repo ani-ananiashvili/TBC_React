@@ -1,36 +1,39 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import PostFilter from "../../components/PostSearch/PostSearch";
 import PostList from "../../components/PostList/PostList";
+import PostForm from "../../components/forms/PostForm"; 
 import "./index.css";
 
-export default async function PostsPage({ searchParams }) {
+export default function PostsPage({ searchParams }) {
   const searchTerm = searchParams.search || "";
+  const [posts, setPosts] = useState([]);
 
-  let url = "https://dummyjson.com/posts";
-  if (searchTerm) {
-    url = `https://dummyjson.com/posts/search?q=${searchTerm}`;
-  }
+  useEffect(() => {
+    const storedPosts = JSON.parse(localStorage.getItem("posts")) || [];
+    setPosts(storedPosts);
+  }, []);
 
-  console.log("Fetching URL:", url); 
+  const handleAddPost = (newPost) => {
+    const updatedPosts = [newPost, ...posts]; 
+    setPosts(updatedPosts);
+    localStorage.setItem("posts", JSON.stringify(updatedPosts)); 
+  };
 
-  let posts = [];
-  try {
-    const res = await fetch(url);
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-    const data = await res.json();
-    posts = data.posts || [];
-  } catch (error) {
-    console.error("Failed to fetch posts:", error);
-    return <p>Error loading posts... Please try again later...</p>; 
-  }
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="posts-page">
       <h1 className="page-title">Blog Posts</h1>
-      <PostFilter />
-      {posts.length > 0 ? (
-        <PostList posts={posts} />
+      <div className="search-and-form">
+        <PostFilter />
+        <PostForm onAddPost={handleAddPost} />
+      </div>
+      {filteredPosts.length > 0 ? (
+        <PostList posts={filteredPosts} />
       ) : (
         <p className="not-found">Post Not Found...</p>
       )}
