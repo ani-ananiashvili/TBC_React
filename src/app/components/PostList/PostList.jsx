@@ -1,9 +1,7 @@
-"use client"; 
+import Link from 'next/link';
+import './PostList.css';
 
-import Link from "next/link";
-import "./PostList.css";
-
-export default function PostList({ posts, onDeletePost }) {
+export default function PostList({ posts, onDeletePost, onEditPost }) {
   return (
     <div className="posts-grid">
       {posts.map((post) => (
@@ -12,18 +10,16 @@ export default function PostList({ posts, onDeletePost }) {
             <Link href={`/posts/${post.id}`}>{post.title}</Link>
           </h2>
           <p className="post-body">{post.body.slice(0, 100)}...</p>
-
-          <div className="button-group">
-            <Link href={`/posts/${post.id}`}>
-              <button className="read-more-btn">Read More</button>
-            </Link>
-            <button
-              onClick={() => onDeletePost(post.id)}
-              className="delete-button"
-            >
-              Delete
-            </button>
-          </div>
+          
+          <Link href={`/posts/${post.id}`}>
+            <button className="read-more-btn">Read More</button>
+          </Link>
+          <button onClick={() => onEditPost(post)} className="edit-button">
+            Edit
+          </button>
+          <button onClick={() => onDeletePost(post.id)} className="delete-button">
+            Delete
+          </button>
         </div>
       ))}
     </div>
