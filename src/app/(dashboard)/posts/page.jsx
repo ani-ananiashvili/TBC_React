@@ -21,6 +21,12 @@ export default function PostsPage({ searchParams }) {
     localStorage.setItem("posts", JSON.stringify(updatedPosts)); 
   };
 
+  const handleDeletePost = (postId) => {
+    const updatedPosts = posts.filter((post) => post.id !== postId);
+    setPosts(updatedPosts);
+    localStorage.setItem("posts", JSON.stringify(updatedPosts));
+  };
+
   const filteredPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -33,7 +39,7 @@ export default function PostsPage({ searchParams }) {
         <PostForm onAddPost={handleAddPost} />
       </div>
       {filteredPosts.length > 0 ? (
-        <PostList posts={filteredPosts} />
+        <PostList posts={filteredPosts} onDeletePost={handleDeletePost} />
       ) : (
         <p className="not-found">Post Not Found...</p>
       )}
