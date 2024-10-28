@@ -3,7 +3,7 @@
 import Link from "next/link";
 import "./PostList.css";
 
-export default function PostList({ posts }) {
+export default function PostList({ posts, onDeletePost }) {
   return (
     <div className="posts-grid">
       {posts.map((post) => (
@@ -12,10 +12,18 @@ export default function PostList({ posts }) {
             <Link href={`/posts/${post.id}`}>{post.title}</Link>
           </h2>
           <p className="post-body">{post.body.slice(0, 100)}...</p>
-          
-          <Link href={`/posts/${post.id}`}>
-            <button className="read-more-btn">Read More</button>
-          </Link>
+
+          <div className="button-group">
+            <Link href={`/posts/${post.id}`}>
+              <button className="read-more-btn">Read More</button>
+            </Link>
+            <button
+              onClick={() => onDeletePost(post.id)}
+              className="delete-button"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
     </div>

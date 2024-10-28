@@ -36,7 +36,8 @@
     color: inherit;
   }
   
-  .read-more-btn {
+  .read-more-btn,
+  .delete-button {
     background-color: #4e4d4d;
     color: white;
     border: none;
@@ -45,7 +46,16 @@
     transition: background-color 0.3s ease;
   }
   
-  .read-more-btn:hover {
+  .read-more-btn:hover,
+  .delete-button:hover {
     background-color: rgb(221, 106, 44);
   }
+  
+  .button-group {
+    display: flex; 
+    gap: 10px; 
+    margin-top: auto; 
+  }
+
+ 
   
