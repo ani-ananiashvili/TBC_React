@@ -1,25 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./PostForm.css"; 
 
-export default function PostForm({ onAddPost }) {
+const PostForm = ({ onAddPost, onUpdatePost, post, onCancel }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (title && body) {
-      const newPost = { id: Date.now(), title, body }; 
-      onAddPost(newPost); 
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title);
+      setBody(post.body);
+    } else {
       setTitle("");
       setBody("");
     }
+  }, [post]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newPost = {
+      id: post ? post.id : Date.now(), 
+      title,
+      body,
+    };
+
+    if (post) {
+      onUpdatePost(newPost);
+    } else {
+      onAddPost(newPost);
+    }
+    setTitle("");
+    setBody("");
   };
 
   return (
     <form className="post-form" onSubmit={handleSubmit}>
-      <h2>Create a New Post</h2>
+      <h2>{post ? "Edit Post" : "Add Post"}</h2>
       <div className="form-group">
         <label htmlFor="title">Title</label>
         <input
@@ -37,9 +54,18 @@ export default function PostForm({ onAddPost }) {
           value={body}
           onChange={(e) => setBody(e.target.value)}
           required
-        ></textarea>
+        />
       </div>
-      <button type="submit" className="submit-btn">Add Post</button>
+      <button type="submit" className="submit-btn">
+        {post ? "Update Post" : "Add Post"}
+      </button>
+      {post && (
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
+      )}
     </form>
   );
-}
+};
+
+export default PostForm;
