@@ -3,13 +3,19 @@
 import { useEffect, useState } from "react";
 import PostFilter from "../../components/PostSearch/PostSearch";
 import PostList from "../../components/PostList/PostList";
-import PostForm from "../../components/forms/PostForm"; 
-import { addPostToLocalStorage, deletePostFromLocalStorage } from "../../components/functions/postActions"; 
+import PostForm from "../../components/forms/PostForm";
+import EditPostForm from "../../components/forms/EditPostForm";
+import {
+  addPostToLocalStorage,
+  deletePostFromLocalStorage,
+  updatePostInLocalStorage,
+} from "../../components/functions/postActions";
 import "./index.css";
 
 export default function PostsPage({ searchParams }) {
   const searchTerm = searchParams.search || "";
   const [posts, setPosts] = useState([]);
+  const [editingPost, setEditingPost] = useState(null);
 
   useEffect(() => {
     const storedPosts = JSON.parse(localStorage.getItem("posts")) || [];
@@ -17,13 +23,23 @@ export default function PostsPage({ searchParams }) {
   }, []);
 
   const handleAddPost = (newPost) => {
-    const updatedPosts = addPostToLocalStorage(newPost, posts); 
+    const updatedPosts = addPostToLocalStorage(newPost, posts);
     setPosts(updatedPosts);
   };
 
   const handleDeletePost = (postId) => {
     const updatedPosts = deletePostFromLocalStorage(postId, posts);
     setPosts(updatedPosts);
+  };
+
+  const handleEditPost = (post) => {
+    setEditingPost(post);
+  };
+
+  const handleUpdatePost = (updatedPost) => {
+    const updatedPosts = updatePostInLocalStorage(updatedPost, posts);
+    setPosts(updatedPosts);
+    setEditingPost(null);
   };
 
   const filteredPosts = posts.filter((post) =>
@@ -37,8 +53,19 @@ export default function PostsPage({ searchParams }) {
         <PostFilter />
         <PostForm onAddPost={handleAddPost} />
       </div>
+      {editingPost && (
+        <EditPostForm
+          post={editingPost}
+          onUpdatePost={handleUpdatePost}
+          onCancel={() => setEditingPost(null)}
+        />
+      )}
       {filteredPosts.length > 0 ? (
-        <PostList posts={filteredPosts} onDeletePost={handleDeletePost} />
+        <PostList
+          posts={filteredPosts}
+          onDeletePost={handleDeletePost}
+          onEditPost={handleEditPost}
+        />
       ) : (
         <p className="not-found">Post Not Found...</p>
       )}
