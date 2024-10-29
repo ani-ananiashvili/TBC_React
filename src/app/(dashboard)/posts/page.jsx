@@ -18,8 +18,25 @@ export default function PostsPage({ searchParams }) {
   const [editingPost, setEditingPost] = useState(null);
 
   useEffect(() => {
-    const storedPosts = JSON.parse(localStorage.getItem("posts")) || [];
-    setPosts(storedPosts);
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("https://dummyjson.com/posts");
+        const data = await response.json();
+
+        const originalPosts = data.posts;
+        const userPosts = JSON.parse(localStorage.getItem("userPosts")) || [];
+
+        const combinedPosts = [...userPosts, ...originalPosts];
+
+        setPosts(combinedPosts);
+
+        localStorage.setItem("originalPosts", JSON.stringify(originalPosts));
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
   }, []);
 
   const handleAddPost = (newPost) => {
