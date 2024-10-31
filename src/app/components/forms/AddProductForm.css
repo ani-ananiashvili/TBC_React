@@ -1,0 +1,38 @@
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+.add-product-form input[type="text"],
+.add-product-form input[type="number"],
+.add-product-form input[type="file"] {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+}
+
+.add-product-form input[type="text"]:focus,
+.add-product-form input[type="number"]:focus,
+.add-product-form input[type="file"]:focus {
+  border-color: rgb(221, 106, 44);
+  outline: none;
+}
+
+.add-product-form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: rgb(221, 106, 44);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.image-preview {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+}
