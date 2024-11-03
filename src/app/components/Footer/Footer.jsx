@@ -1,4 +1,5 @@
 import "./Footer.css";
+import Link from "next/link";
 
 function Footer() {
   return (
@@ -19,37 +20,37 @@ function Footer() {
         <div className="footer-links">
           <ul>
             <li>
-              <a href="/">Legal</a>
+              <Link href="/">Legal</Link>
             </li>
             <li>
-              <a href="/">Privacy</a>
+              <Link href="/">Privacy</Link>
             </li>
             <li>
-              <a href="/">Artist Resources</a>
-            </li>
-          </ul>
-
-          <ul>
-            <li>
-              <a href="/posts">Posts</a>
-            </li>
-            <li>
-              <a href="/products">Products</a>
-            </li>
-            <li>
-              <a href="/">Cookie Manager</a>
+              <Link href="/">Artist Resources</Link>
             </li>
           </ul>
 
           <ul>
             <li>
-              <a href="/blog">Blog</a>
+              <Link href="/posts">Posts</Link>
             </li>
             <li>
-              <a href="/">Charts</a>
+              <Link href="/products">Products</Link>
             </li>
             <li>
-              <a href="/">Transparency Reports</a>
+              <Link href="/">Cookie Manager</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link href="/blog">Blog</Link>
+            </li>
+            <li>
+              <Link href="/">Charts</Link>
+            </li>
+            <li>
+              <Link href="/">Transparency Reports</Link>
             </li>
           </ul>
         </div>
