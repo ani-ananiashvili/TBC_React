@@ -9,8 +9,16 @@ export default function Page({ params }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (params?.slug === "login") {
-      router.push("/login");
+    if (!params?.slug || params.slug.length === 0) {
+      router.replace("/home");
+    } else if (params.slug[0] === "login") {
+      router.replace("/login");
+    } else if (params.slug[0] === "logout") {
+      router.replace("/");
+    } else {
+      console.error("Page not found:", params.slug.join("/"));
+      alert("Page not found...");
+      router.replace("/home");
     }
   }, [params, router]);
 
