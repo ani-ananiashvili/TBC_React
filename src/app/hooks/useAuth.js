@@ -1,32 +1,24 @@
-import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!Cookies.get("token"));
+  const { user, error, isLoading } = useUser();
 
-  useEffect(() => {
-    const token = Cookies.get("token");
-    setIsAuthenticated(!!token); 
-  }, []);
-
-  const login = async (username, password) => {
-    if (username === "emilys" && password === "emilyspass") {
-      const token = "dummyToken";
-      Cookies.set("token", token, { expires: 1 }); 
-      setIsAuthenticated(true);
-      return true;
-    } else {
-      alert("Invalid username or password.");
-      return false;
-    }
+  const login = () => {
+    window.location.href = "/api/auth/login"; 
   };
 
   const logout = () => {
-    Cookies.remove("token");
-    setIsAuthenticated(false);
+    window.location.href = "/api/auth/logout"; 
   };
 
-  return { isAuthenticated, login, logout };
+  return {
+    isAuthenticated: !!user,
+    user,
+    error,
+    isLoading,
+    login,
+    logout,
+  };
 };
 
 export default useAuth;
