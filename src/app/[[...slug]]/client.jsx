@@ -1,8 +1,8 @@
-import dynamic from 'next/dynamic';
-import '../../global.css';
+import dynamic from "next/dynamic";
+import "../../global.css";
 
-const App = dynamic(() => import('../../App'), { ssr: false });
+const MainComponent = dynamic(() => import("../layout"), { ssr: false });
 
 export function ClientOnly() {
-  return <App />;
+  return <MainComponent />;
 }
