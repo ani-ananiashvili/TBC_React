@@ -1,32 +1,40 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
+import useTheme from "../hooks/useTheme";
 
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("system");
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+    const systemThemeListener = (e) => {
+      if (theme === "system") {
+        toggleTheme(e.matches ? "dark" : "light");
+      }
+    };
 
-    setTheme(initialTheme);
-    document.documentElement.classList.toggle("dark", initialTheme === "dark");
-  }, []);
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", systemThemeListener);
 
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    return () => {
+      mediaQuery.removeEventListener("change", systemThemeListener);
+    };
+  }, [theme, toggleTheme]);
+
+  const changeTheme = (newTheme) => {
+    if (newTheme === "system") {
+      toggleTheme("system");
+    } else {
+      toggleTheme(newTheme);
+    }
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, changeTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
-export const useTheme = () => useContext(ThemeContext);
+export const useThemeContext = () => useContext(ThemeContext);
