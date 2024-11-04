@@ -5,7 +5,7 @@ function getInitialTheme() {
     return localStorage.getItem("theme");
   }
 
-  // default (light) theme on first login
+  // default (light) theme on first login 
   return "light";
 }
 
