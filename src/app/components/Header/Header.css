@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0em 7em;
+  padding: 0em 6em;
   background-color: #2e2e2d;
-  color: white;
+  color: #f1f1f1;
 }
 
 .dark .header {
@@ -79,6 +79,7 @@ button {
   background-color: transparent;
   color: #d3d1d1;
   border: 1px solid #fff;
+  margin-left: 5px;
 }
 
 .auth-buttons :nth-child(2) {
@@ -166,12 +167,12 @@ button {
 @media (max-width: 390px) {
 }
 
-.theme-toggle {
-  margin-left: 20px;
-  padding: 8px 12px;
-  border: none;
-  background-color: rgb(221, 106, 44);
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
+.theme-toggle button {
+  margin: 0 5px;
+  padding: 5px 10px;
+}
+
+.theme-toggle button.active {
+  background-color: rgb(221, 106, 44); 
+  color: #f1f1f1;
 }
