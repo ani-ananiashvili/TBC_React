@@ -5,20 +5,37 @@ function getInitialTheme() {
     return localStorage.getItem("theme");
   }
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  // default (light) theme on first login
+  return "light";
 }
 
 export default function useTheme() {
   const [theme, setTheme] = useState(getInitialTheme);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("theme", theme);
+    const updateTheme = () => {
+      if (theme === "system") {
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
+        setTheme(systemTheme);
+        document.documentElement.classList.toggle(
+          "dark",
+          systemTheme === "dark"
+        );
+      } else {
+        document.documentElement.classList.toggle("dark", theme === "dark");
+      }
+      localStorage.setItem("theme", theme);
+    };
+
+    updateTheme();
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  const toggleTheme = (newTheme) => {
+    setTheme(newTheme);
   };
 
-  return { theme, setTheme, toggleTheme };
+  return { theme, toggleTheme };
 }
