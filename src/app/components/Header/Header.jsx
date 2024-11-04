@@ -3,13 +3,13 @@
 import "./Header.css";
 import Link from "next/link";
 import useAuth from "../../hooks/useAuth";
-import { useTheme } from "../../context/ThemeContext";
+import { useThemeContext } from "../../context/ThemeContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 function Header() {
   const { isAuthenticated, logout } = useAuth();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, changeTheme } = useThemeContext();
   const router = useRouter();
   const [isAuthChecked, setIsAuthChecked] = useState(false);
 
@@ -83,9 +83,11 @@ function Header() {
         </div>
       </div>
 
-      <button onClick={toggleTheme} className="theme-toggle">
-        {theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-      </button>
+      <div className="theme-toggle">
+        <button onClick={() => changeTheme("light")} className={theme === "light" ? "active" : ""}>Light</button>
+        <button onClick={() => changeTheme("dark")} className={theme === "dark" ? "active" : ""}>Dark</button>
+        <button onClick={() => changeTheme("system")} className={theme === "system" ? "active" : ""}>System</button>
+      </div>
     </header>
   );
 }
