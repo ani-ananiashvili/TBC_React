@@ -7,6 +7,10 @@
   color: white;
 }
 
+.dark .header {
+  background-color: black; 
+  color: #f1f1f1;
+}
 .logo img {
   width: 5em;
 }
@@ -160,4 +164,14 @@ button {
 }
 
 @media (max-width: 390px) {
+}
+
+.theme-toggle {
+  margin-left: 20px;
+  padding: 8px 12px;
+  border: none;
+  background-color: rgb(221, 106, 44);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
 }
