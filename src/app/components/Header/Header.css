@@ -8,7 +8,7 @@
 }
 
 .dark .header {
-  background-color: black; 
+  background-color: black;
   color: #f1f1f1;
 }
 .logo img {
@@ -21,7 +21,7 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 30px;
+  /* gap: 30px; */
 }
 
 .nav-left,
@@ -79,7 +79,6 @@ button {
   background-color: transparent;
   color: #d3d1d1;
   border: 1px solid #fff;
-  margin-left: 5px;
 }
 
 .auth-buttons :nth-child(2) {
@@ -173,6 +172,15 @@ button {
 }
 
 .theme-toggle button.active {
-  background-color: rgb(221, 106, 44); 
+  background-color: rgb(221, 106, 44);
   color: #f1f1f1;
+}
+
+.language-toggle button {
+  background-color: transparent;
+  border: none;
+  color: #f1f1f1;
+  font-size: 1em;
+  cursor: pointer;
+  margin-left: 10px;
 }
