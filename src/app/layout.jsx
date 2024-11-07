@@ -4,6 +4,7 @@ import Head from "next/head";
 import "../global.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { ThemeProvider } from "./context/ThemeContext";
+import { LanguageProvider } from "./context/LanguageContext";
 
 export default function RootLayout({ children }) {
   return (
@@ -15,7 +16,9 @@ export default function RootLayout({ children }) {
       </Head>
       <UserProvider>
         <ThemeProvider>
-          <body>{children}</body>
+          <LanguageProvider>
+            <body>{children}</body>
+          </LanguageProvider>
         </ThemeProvider>
       </UserProvider>
     </html>
