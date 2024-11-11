@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation"; 
 import "./index.css";
 
-export default function PostDetailPage({ params }) {
-  const { id } = params;
+export default function PostDetailPage() {
+  const { id } = useParams(); 
   const [post, setPost] = useState(null);
 
   useEffect(() => {
