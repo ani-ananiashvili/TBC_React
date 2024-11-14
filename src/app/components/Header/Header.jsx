@@ -31,7 +31,7 @@ function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <img src="/assets/logo-soundcloud.png" alt="logo" />
+        <img src="/assets/logo_aveji.png" alt="logo" />
       </div>
 
       <nav className="nav">
@@ -53,11 +53,11 @@ function Header() {
         </div> */}
 
         <ul className="nav-right">
-          <li>
+          {/* <li>
             <Link href="/" className="try-next-pro">
               Try Next Pro
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link href="/about">{t.about}</Link>
           </li>
