@@ -3,13 +3,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 0em 6em;
-  background-color: #2e2e2d;
-  color: #f1f1f1;
+  background-color: #4A628A;
+  color: #d3d1d1;
 }
 
 .dark .header {
   background-color: black;
-  color: #f1f1f1;
+  color: #d3d1d1;
 }
 .logo img {
   width: 5em;
@@ -36,10 +36,10 @@
   font-size: 1.2em;
 }
 
-.try-next-pro {
+/* .try-next-pro {
   color: rgb(221, 106, 44);
   font-size: 1.2em;
-}
+} */
 
 .search {
   display: flex;
@@ -78,11 +78,11 @@ button {
 .auth-buttons :nth-child(1) {
   background-color: transparent;
   color: #d3d1d1;
-  border: 1px solid #fff;
+  border: 1px solid #d3d1d1;
 }
 
 .auth-buttons :nth-child(2) {
-  background-color: rgb(221, 106, 44);
+  /* background-color: rgb(221, 106, 44); */
   color: #fff;
 }
 
@@ -169,17 +169,19 @@ button {
 .theme-toggle button {
   margin: 0 5px;
   padding: 5px 10px;
+  /* border: 1px solid #d3d1d1; */
 }
 
 .theme-toggle button.active {
-  background-color: rgb(221, 106, 44);
+  /* background-color: rgb(221, 106, 44); */
   color: #f1f1f1;
+  border: 1px solid #d3d1d1;
 }
 
 .language-toggle button {
   background-color: transparent;
   border: none;
-  color: #f1f1f1;
+  color: #d3d1d1;
   font-size: 1em;
   cursor: pointer;
   margin-left: 10px;

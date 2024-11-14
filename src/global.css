@@ -21,8 +21,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: white;
-  color: black;
+  /* background-color: white; */
+  /* color: black; */
 }
 
 .dark body {
@@ -37,14 +37,17 @@ header {
 }
 
 footer {
-  background-color: #f8f9fa;
+  background-color: #4A628A;
   padding: 20px;
   text-align: center;
   width: 100%;
   margin-top: auto;
 }
 
-.main-content {
+main {
   flex-grow: 1;
-  padding: 20px;
+  /* padding: 20px; */
+  background-color: rgb(235, 231, 209);
+  /* background-color: #4A628A; */
+
 }
