@@ -13,7 +13,7 @@
   cursor: pointer;
   flex-direction: column;
   justify-content: space-between;
-  height: 200px;
+  height: 250px;
 }
 
 .post-card:hover {
@@ -22,7 +22,7 @@
 
 .post-title {
   font-size: 1.3em;
-  color: rgb(221, 106, 44);
+  color: #4A628A;
   font-weight: bold;
 }
 
@@ -50,7 +50,7 @@
 .read-more-btn:hover,
 .delete-button:hover,
 .edit-button:hover {
-  background-color: rgb(221, 106, 44);
+  background-color: #4A628A;
 }
 
 .button-group {

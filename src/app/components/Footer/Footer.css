@@ -26,7 +26,8 @@ footer {
 
 .footer h2 {
   font-size: 1.7em;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
+  color: #d3d1d1;
 }
 
 .mobile-img {

@@ -36,14 +36,14 @@
   
   .form-group input:focus,
   .form-group textarea:focus {
-    border-color: rgb(221, 106, 44);
+    border-color: #4A628A;
     outline: none;
   }
   
   .submit-btn {
     width: 100%;
     padding: 10px;
-    background-color: rgb(221, 106, 44);
+    background-color: #4A628A;
     color: white;
     border: none;
     font-size: 16px;

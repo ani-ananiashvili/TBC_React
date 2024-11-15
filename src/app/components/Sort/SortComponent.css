@@ -25,7 +25,7 @@
   
   .sort-component select:focus,
   .sort-component select:hover {
-    border-color: rgb(221, 106, 44); 
+    border-color: #4A628A; 
   }
   
   .sort-component option {

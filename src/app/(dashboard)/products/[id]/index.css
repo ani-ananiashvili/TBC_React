@@ -10,7 +10,7 @@
 
 .product-detail-card h1 {
   font-size: 2.2rem;
-  color: #333;
+  color: #4A628A;
   text-align: center;
   margin-bottom: 20px;
   font-weight: bold;
@@ -36,7 +36,7 @@
 .product-detail-card p:last-of-type {
   font-size: 1.3rem;
   font-weight: bold;
-  color:  rgb(221, 106, 44);
+  color:  #4A628A;
 }
 
 @media (max-width: 768px) {

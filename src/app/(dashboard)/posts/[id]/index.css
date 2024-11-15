@@ -10,7 +10,7 @@
 
 .post-title {
   font-size: 28px;
-  color: rgb(221, 106, 44);
+  color: #4A628A;
   margin-bottom: 20px;
 }
 
@@ -34,7 +34,7 @@
 
 .post-tags p {
   font-size: 1.2em;
-  color: rgb(221, 106, 44);
+  color: #4A628A;
   margin-bottom: 10px;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .tag {
-  background-color: rgb(221, 106, 44);
+  background-color: #4A628A;
   color: white;
   padding: 5px 10px;
   font-size: 1em;
