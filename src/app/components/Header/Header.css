@@ -79,6 +79,7 @@ button {
   background-color: transparent;
   color: #d3d1d1;
   border: 1px solid #d3d1d1;
+  padding: 10px 20px;
 }
 
 .auth-buttons :nth-child(2) {

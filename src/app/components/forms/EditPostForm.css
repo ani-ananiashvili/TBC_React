@@ -54,14 +54,14 @@
 
 .modal input:focus,
 .modal textarea:focus {
-  border-color: rgb(221, 106, 44);
+  border-color: #4A628A;
   outline: none;
 }
 
 .modal button {
   padding: 10px 15px;
   border: none;
-  background-color: rgb(221, 106, 44);
+  background-color: #4A628A;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
