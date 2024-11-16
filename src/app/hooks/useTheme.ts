@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 
-function getInitialTheme() {
+function getInitialTheme(): string {
   if (typeof window !== "undefined" && localStorage.getItem("theme")) {
-    return localStorage.getItem("theme");
+    return localStorage.getItem("theme")!;
   }
-
-  // default (light) theme on first login 
   return "light";
 }
 
 export default function useTheme() {
-  const [theme, setTheme] = useState(getInitialTheme);
+  const [theme, setTheme] = useState<string>(getInitialTheme);
 
   useEffect(() => {
     const updateTheme = () => {
@@ -33,7 +31,7 @@ export default function useTheme() {
     updateTheme();
   }, [theme]);
 
-  const toggleTheme = (newTheme) => {
+  const toggleTheme = (newTheme: string) => {
     setTheme(newTheme);
   };
 
