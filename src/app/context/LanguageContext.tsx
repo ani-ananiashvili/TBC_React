@@ -1,6 +1,22 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
-export const translations = {
+interface Translations {
+  [key: string]: { [key: string]: string };
+}
+
+interface LanguageContextType {
+  language: string;
+  toggleLanguage: () => void;
+  translations: Translations;
+}
+
+const translations: Translations = {
   en: {
     home: "Home",
     profile: "Profile",
@@ -41,17 +57,25 @@ export const translations = {
   },
 };
 
-const LanguageContext = createContext();
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+);
 
-export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState(() => {
+interface LanguageProviderProps {
+  children: ReactNode;
+}
+
+export const LanguageProvider = ({
+  children,
+}: LanguageProviderProps): JSX.Element => {
+  const [language, setLanguage] = useState<string>(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("language") || "en";
     }
     return "en";
   });
 
-  const toggleLanguage = () => {
+  const toggleLanguage = (): void => {
     const newLanguage = language === "en" ? "ka" : "en";
     setLanguage(newLanguage);
     localStorage.setItem("language", newLanguage);
@@ -62,13 +86,23 @@ export const LanguageProvider = ({ children }) => {
     if (savedLanguage && savedLanguage !== language) {
       setLanguage(savedLanguage);
     }
-  }, []);
+  }, [language]);
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
+    <LanguageContext.Provider
+      value={{ language, toggleLanguage, translations }}
+    >
       {children}
     </LanguageContext.Provider>
   );
 };
 
-export const useLanguageContext = () => useContext(LanguageContext);
+export const useLanguageContext = (): LanguageContextType => {
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error(
+      "useLanguageContext must be used within a LanguageProvider"
+    );
+  }
+  return context;
+};
