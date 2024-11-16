@@ -6,20 +6,19 @@ import { useThemeContext } from "../../context/ThemeContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLanguageContext } from "../../context/LanguageContext";
-import { translations } from "../../context/translations";
 
-function Header() {
+const Header = (): JSX.Element | null => {
   const { isAuthenticated, logout } = useAuth();
   const { theme, changeTheme } = useThemeContext();
-  const { language, toggleLanguage } = useLanguageContext();
+  const { language, toggleLanguage, translations } = useLanguageContext();
   const router = useRouter();
-  const [isAuthChecked, setIsAuthChecked] = useState(false);
+  const [isAuthChecked, setIsAuthChecked] = useState<boolean>(false);
 
   useEffect(() => {
     setIsAuthChecked(true);
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     logout();
     router.push("/login");
   };
@@ -47,17 +46,7 @@ function Header() {
           </li>
         </ul>
 
-        {/* <div className="search">
-          <input type="text" placeholder="Search" className="search-input" />
-          <img src="/assets/search.svg" alt="search-icon" />
-        </div> */}
-
         <ul className="nav-right">
-          {/* <li>
-            <Link href="/" className="try-next-pro">
-              Try Next Pro
-            </Link>
-          </li> */}
           <li>
             <Link href="/about">{t.about}</Link>
           </li>
@@ -115,6 +104,6 @@ function Header() {
       </div>
     </header>
   );
-}
+};
 
 export default Header;
