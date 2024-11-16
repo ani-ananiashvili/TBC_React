@@ -1,20 +1,35 @@
-# Next.js Project (Previously React + Vite)
+# **Furniture Website**
 
-This project has been migrated from **React + Vite** to **Next.js** for improved features like server-side rendering, API routes, and better performance.
+A feature-rich furniture website showcasing a variety of products, powered by **Next.js** and **TypeScript** for fast performance and SEO-friendly capabilities.
 
-## Features
+---
 
-- **Next.js** framework with built-in SSR (Server-Side Rendering) and SSG (Static Site Generation)
-- **Dynamic routing** for pages and products
-- **Image optimization** using Next.js `next/image`
-- **API integration** for product search and sorting using [DummyJSON](https://dummyjson.com/docs/products)
-- **Debounced product search** for better performance
-- **Styled with CSS modules** and responsive design
+## **Project Description**
 
-## Migration Highlights
+This project is a **dynamic furniture website** migrated from **React + Vite** to **Next.js** with **TypeScript** for improved type safety and scalability.  
+It showcases modern furniture collections, offering features like:
 
-- **Next.js Migration**: The project has migrated from React + Vite to Next.js for better scalability and performance.
-- **SSR and SSG**: Leveraged server-side rendering and static site generation for improved SEO and faster page loads.
-- **API Integration**: Implemented search and sort functionality using [DummyJSON](https://dummyjson.com/docs/products).
-- **Improved Image Handling**: Utilized Next.js `next/image` for image optimization.
-- **File Structure Changes**: Updated project structure to adhere to Next.js standards.
+- Real-time product search and filtering  
+- Optimized image loading for faster performance  
+- Dynamic and static rendering for a seamless browsing experience  
+- Enhanced developer experience with TypeScript
+
+---
+
+## **How to Install**
+
+Follow these steps to set up the project locally:
+
+1. **Clone the repository:**  
+   ```bash
+   git clone https://github.com/ani-ananiashvili/TBC_React.git
+   cd TBC_React
+
+2. **Install dependencies:**  
+   ```bash
+   npm install
+3. **Start the development server:**  
+   ```bash
+   npm run dev
+4. **View the site in your browser:**
+   Open http://localhost:3000
