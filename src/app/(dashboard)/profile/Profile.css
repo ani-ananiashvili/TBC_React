@@ -19,16 +19,14 @@
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 20px;
 }
 
 .profile-container h2 {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   color: #333;
 }
 
 .profile-container p {
-  font-size: 1rem;
+  font-size: 0.90rem;
   color: #666;
-  margin-top: 5px;
 }
