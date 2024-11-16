@@ -5,7 +5,13 @@ import { useEffect } from "react";
 import "../../global.css";
 import { ClientOnly } from "./client";
 
-export default function Page({ params }) {
+interface PageProps {
+  params: {
+    slug?: string[];
+  };
+}
+
+export default function Page({ params }: PageProps) {
   const router = useRouter();
 
   useEffect(() => {
