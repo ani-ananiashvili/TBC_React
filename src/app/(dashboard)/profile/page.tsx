@@ -5,12 +5,6 @@ import { useState } from "react";
 import "./Profile.css";
 import Spinner from "../../components/Spinner/Spinner";
 
-interface User {
-  name: string;
-  email: string;
-  picture: string;
-}
-
 export default function Profile() {
   const { user, error, isLoading } = useUser();
   const [isError, setIsError] = useState<string | null>(null);
