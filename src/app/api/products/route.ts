@@ -17,7 +17,7 @@ export async function GET(): Promise<NextResponse> {
     data: products,
     error,
   }: { data: Product[] | null; error: SupabaseError | null } = await supabase
-    .from("products")
+    .from("Products")
     .select("*");
 
   if (error) {

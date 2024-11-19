@@ -20,7 +20,7 @@ export async function GET(
 
   try {
     const { data: post, error } = await supabase
-      .from("posts")
+      .from("Blogs")
       .select("*")
       .eq("id", Number(id))
       .single<Post>();
