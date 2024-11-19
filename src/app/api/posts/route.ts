@@ -1,8 +1,23 @@
 import { NextResponse } from "next/server";
 import supabase from "../../components/utils/supabase";
 
-export async function GET() {
-  const { data: posts, error } = await supabase.from("posts").select("*");
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+}
+
+interface SupabaseError {
+  message: string;
+}
+
+export async function GET(): Promise<NextResponse> {
+  const {
+    data: posts,
+    error,
+  }: { data: Post[] | null; error: SupabaseError | null } = await supabase
+    .from("posts")
+    .select("*");
 
   if (error) {
     console.error("Error fetching posts:", error);
