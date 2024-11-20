@@ -53,23 +53,27 @@ Go to Table Editor to the from left side panel and click "Create a new table".
 
 **For blogs:**
 Name: Blogs;
-Collumns: Name[Title, Description], Type [Text, Text]; Remove created_at collumn;
+Collumns: Name[Title, Description, Title_Ka, Description_Ka], Type [Text, Text, Text, Text]; Remove created_at collumn;
 
 **For products:**
 Name: Products;
-Collumns: Name[Title, Title, Description, Price], Type[text, text, text, float8];  Remove created_at collumn;
+Collumns: Name[Image, Price, Title, Description, Title_Ka, Description_Ka], Type[text, Numeric, text, text, text, text];  Remove created_at collumn;
 
 
 3. ### How to create API endpoints:
-Create /blogs and /products subfolders in /api folder;
+Create subfolders for Blogs and Products in /api folder;
 Create route.ts in each of them;
 Template for API endpoints:
 
       const { data: posts, error } = await supabase.from("Blogs").select();
 
       return NextResponse.json(posts);
+4. ### Example for language-specific data:
+      const columns =
+         language === "ka"
+            ? "id, Title_Ka, Description_Ka, Price"
+            : "id, Title, Description, Price";
 
-4. ### Template to fetch data on /blogsPage and /productsPage:
-
+5. ### Template to fetch data on /blogsPage and /productsPage:
       const res = await fetch("http://localhost:3000/api/blogs");
       const posts: Blog[] = await res.json();

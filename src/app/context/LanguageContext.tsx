@@ -65,24 +65,34 @@ interface LanguageProviderProps {
   children: ReactNode;
 }
 
+const getCookie = (name: string): string | undefined => {
+  const matches = document.cookie.match(
+    new RegExp(`(?:^|; )${name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1")}=([^;]*)`)
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+};
+
+const setCookie = (name: string, value: string, days: number): void => {
+  const date = new Date();
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${encodeURIComponent(value)};path=/;expires=${date.toUTCString()}`;
+};
+
 export const LanguageProvider = ({
   children,
 }: LanguageProviderProps): JSX.Element => {
   const [language, setLanguage] = useState<string>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("language") || "en";
-    }
-    return "en";
+    return getCookie("language") || "en";
   });
 
   const toggleLanguage = (): void => {
     const newLanguage = language === "en" ? "ka" : "en";
     setLanguage(newLanguage);
-    localStorage.setItem("language", newLanguage);
+    setCookie("language", newLanguage, 7); // Store for 7 days
   };
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem("language");
+    const savedLanguage = getCookie("language");
     if (savedLanguage && savedLanguage !== language) {
       setLanguage(savedLanguage);
     }
