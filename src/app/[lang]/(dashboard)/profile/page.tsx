@@ -3,7 +3,7 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useState } from "react";
 import "./Profile.css";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../../components/Spinner/Spinner";
 
 interface User {
   name: string;
