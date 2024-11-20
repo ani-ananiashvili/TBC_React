@@ -23,15 +23,15 @@ function MainContent(): JSX.Element {
         className="main-logo"
       />
       <div className="categories">
-        {categories.map((category, index) => (
-          <div className="category-item" key={index}>
+        {categories.map((category) => (
+          <article className="category-item" key={category.label}>
             <img
               src={category.img}
               alt={`Category: ${category.label}`}
               className="category-img"
             />
             <div className="label">{category.label}</div>
-          </div>
+          </article>
         ))}
       </div>
     </div>
