@@ -4,6 +4,15 @@ const nextConfig = {
   images: {
     domains: ['cdn.dummyjson.com'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+        permanent: true, 
+      },
+    ];
+  },
 };
 
 export default nextConfig;

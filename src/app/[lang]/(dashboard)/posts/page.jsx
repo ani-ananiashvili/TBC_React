@@ -2,15 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation"; 
-import PostFilter from "../../components/PostSearch/PostSearch";
-import PostList from "../../components/PostList/PostList";
-import PostForm from "../../components/forms/PostForm";
-import EditPostForm from "../../components/forms/EditPostForm";
+import PostFilter from "../../../components/PostSearch/PostSearch";
+import PostList from "../../../components/PostList/PostList";
+import PostForm from "../../../components/forms/PostForm";
+import EditPostForm from "../../../components/forms/EditPostForm";
 import {
   addPostToLocalStorage,
   deletePostFromLocalStorage,
   updatePostInLocalStorage,
-} from "../../components/functions/postActions";
+} from "../../../components/functions/postActions";
 import "./index.css";
 
 export default function PostsPage() {
