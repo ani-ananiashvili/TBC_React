@@ -32,15 +32,15 @@ export default async function productPage({
 
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="p-8 bg-white shadow-md rounded-lg max-w-md text-center">
+        <div className="p-10 bg-white shadow-md rounded-lg max-w-2xl text-center">
           <img
             src={product.Image}
             alt={product.Title}
-            className="w-full h-48 object-cover rounded-md mb-4"
+            className="w-full h-64 object-cover rounded-md mb-6"
           />
-          <h1 className="text-2xl font-bold mb-4">{product.Title}</h1>
-          <p className="text-gray-700">{product.Description}</p>
-          <p className="text-gray-700">{product.Price}</p>
+          <h1 className="text-3xl font-bold mb-4">{product.Title}</h1>
+          <p className="text-gray-700 mb-4">{product.Description}</p>
+          <p className="text-gray-700 text-lg font-medium">Price: ${product.Price}</p>
         </div>
       </div>
     );
