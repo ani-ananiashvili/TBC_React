@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import supabase from "../../components/utils/supabase"; 
+import supabase from "../../components/utils/supabase";
 
 interface Post {
   id: number;
