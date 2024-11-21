@@ -30,7 +30,7 @@ export default async function PostsPage() {
               className="text-headerColor font-medium transition-colors duration-200"
               href={`/ka/posts/${post.id}`}
             >
-              see more ...
+              see more ....
             </Link>
           </div>
         ))}
