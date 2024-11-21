@@ -2,7 +2,7 @@
 
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useState } from "react";
-import "./Profile.css";
+import "./profile.css";
 import Spinner from "../../../components/Spinner/Spinner";
 
 export default function Profile() {
@@ -12,7 +12,7 @@ export default function Profile() {
   if (isLoading) {
     return (
       <div className="loading">
-        <Spinner></Spinner>
+        <Spinner />
       </div>
     );
   }
@@ -22,7 +22,9 @@ export default function Profile() {
       <div className="error">
         <h2>Error loading profile</h2>
         <p>{error?.message || isError}</p>
-        <button onClick={() => setIsError(null)}>Retry</button>
+        <button className="retry-button" onClick={() => setIsError(null)}>
+          Retry
+        </button>
       </div>
     );
   }
@@ -30,14 +32,16 @@ export default function Profile() {
   return (
     user && (
       <div className="profile-container">
-        <h1 className="profile-title">User Profile</h1>
+        <h1 className="profile-title">Welcome, {user.name || "User"}!</h1>
         <img
-          src={user.picture || "User Picture"}
+          src={user.picture || "/default-user.png"}
           alt={user.name || "User Profile"}
           className="profile-image"
         />
-        <h2 className="profile-name">{user.name || "Unknown User"}</h2>
-        <p className="profile-email">{user.email}</p>
+        <div className="profile-details">
+          <h2 className="profile-name">{user.name || "Unknown User"}</h2>
+          <p className="profile-email">Email: {user.email}</p>
+        </div>
       </div>
     )
   );
