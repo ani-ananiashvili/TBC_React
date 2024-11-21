@@ -1,5 +1,5 @@
 import React from "react";
- 
+
 type product = {
   id: number;
   Title: string;
@@ -7,29 +7,29 @@ type product = {
   Price: number;
   Image: string;
 };
- 
+
 async function getproduct(id: string): Promise<product> {
   const response = await fetch(`http://localhost:3000/api/products/${id}`, {
     cache: "no-store",
   });
- 
+
   if (!response.ok) {
     throw new Error("Failed to fetch the product");
   }
- 
+
   return response.json();
 }
- 
+
 export default async function productPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const { id } = await params;
- 
+  const { id } = params;
+
   try {
     const product = await getproduct(id);
- 
+
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="p-8 bg-white shadow-md rounded-lg max-w-md text-center">
@@ -44,8 +44,9 @@ export default async function productPage({
         </div>
       </div>
     );
-    
-  } catch (error: any) {
-    return <div>Error: {error.message}</div>;
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : "An unknown error occurred";
+    return <div>Error: {errorMessage}</div>;
   }
 }
