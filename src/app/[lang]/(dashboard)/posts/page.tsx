@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLanguageContext } from "../../../context/LanguageContext";
+import Spinner from "../../../components/Spinner/Spinner";
 
 interface Post {
   id: number;
@@ -41,7 +42,7 @@ export default function PostsPage() {
   }, [language]);
 
   if (loading) {
-    return <div className="text-center">Loading posts...</div>;
+    return <Spinner />;
   }
 
   return (

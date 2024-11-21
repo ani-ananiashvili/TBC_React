@@ -1,7 +1,8 @@
-'use client'
+"use client";
 import { useState, useEffect } from "react";
 import { useLanguageContext } from "../../../context/LanguageContext";
 import Link from "next/link";
+import Spinner from "../../../components/Spinner/Spinner"; 
 
 interface Product {
   id: number;
@@ -16,16 +17,23 @@ interface Product {
 export default function ProductsPage() {
   const { language } = useLanguageContext();
   const [products, setProducts] = useState<Product[]>([]);
-  
+  const [loading, setLoading] = useState<boolean>(true);  
+
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true); 
       const response = await fetch(`http://localhost:3000/api/products`);
       const productsData: Product[] = await response.json();
       setProducts(productsData);
+      setLoading(false); 
     };
 
     fetchProducts();
   }, [language]);
+
+  if (loading) {
+    return <Spinner />;  
+  }
 
   return (
     <div className="max-w-6xl mx-auto p-6">
