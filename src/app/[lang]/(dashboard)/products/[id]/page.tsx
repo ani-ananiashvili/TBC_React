@@ -5,6 +5,7 @@ type product = {
   Title: string;
   Description: string;
   Price: number;
+  Image: string;
 };
  
 async function getproduct(id: string): Promise<product> {
@@ -32,12 +33,18 @@ export default async function productPage({
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="p-8 bg-white shadow-md rounded-lg max-w-md text-center">
+          <img
+            src={product.Image}
+            alt={product.Title}
+            className="w-full h-48 object-cover rounded-md mb-4"
+          />
           <h1 className="text-2xl font-bold mb-4">{product.Title}</h1>
           <p className="text-gray-700">{product.Description}</p>
           <p className="text-gray-700">{product.Price}</p>
         </div>
       </div>
     );
+    
   } catch (error: any) {
     return <div>Error: {error.message}</div>;
   }
