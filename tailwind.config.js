@@ -3,7 +3,13 @@ export default {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: "class",
   theme: {
-    extend: {},
+    
+    extend: {
+      colors:{
+        'headerColor':'#4A628A',
+        
+      }
+    },
   },
   plugins: [],
 };

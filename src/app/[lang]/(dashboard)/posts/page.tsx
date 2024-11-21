@@ -27,7 +27,7 @@ export default async function PostsPage() {
               {post.Description}
             </p>
             <Link
-              className="text-indigo-600 font-medium transition-colors duration-200"
+              className="text-headerColor font-medium transition-colors duration-200"
               href={`/ka/posts/${post.id}`}
             >
               see more ...
