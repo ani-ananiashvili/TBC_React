@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import supabase from "../../components/utils/supabase";
 
-interface CustomError extends Error {
-  message: string;
-}
-
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     const language = req.cookies.get("language")?.value || "en";

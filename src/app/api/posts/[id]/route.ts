@@ -3,20 +3,19 @@ import supabase from "../../../components/utils/supabase";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse> {
   try {
-    const { id } = params; // Get dynamic `id` from URL
-    const language = req.cookies.get("language")?.value || "en"; // Check for language cookie
+    const { id } = params; 
+    const language = req.cookies.get("language")?.value || "en"; 
 
     const columns =
       language === "ka"
         ? "id, Title_Ka, Description_Ka"
         : "id, Title, Description";
 
-    // Fetch the post from Supabase based on the `id`
     const { data: post, error } = await supabase
       .from("Blogs")
       .select(columns)
       .eq("id", id)
-      .single(); // Use `.single()` to ensure only one post is returned
+      .single(); 
 
     if (error) {
       throw new Error(error.message);
