@@ -19,14 +19,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   useEffect(() => {
     if (!isLoading) {
       if (!user) {
-        router.push("/api/auth/login");
+        router.push("/login");
       } else {
         setLoading(false);
       }
     }
   }, [isLoading, user, router]);
 
-  if (loading) {
+  if (isLoading || !user) {
     return <Spinner />;
   }
 
