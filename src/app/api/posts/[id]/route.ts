@@ -1,40 +1,33 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import supabase from "../../../components/utils/supabase";
 
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-  created_at?: string;
-}
-
-export async function GET(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const { id } = await context.params;
-
-  if (!id || isNaN(Number(id))) {
-    return NextResponse.json({ error: "Invalid post ID" }, { status: 400 });
-  }
-
+export async function GET(req: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse> {
   try {
+    const { id } = params; // Get dynamic `id` from URL
+    const language = req.cookies.get("language")?.value || "en"; // Check for language cookie
+
+    const columns =
+      language === "ka"
+        ? "id, Title_Ka, Description_Ka"
+        : "id, Title, Description";
+
+    // Fetch the post from Supabase based on the `id`
     const { data: post, error } = await supabase
       .from("Blogs")
-      .select("*")
-      .eq("id", Number(id))
-      .single<Post>();
+      .select(columns)
+      .eq("id", id)
+      .single(); // Use `.single()` to ensure only one post is returned
 
-    if (error || !post) {
-      console.error("Error fetching post:", error);
-      return NextResponse.json({ error: "Post not found" }, { status: 404 });
+    if (error) {
+      throw new Error(error.message);
     }
 
-    return NextResponse.json(post, { status: 200 });
-  } catch (err) {
-    console.error("Unexpected error:", err);
+    return NextResponse.json(post);
+  } catch (error) {
+    console.error("Error fetching post:", error);
+
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: error instanceof Error ? error.message : "Unknown error" },
       { status: 500 }
     );
   }
