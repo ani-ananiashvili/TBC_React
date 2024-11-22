@@ -9,16 +9,22 @@ interface AuthLayoutProps {
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && user) {
       router.push("/home");
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, user, router]);
 
-  if (isAuthenticated) return null;
+  if (isAuthenticated === undefined) {
+    return null; 
+  }
+
+  if (isAuthenticated) {
+    return null;
+  }
 
   return <>{children}</>;
 }
