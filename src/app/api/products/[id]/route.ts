@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import supabase from "../../../components/utils/supabase";
 
 interface Product {
@@ -6,13 +6,21 @@ interface Product {
   title: string;
   description: string;
   price: number;
+  image: string;
 }
 
 export async function GET(
-  request: Request,
+  req: NextRequest,
   context: { params: { id: string } }
-) {
-  const { id } = await context.params;
+): Promise<NextResponse> {
+  const { id } = context.params;
+
+  const language = req.cookies.get("language")?.value || "en";
+
+  const columns =
+    language === "ka"
+      ? "id, Title_Ka, Description_Ka, Price, Image" 
+      : "id, Title, Description, Price, Image"; 
 
   if (!id || isNaN(Number(id))) {
     return NextResponse.json({ error: "Invalid product ID" }, { status: 400 });
@@ -21,7 +29,7 @@ export async function GET(
   try {
     const { data: product, error } = await supabase
       .from("Products")
-      .select("*")
+      .select(columns)
       .eq("id", Number(id))
       .single<Product>();
 

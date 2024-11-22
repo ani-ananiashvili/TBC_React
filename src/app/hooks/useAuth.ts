@@ -1,14 +1,19 @@
+import { useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import Spinner from "../components/Spinner/Spinner";
 
 const useAuth = () => {
   const { user, error, isLoading } = useUser();
+  const [isActionLoading, setActionLoading] = useState(false); 
 
   const login = () => {
-    window.location.href = "/api/auth/login"; 
+    setActionLoading(true);  
+    window.location.href = "/api/auth/login";
   };
 
   const logout = () => {
-    window.location.href = "/api/auth/logout"; 
+    setActionLoading(true);  
+    window.location.href = "/api/auth/logout";
   };
 
   return {
@@ -16,6 +21,7 @@ const useAuth = () => {
     user,
     error,
     isLoading,
+    isActionLoading, 
     login,
     logout,
   };

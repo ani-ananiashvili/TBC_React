@@ -3,22 +3,29 @@
 import { useRouter } from "next/navigation";
 import { useEffect, ReactNode } from "react";
 import useAuth from "../../hooks/useAuth";
+import Spinner from "../../components/Spinner/Spinner";
 
 interface AuthLayoutProps {
   children: ReactNode;
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && user) {
       router.push("/home");
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, user, router]);
 
-  if (isAuthenticated) return null;
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isAuthenticated) {
+    return null;
+  }
 
   return <>{children}</>;
 }

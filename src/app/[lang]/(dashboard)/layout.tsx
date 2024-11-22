@@ -12,25 +12,22 @@ interface DashboardLayoutProps {
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth(); 
   const router = useRouter();
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isAuthenticated === false) {
-      router.push("/login");
-    } else {
-      setLoading(false);
+    if (!isLoading) {
+      if (!user) {
+        router.push("/login");
+      } else {
+        setLoading(false);
+      }
     }
-  }, [isAuthenticated, router]);
+  }, [isLoading, user, router]);
 
-  if (loading) {
-    return <Spinner></Spinner>;
-  }
-
-  if (!isAuthenticated) {
-    return null;
+  if (isLoading || !user) {
+    return <Spinner />;
   }
 
   return (
