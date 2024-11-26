@@ -12,7 +12,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         : "id, Title, Description";
 
     const { data: post, error } = await supabase
-      .from("Blogs")
+      .from("Posts")
       .select(columns)
       .eq("id", id)
       .single(); 

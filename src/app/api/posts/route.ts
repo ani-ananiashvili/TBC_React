@@ -10,7 +10,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         ? "id, Title_Ka, Description_Ka"
         : "id, Title, Description";
 
-    const { data: posts, error } = await supabase.from("Blogs").select(columns);
+    const { data: posts, error } = await supabase.from("Posts").select(columns);
 
     if (error) {
       throw new Error(error.message);
