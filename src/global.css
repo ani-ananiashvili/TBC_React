@@ -21,13 +21,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* background-color: white; */
-  /* color: black; */
-}
-
-.dark body {
-  background-color: black;
-  color: white;
 }
 
 header {
@@ -37,7 +30,7 @@ header {
 }
 
 footer {
-  background-color: #4A628A;
+  background-color: #4a628a;
   padding: 20px;
   text-align: center;
   width: 100%;
@@ -46,8 +39,9 @@ footer {
 
 main {
   flex-grow: 1;
-  /* padding: 20px; */
   background: linear-gradient(145deg, #f5f7fa, #e4ebf5);
-  /* background-color: #4A628A; */
+}
 
+.dark main {
+  background: linear-gradient(145deg, rgb(16, 16, 16), #2a2a2a);
 }
