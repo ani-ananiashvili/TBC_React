@@ -6,12 +6,18 @@ interface Category {
 }
 
 const categories: Category[] = [
-  { label: "Chair", img: "/assets/chair.jpg" },
-  { label: "Table", img: "/assets/table.jpg" },
-  { label: "Closet", img: "/assets/closet.jpg" },
-  { label: "Chandelier", img: "/assets/chandelier.jpg" },
-  { label: "Bed", img: "/assets/bed.jpg" },
-  { label: "Armchair", img: "/assets/armchair.jpg" },
+  { label: "Ashley", img: "/assets/ashley.jpg" },
+  { label: "BoConcept", img: "/assets/boconcept.png" },
+  { label: "Herman Miller", img: "/assets/herman_miller.webp" },
+  { label: "Knoll", img: "/assets/knoll.svg" },
+  { label: "IKEA", img: "/assets/ikea.jpg" },
+  { label: "Natuzzi", img: "/assets/natuzzi.jpg" },
+  { label: "Restoration Hardware", img: "/assets/rh.jpg" },
+  { label: "Cassina", img: "/assets/cassina.jpg" },
+  { label: "Roche Bobois", img: "/assets/roche_bobois.png" },
+  { label: "West Elm", img: "/assets/west_elm.png" },
+  { label: "Flexform", img: "/assets/flexform.png" },
+  { label: "Vitra", img: "/assets/vitra.jpg" },
 ];
 
 function MainContent(): JSX.Element {
@@ -24,14 +30,20 @@ function MainContent(): JSX.Element {
       />
       <div className="categories">
         {categories.map((category) => (
-          <article className="category-item" key={category.label}>
-            <img
-              src={category.img}
-              alt={`Category: ${category.label}`}
-              className="category-img"
-            />
-            <div className="label">{category.label}</div>
-          </article>
+          <a
+            href={`/${category.label.toLowerCase().replace(/\s+/g, "-")}`}
+            className="category-link"
+            key={category.label}
+          >
+            <article className="category-item">
+              <img
+                src={category.img}
+                alt={`Category: ${category.label}`}
+                className="category-img"
+              />
+              <div className="label">{category.label}</div>
+            </article>
+          </a>
         ))}
       </div>
     </div>
