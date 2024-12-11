@@ -1,4 +1,5 @@
 "use client";
+
 import "./Header.css";
 import Link from "next/link";
 import useAuth from "../../hooks/useAuth";
@@ -34,19 +35,10 @@ const Header = (): JSX.Element | null => {
       </div>
 
       <nav className="nav">
-        <ul className="nav-left">
+        <ul>
           <li>
             <Link href="/">{t.home}</Link>
           </li>
-          <li>
-            <Link href="/profile">{t.profile}</Link>
-          </li>
-          <li>
-            <Link href="/">{t.library}</Link>
-          </li>
-        </ul>
-
-        <ul className="nav-right">
           <li>
             <Link href="/about">{t.about}</Link>
           </li>
@@ -56,51 +48,55 @@ const Header = (): JSX.Element | null => {
         </ul>
       </nav>
 
-      <div className="theme-toggle">
-        <button
-          onClick={() => changeTheme("light")}
-          className={theme === "light" ? "active" : ""}
-        >
-          Light
-        </button>
-        <button
-          onClick={() => changeTheme("dark")}
-          className={theme === "dark" ? "active" : ""}
-        >
-          Dark
-        </button>
-        <button
-          onClick={() => changeTheme("system")}
-          className={theme === "system" ? "active" : ""}
-        >
-          System
-        </button>
-      </div>
+      <div className="controls"></div>
 
-      <div className="language-toggle">
-        <button onClick={toggleLanguage}>
-          {language === "en" ? "ქართული" : "English"}
-        </button>
-      </div>
-
-      <div className="bar-auth">
-        <a className="burger-bar" href="#">
-          <img src="/assets/burger-bar.png" alt="burger-bar" />
-        </a>
-        <div className="auth-buttons">
-          {isAuthenticated ? (
-            <button onClick={handleLogout}>{t.logout}</button>
-          ) : (
-            <>
-              <Link href="/login">
-                <button>{t.signIn}</button>
-              </Link>
-              <Link href="/signup">
-                <button>{t.signUp}</button>
-              </Link>
-            </>
-          )}
+      <div className="auth">
+        <div className="theme-toggle">
+          <div
+            className="toggle-track"
+            onClick={() => changeTheme(theme === "light" ? "dark" : "light")}
+          >
+            <div
+              className={`toggle-button ${theme}`}
+              draggable="true"
+              onDragEnd={() =>
+                changeTheme(theme === "light" ? "dark" : "light")
+              }
+            >
+              {theme === "light" ? "⛅" : "🌙"}
+            </div>
+          </div>
         </div>
+
+        <div className="language-toggle">
+          <button
+            onClick={toggleLanguage}
+            title={language === "en" ? "English" : "ქართული"}
+          >
+            {language === "en" ? "🇬🇧 EN" : "🇬🇪 KA"}
+          </button>
+        </div>
+
+        <div className="icons">
+          <Link href="/profile" className="icon-link">
+            <img src="/assets/user.png" alt="User Profile" className="icon" />
+          </Link>
+          <Link href="/cart" className="icon-link">
+            <img src="/assets/shop.png" alt="Shopping Cart" className="icon" />
+          </Link>
+        </div>
+
+        {isAuthenticated ? (
+          <button className="logout" onClick={handleLogout}>
+            {t.logout}
+          </button>
+        ) : (
+          <div className="auth-buttons">
+            <Link href="/signup">
+              <button>{t.signUp}</button>
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );
