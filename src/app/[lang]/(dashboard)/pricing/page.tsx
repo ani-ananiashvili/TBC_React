@@ -1,38 +1,62 @@
+import type { Metadata } from "next";
+import CheckoutForm from "../../../components/CheckoutForm";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Upgrade to Premium | Stripe Integration",
+};
 
 export default function PricingPage(): JSX.Element {
   return (
-    <div className="pricing-container">
-      <h1>Explore Our Furniture Brand Plans</h1>
-      <p>
-        Choose the plan that suits you. Access our exclusive furniture designs
-        and premium features with the Premium Plan.
-      </p>
-
-      <div className="pricing-cards">
-        <div className="card">
-          <h2>Free Plan</h2>
-          <p>Perfect for casual users looking for inspiration.</p>
-          <ul>
-            <li>Access to 50+ furniture designs</li>
-            <li>Basic support</li>
-            <li>Limited customization options</li>
-          </ul>
-        </div>
-
-        <div className="card premium">
-          <h2>Premium Plan</h2>
-          <p>
-            Get exclusive access to our full collection and advanced features.
+    <div className="pricing-page bg-gray-50 min-h-screen flex flex-col items-center justify-center p-6">
+      <div className="max-w-4xl w-full bg-white p-8 rounded-xl shadow-lg">
+        <header className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Our Plans</h1>
+          <p className="text-lg text-gray-600">
+            Choose between our free and premium plans to access the best
+            furniture designs and features.
           </p>
-          <ul>
-            <li>Access to 500+ furniture designs</li>
-            <li>Priority support</li>
-            <li>Advanced customization options</li>
-            <li>Early access to new collections</li>
-          </ul>
-          <Link href="/donate-with-checkout" className="button">
-            Subscribe Now
+        </header>
+
+        <section className="pricing-options flex flex-col md:flex-row justify-center gap-8 mb-8">
+          <div className="plan free-plan bg-gray-100 p-6 rounded-lg shadow-md flex-1">
+            <h2 className="text-2xl font-semibold mb-4">Free Plan</h2>
+            <p className="mb-4">
+              Enjoy limited access to our furniture collection.
+            </p>
+            <ul className="list-disc pl-5">
+              <li>50+ furniture designs</li>
+              <li>Basic customization</li>
+              <li>Community support</li>
+            </ul>
+          </div>
+
+          <div className="plan premium-plan bg-blue-100 p-6 rounded-lg shadow-md flex-1">
+            <h2 className="text-2xl font-semibold mb-4">Premium Plan</h2>
+            <p className="mb-4">
+              Unlock exclusive designs and premium features.
+            </p>
+            <ul className="list-disc pl-5 mb-6">
+              <li>500+ furniture designs</li>
+              <li>Advanced customization</li>
+              <li>Priority support</li>
+              <li>Exclusive early access to new collections</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="checkout-form" className="flex justify-center mb-8">
+          <div className="bg-blue-50 p-6 rounded-xl shadow-md w-full max-w-lg flex justify-center text-xl text-green-600">
+            <CheckoutForm />
+          </div>
+        </section>
+
+        <div className="text-center mt-6">
+          <Link
+            href="/unsubscribe"
+            className="text-red-500 hover:text-red-700 text-lg"
+          >
+            Unsubscribe
           </Link>
         </div>
       </div>
