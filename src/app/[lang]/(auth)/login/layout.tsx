@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, ReactNode } from "react";
-import useAuth from "../../hooks/useAuth";
-import Spinner from "../../components/Spinner/Spinner";
+import useAuth from "../../../hooks/useAuth";
+import Spinner from "../../../components/Spinner/Spinner";
 
 interface AuthLayoutProps {
   children: ReactNode;

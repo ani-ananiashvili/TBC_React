@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { createCheckoutSession } from "../actions/stripe";
+import { createCheckoutSession } from "../../actions/stripe";
 
 export default function CheckoutForm(): JSX.Element {
   const [loading, setLoading] = useState(false);

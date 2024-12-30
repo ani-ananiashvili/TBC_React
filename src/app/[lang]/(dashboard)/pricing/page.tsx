@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import CheckoutForm from "../../../components/CheckoutForm";
+import CheckoutForm from "../../../components/Stripe/CheckoutForm";
 import Link from "next/link";
 
 export const metadata: Metadata = {

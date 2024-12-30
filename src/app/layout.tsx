@@ -1,7 +1,7 @@
 "use client";
 
 import PropTypes from "prop-types";
-import "../global.css";
+import "/global.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
