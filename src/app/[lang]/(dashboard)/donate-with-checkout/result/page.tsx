@@ -20,9 +20,9 @@ export default async function ResultPage({
 
   return (
     <>
-      <h2>Status: {paymentIntent.status}</h2>
-      <h3>Checkout Session response:</h3>
-      <PrintObject content={checkoutSession} />
+      <h2 className="text-center">Status: {paymentIntent.status}</h2>
+      {/* <h3>Checkout Session response:</h3> */}
+      {/* <PrintObject content={checkoutSession} /> */}
     </>
   );
 }
