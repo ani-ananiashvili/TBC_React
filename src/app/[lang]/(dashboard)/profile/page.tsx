@@ -14,6 +14,9 @@ export default function Profile() {
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState<string | null>(null);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -26,6 +29,12 @@ export default function Profile() {
           setIsError(error.message);
         } else {
           setUser(user);
+          const { data } = await supabase
+            .from("subscriptions")
+            .select("status")
+            .eq("user_id", user.id)
+            .single();
+          setSubscriptionStatus(data?.status || "free");
         }
       } catch (err) {
         setIsError("Failed to load user data.");
@@ -57,24 +66,32 @@ export default function Profile() {
     );
   }
 
+  const userName = user?.user_metadata?.name || "User";
+  const avatarUrl = user?.user_metadata?.avatar_url || "/default-user.png";
+  const email = user?.email || "No email available";
+  const subscription = subscriptionStatus === "premium" ? "Premium" : "Free";
+
   return (
-    user && (
-      <div className="profile-container">
-        <h1 className="profile-title">
-          Welcome, {user.user_metadata?.name || "User"}!
-        </h1>
-        <img
-          src={user.user_metadata?.avatar_url || "/default-user.png"}
-          alt={user.user_metadata?.name || "User Profile"}
-          className="profile-image"
-        />
-        <div className="profile-details">
-          <h2 className="profile-name">
-            {user.user_metadata?.name || "Unknown User"}
-          </h2>
-          <p className="profile-email">Email: {user.email}</p>
-        </div>
+    <div className="profile-container">
+      <h1 className="profile-title">Welcome, {userName}!</h1>
+      <img src={avatarUrl} alt={userName} className="profile-image" />
+      <div className="profile-details">
+        <h2 className="profile-name">{userName}</h2>
+        <p className="profile-email">Email: {email}</p>
+        <p className="profile-subscription">
+          Subscription Status: {subscription}
+        </p>
+        {subscriptionStatus === "premium" && (
+          <div className="premium-features">
+            <h3>Premium Features:</h3>
+            <ul>
+              <li>500+ Furniture Designs</li>
+              <li>Advanced Customization</li>
+              <li>Priority Support</li>
+            </ul>
+          </div>
+        )}
       </div>
-    )
+    </div>
   );
 }
