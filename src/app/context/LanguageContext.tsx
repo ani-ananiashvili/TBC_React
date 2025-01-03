@@ -1,3 +1,5 @@
+"use client"
+
 import {
   createContext,
   useContext,
@@ -91,7 +93,7 @@ export const LanguageProvider = ({
     const pathWithoutLang = window.location.pathname.replace(/^\/(en|ka)/, "");
     router.push(`/${selectedLang}${pathWithoutLang}`);
     setLanguage(selectedLang);
-    setCookie("language", selectedLang, 7); // store for 7 days
+    setCookie("language", selectedLang, 7);
   };
 
   const toggleLanguage = (): void => {
