@@ -1,40 +1,11 @@
-"use client";
+import '/global.css';
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import Spinner from "../../components/Spinner/Spinner";
-
-interface DashboardLayoutProps {
+export default async function Layout({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const { user, isAuthenticated, isLoading } = useAuth(); 
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!isLoading) {
-      if (!user) {
-        router.push("/login");
-      } else {
-        setLoading(false);
-      }
-    }
-  }, [isLoading, user, router]);
-
-  if (isLoading || !user) {
-    return <Spinner />;
-  }
-
+}) {
   return (
-    <>
-      <Header />
-      <main>{children}</main>
-      <Footer />
-    </>
+    <div className="max-w-7xl flex flex-col gap-12 items-start">{children}</div>
   );
 }
