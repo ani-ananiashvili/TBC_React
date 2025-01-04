@@ -1,57 +1,51 @@
-import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+"use client";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { useState, useEffect } from "react";
+import { createClient } from "../../../utils/supabase/client";
 
 const useAuth = () => {
-  const [user, setUser] = useState<any>(null);
-  const [isLoading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const supabase = createClient();
+
     const fetchSession = async () => {
       const {
         data: { session },
+        error,
       } = await supabase.auth.getSession();
-      setUser(session?.user || null);
-      setLoading(false);
+
+      if (error) {
+        console.error("Error fetching session:", error.message);
+      } else if (session) {
+        setIsAuthenticated(true);
+      }
+
+      setIsLoading(false);
     };
 
     fetchSession();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null);
-      setLoading(false);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
   }, []);
 
-  const login = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "github",
+  const login = async (email: string, password: string) => {
+    const { error } = await createClient().auth.signInWithPassword({
+      email,
+      password,
     });
-    if (error) console.error("Login error:", error.message);
+    if (!error) {
+      setIsAuthenticated(true);
+    } else {
+      console.error(error.message);
+    }
   };
 
   const logout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) console.error("Logout error:", error.message);
+    await createClient().auth.signOut();
+    setIsAuthenticated(false);
   };
 
-  return {
-    isAuthenticated: !!user,
-    user,
-    isLoading,
-    login,
-    logout,
-  };
+  return { isAuthenticated, isLoading, login, logout };
 };
 
 export default useAuth;
