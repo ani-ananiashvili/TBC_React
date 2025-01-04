@@ -48,54 +48,35 @@ const Header = (): JSX.Element | null => {
         </ul>
       </nav>
 
-      <div className="controls"></div>
-
-      <div className="auth">
+      <div className="controls">
         <div className="theme-toggle">
           <div
             className="toggle-track"
             onClick={() => changeTheme(theme === "light" ? "dark" : "light")}
           >
-            <div
-              className={`toggle-button ${theme}`}
-              draggable="true"
-              onDragEnd={() =>
-                changeTheme(theme === "light" ? "dark" : "light")
-              }
-            >
               {theme === "light" ? "⛅" : "🌙"}
-            </div>
-          </div>
+              </div>
         </div>
 
         <div className="language-toggle">
-          <button
-            onClick={toggleLanguage}
-            title={language === "en" ? "English" : "ქართული"}
-          >
-            {language === "en" ? "🇬🇧 EN" : "🇬🇪 KA"}
+          <button onClick={toggleLanguage}>
+            {language === "en" ? "ES" : "EN"}
           </button>
         </div>
+      </div>
 
-        <div className="icons">
-          <Link href="/profile" className="icon-link">
-            <img src="/assets/user.png" alt="User Profile" className="icon" />
-          </Link>
-          <Link href="/cart" className="icon-link">
-            <img src="/assets/shop.png" alt="Shopping Cart" className="icon" />
-          </Link>
-        </div>
-
+      <div className="auth">
         {isAuthenticated ? (
-          <button className="logout" onClick={handleLogout}>
-            {t.logout}
-          </button>
+          <>
+            <span>Welcome, User!</span>
+            <button onClick={handleLogout}>Logout</button>
+          </>
         ) : (
-          <div className="auth-buttons">
-            <Link href="/signup">
-              <button>{t.signUp}</button>
-            </Link>
-          </div>
+          <div className="auth-links flex space-x-7">
+          <Link href="/login">Sign In</Link>
+          <Link href="/login">Sign Up</Link>
+        </div>
+        
         )}
       </div>
     </header>
