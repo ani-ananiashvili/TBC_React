@@ -1,8 +1,6 @@
 import { LanguageProvider } from "./context/LanguageContext";
 import Footer from "./components/Footer/Footer";
-import { EnvVarWarning } from "./components/env-var-warning";
 import Header from "./components/Header/Header";
-import { Client } from "../../utils/supabase/client";
 import { ThemeProvider } from "./context/ThemeContext";
 import "/global.css";
 
@@ -21,7 +19,6 @@ export default function RootLayout({
                 <nav>
                   <div>
                     <Header />
-                    {!Client ? <EnvVarWarning /> : null}
                   </div>
                 </nav>
               </div>
