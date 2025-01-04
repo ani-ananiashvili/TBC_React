@@ -1,34 +1,19 @@
-"use client";
-import { useRouter } from "next/navigation";
-import useAuth from "../../../hooks/useAuth";
-import "./login.css";
+import SignInForm from "../../../components/SignInForm";
+import SignUpForm from "../../../components/SignUpForm";
 
-export default function LoginPage() {
-  const router = useRouter();
-  const { login, isAuthenticated } = useAuth();
+interface Props {
+  searchParams: Record<string, string | undefined>; 
+}
 
-  if (isAuthenticated) {
-    router.push("/home");
-  }
-
+export default async function Login({ searchParams }: Props) {
   return (
-    <div className="login-container">
-      <div className="background-image"></div>
-      <div className="login-content">
-        <h1 className="welcome-message">Welcome to the Furniture Store!</h1>
-        <p className="store-description">
-          Discover stylish and comfortable furniture for every room in your
-          home. From modern to classic, we have something for every taste.
-        </p>
-        <p className="store-benefits">
-          Enjoy exclusive deals, free delivery, and quality craftsmanship that
-          lasts.
-        </p>
-        <button className="login-button" onClick={login}>
-          Login
-        </button>
+    <div className="flex gap-8 justify-center mt-16 flex-col md:flex-row">
+      <div className="flex-1">
+        <SignInForm searchParams={searchParams} />
+      </div>
+      <div className="flex-1">
+        <SignUpForm searchParams={searchParams} />
       </div>
     </div>
   );
 }
-
