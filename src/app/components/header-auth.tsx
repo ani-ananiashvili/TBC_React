@@ -1,7 +1,6 @@
 import { signOutAction } from "../actions";
 import { Client } from "../../../utils/supabase/client";
 import Link from "next/link";
-import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { createClient } from "../../../utils/supabase/server";
 
@@ -17,11 +16,6 @@ export default async function AuthButton() {
       <>
         <div className="flex gap-4 items-center">
           <div>
-            <Badge
-              variant={"default"}
-              className="font-normal pointer-events-none"
-            >
-            </Badge>
           </div>
           <div className="flex gap-2">
             <Button
