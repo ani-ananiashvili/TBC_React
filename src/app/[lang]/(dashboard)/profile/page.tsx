@@ -1,50 +1,38 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
-import "./profile.css";
+import { createClient } from "../../../../../utils/supabase/client";
 import Spinner from "../../../components/Spinner/Spinner";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import useAuth from "../../../hooks/useAuth";
+import "./profile.css";
 
 export default function Profile() {
-  const [user, setUser] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const { user, isLoading, isAuthenticated } = useAuth();
+  const [subscriptionStatus, setSubscriptionStatus] = useState<string | null>(null);
   const [isError, setIsError] = useState<string | null>(null);
-  const [subscriptionStatus, setSubscriptionStatus] = useState<string | null>(
-    null
-  );
+
+  const supabase = createClient();
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const {
-          data: { user },
-          error,
-        } = await supabase.auth.getUser();
+    const fetchSubscriptionStatus = async () => {
+      if (user) {
+        const { data, error } = await supabase
+          .from("subscriptions")
+          .select("status")
+          .eq("user_id", user.id)
+          .single();
         if (error) {
           setIsError(error.message);
         } else {
-          setUser(user);
-          const { data } = await supabase
-            .from("subscriptions")
-            .select("status")
-            .eq("user_id", user.id)
-            .single();
           setSubscriptionStatus(data?.status || "free");
         }
-      } catch (err) {
-        setIsError("Failed to load user data.");
-      } finally {
-        setIsLoading(false);
       }
     };
 
-    fetchUser();
-  }, []);
+    if (user) {
+      fetchSubscriptionStatus();
+    }
+  }, [user]);
 
   if (isLoading) {
     return (
@@ -54,14 +42,10 @@ export default function Profile() {
     );
   }
 
-  if (isError) {
+  if (!isAuthenticated) {
     return (
       <div className="error">
-        <h2>Error loading profile</h2>
-        <p>{isError}</p>
-        <button className="retry-button" onClick={() => setIsError(null)}>
-          Retry
-        </button>
+        <h2>Please log in to view your profile.</h2>
       </div>
     );
   }
@@ -78,9 +62,7 @@ export default function Profile() {
       <div className="profile-details">
         <h2 className="profile-name">{userName}</h2>
         <p className="profile-email">Email: {email}</p>
-        <p className="profile-subscription">
-          Subscription Status: {subscription}
-        </p>
+        <p className="profile-subscription">Subscription Status: {subscription}</p>
         {subscriptionStatus === "premium" && (
           <div className="premium-features">
             <h3>Premium Features:</h3>
