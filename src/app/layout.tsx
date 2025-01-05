@@ -11,24 +11,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-background text-foreground">
+      <body>
         <LanguageProvider>
           <ThemeProvider>
-            <main className="min-h-screen flex flex-col items-center">
-              <div className="w-full">
-                <nav>
-                  <div>
-                    <Header />
-                  </div>
-                </nav>
-              </div>
-
-              <div className="flex flex-col gap-20 max-w-5xl p-5 w-full">
-                {children}
-              </div>
-
-              <Footer />
+            <nav>
+              <Header />
+            </nav>
+            <main>
+              <div>{children}</div>
             </main>
+            <Footer />
           </ThemeProvider>
         </LanguageProvider>
       </body>
