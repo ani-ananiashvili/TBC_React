@@ -6,10 +6,11 @@ import { createClient } from "../../../utils/supabase/client";
 const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
+
+  const supabase = createClient();
 
   useEffect(() => {
-    const supabase = createClient();
-
     const fetchSession = async () => {
       const {
         data: { session },
@@ -20,6 +21,7 @@ const useAuth = () => {
         console.error("Error fetching session:", error.message);
       } else if (session) {
         setIsAuthenticated(true);
+        setUser(session.user);
       }
 
       setIsLoading(false);
@@ -29,7 +31,7 @@ const useAuth = () => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const { error } = await createClient().auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -41,11 +43,21 @@ const useAuth = () => {
   };
 
   const logout = async () => {
-    await createClient().auth.signOut();
+    await supabase.auth.signOut();
     setIsAuthenticated(false);
+    setUser(null);
   };
 
-  return { isAuthenticated, isLoading, login, logout };
+  const loginWithGitHub = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
+    if (error) {
+      console.error(error.message);
+    }
+  };
+
+  return { isAuthenticated, isLoading, login, logout, loginWithGitHub, user };
 };
 
 export default useAuth;
