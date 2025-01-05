@@ -1,13 +1,18 @@
+"use client";
+
 import { signInAction } from "../actions";
 import { FormMessage } from "../components/form-message";
 import { SubmitButton } from "../components/submit-button";
 import Link from "next/link";
+import useAuth from "../hooks/useAuth";
 
 interface SignInFormProps {
   searchParams: Record<string, string | undefined>;
 }
 
 export default function SignInForm({ searchParams }: SignInFormProps) {
+  const { loginWithGitHub } = useAuth();
+
   return (
     <form className="flex flex-col min-w-64 max-w-64 mx-auto">
       <h1 className="text-2xl font-medium">Sign in</h1>
@@ -39,6 +44,14 @@ export default function SignInForm({ searchParams }: SignInFormProps) {
           Sign in
         </SubmitButton>
         <FormMessage message={searchParams} />
+
+        <button
+          type="button"
+          onClick={loginWithGitHub}
+          className="bg-black text-white p-2 mt-4 rounded"
+        >
+          Sign in with GitHub
+        </button>
       </div>
     </form>
   );
