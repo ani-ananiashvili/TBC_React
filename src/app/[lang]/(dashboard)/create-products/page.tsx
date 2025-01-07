@@ -29,6 +29,8 @@ export default function CreateProducts() {
     },
   });
 
+  const [message, setMessage] = useState<string | null>(null);
+
   const regexPrice = /^[0-9]+$/;
 
   const handleChange = (
@@ -40,7 +42,6 @@ export default function CreateProducts() {
       return;
     }
 
-    // update errors dynamically
     let updatedErrors = { ...formData.errors };
 
     if (name === "price") {
@@ -124,8 +125,12 @@ export default function CreateProducts() {
         photo: "",
         errors: { name: "", description: "", price: "", photo: "" },
       });
+
+      setMessage("Product created successfully!");
     } catch (error) {
       console.error("Error creating product:", error);
+
+      setMessage("Failed to create product. Please try again.");
     }
   };
 
@@ -134,6 +139,18 @@ export default function CreateProducts() {
       <h1 className="text-center mt-4 mb-8 text-4xl font-bold text-[#4a628a]">
         Add New Product
       </h1>
+
+      {message && (
+        <div
+          className={`text-center p-4 mb-4 rounded-lg ${
+            message.includes("successfully")
+              ? "bg-green-200 text-green-800"
+              : "bg-red-200 text-red-800"
+          }`}
+        >
+          {message}
+        </div>
+      )}
 
       <div className="max-w-2xl mx-auto mb-4">
         <form onSubmit={handleSubmit} className="space-y-4">
