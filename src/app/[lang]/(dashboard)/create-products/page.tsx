@@ -7,6 +7,12 @@ interface FormData {
   description: string;
   price: string;
   photo: string;
+  errors: {
+    name: string;
+    description: string;
+    price: string;
+    photo: string;
+  };
 }
 
 export default function CreateProducts() {
@@ -15,21 +21,83 @@ export default function CreateProducts() {
     description: "",
     price: "",
     photo: "",
+    errors: {
+      name: "",
+      description: "",
+      price: "",
+      photo: "",
+    },
   });
+
+  const regexPrice = /^[0-9]+$/;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === "price" && value !== "" && !regexPrice.test(value)) {
+      return;
+    }
+
+    // update errors dynamically
+    let updatedErrors = { ...formData.errors };
+
+    if (name === "price") {
+      if (value === "") {
+        updatedErrors.price = "";
+      } else if (!regexPrice.test(value)) {
+        updatedErrors.price = "Please enter a valid number for the price";
+      } else {
+        updatedErrors.price = "";
+      }
+    }
+
+    setFormData({ ...formData, [name]: value, errors: updatedErrors });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const priceInt = Math.round(parseFloat(formData.price));
+    let isValid = true;
+    let updatedErrors = { ...formData.errors };
+
+    if (formData.name.trim() === "") {
+      updatedErrors.name = "Product Name is required";
+      isValid = false;
+    } else {
+      updatedErrors.name = "";
+    }
+
+    if (formData.description.trim() === "") {
+      updatedErrors.description = "Product Description is required";
+      isValid = false;
+    } else {
+      updatedErrors.description = "";
+    }
+
+    if (!regexPrice.test(formData.price)) {
+      updatedErrors.price = "Please enter a valid number for the price";
+      isValid = false;
+    } else {
+      updatedErrors.price = "";
+    }
+
+    const regexUrl = /^(ftp|http|https):\/\/[^ "]+$/;
+    if (!regexUrl.test(formData.photo)) {
+      updatedErrors.photo = "Please enter a valid URL";
+      isValid = false;
+    } else {
+      updatedErrors.photo = "";
+    }
+
+    setFormData({ ...formData, errors: updatedErrors });
+
+    if (!isValid) return;
 
     try {
+      const priceInt = parseInt(formData.price, 10);
+
       const response = await fetch("/api/create-products", {
         method: "POST",
         headers: {
@@ -49,7 +117,13 @@ export default function CreateProducts() {
         throw new Error("Failed to create product");
       }
 
-      setFormData({ name: "", description: "", price: "", photo: "" });
+      setFormData({
+        name: "",
+        description: "",
+        price: "",
+        photo: "",
+        errors: { name: "", description: "", price: "", photo: "" },
+      });
     } catch (error) {
       console.error("Error creating product:", error);
     }
@@ -73,6 +147,9 @@ export default function CreateProducts() {
               required
               className="w-1/2 p-3 text-lg rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
+            {formData.errors.name && (
+              <span className="text-red-700">{formData.errors.name}</span>
+            )}
             <div className="relative w-1/2">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-lg text-gray-600">
                 $
@@ -86,6 +163,9 @@ export default function CreateProducts() {
                 required
                 className="w-full pl-8 pr-3 py-3 text-lg rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
               />
+              {formData.errors.price && (
+                <span className="text-red-700">{formData.errors.price}</span>
+              )}
             </div>
           </div>
 
@@ -96,7 +176,10 @@ export default function CreateProducts() {
             onChange={handleChange}
             required
             className="w-full p-3 text-lg rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          ></textarea>
+          />
+          {formData.errors.description && (
+            <span className="text-red-700">{formData.errors.description}</span>
+          )}
 
           <input
             type="text"
@@ -107,6 +190,9 @@ export default function CreateProducts() {
             required
             className="w-full p-3 text-lg rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
           />
+          {formData.errors.photo && (
+            <span className="text-red-700">{formData.errors.photo}</span>
+          )}
 
           <button
             type="submit"
