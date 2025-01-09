@@ -34,6 +34,29 @@ export default function CreateProductList() {
     fetchProducts();
   }, []);
 
+  const handleBuy = async (productId: number) => {
+    try {
+      const response = await fetch("/api/purchase-product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.url) {
+        window.location.href = data.url; 
+      } else {
+        throw new Error(data.error || "Failed to initiate purchase.");
+      }
+    } catch (error) {
+      console.error("Error purchasing product:", error);
+      alert("Failed to complete the purchase. Please try again.");
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -65,6 +88,12 @@ export default function CreateProductList() {
             <p className="text-xl text-green-600 font-bold mb-2">
               ${product.price}
             </p>
+            <button
+              onClick={() => handleBuy(product.id)}
+              className="px-4 py-2 bg-blue-500 text-white rounded mt-2"
+            >
+              Buy
+            </button>
           </div>
         ))}
       </div>
