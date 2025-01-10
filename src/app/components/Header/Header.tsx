@@ -50,7 +50,7 @@ const Header = (): JSX.Element | null => {
             <Link href="/profile">{t.profile}</Link>
           </li>
           <li>
-            <Link href="/create-products">{t.createProducts}</Link>
+            <Link href="/create-products">Create Products</Link>
           </li>
         </ul>
       </nav>
