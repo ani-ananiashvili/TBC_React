@@ -1,8 +1,8 @@
 "use server";
 
 import { headers } from "next/headers";
-import { CURRENCY } from "../../../config";
-import { formatAmountForStripe } from "../../../utils/stripe-helpers";
+import { CURRENCY } from "../../../config/index";
+import { formatAmountForStripe } from "../utils/stripe/stripe-helpers";
 import { stripe } from "../../../lib/stripe";
 
 export async function createCheckoutSession(

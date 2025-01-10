@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "../../../../../utils/supabase/client";
+import { createClient } from "../../../utils/supabase/client";
 import Spinner from "../../../components/Spinner/Spinner";
 import useAuth from "../../../hooks/useAuth";
 import "./profile.css";

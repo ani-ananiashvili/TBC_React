@@ -45,8 +45,15 @@ const Header = (): JSX.Element | null => {
           <li>
             <Link href="/contact">{t.contact}</Link>
           </li>
+          <li>
+            <Link href="/profile">{t.profile}</Link>
+          </li>
+          <li>
+            <Link href="/create-products">Create Products</Link>
+          </li>
         </ul>
       </nav>
+   
 
       <div className="controls">
         <div className="theme-toggle">

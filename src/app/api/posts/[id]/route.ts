@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import supabase from "../../../components/utils/supabase";
+import supabase from "../../../utils/supabase/supabase";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse> {
   try {

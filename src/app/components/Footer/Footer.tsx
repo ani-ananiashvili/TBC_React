@@ -42,16 +42,17 @@ const Footer = (): JSX.Element => {
               <Link href="/products">{t.products}</Link>
             </li>
             <li>
-              <Link href="/">{t.cookieManager}</Link>
-            </li>
+            <Link href="/create-product-list">Product List</Link>
+          </li>
           </ul>
           <ul>
-            <li>
-              <Link href="/blog">{t.blog}</Link>
-            </li>
-            <li>
+          <li>
               <Link href="/">{t.charts}</Link>
             </li>
+           
+            <li>
+            <Link href="/pricing">Pricing</Link>
+          </li>
             <li>
               <Link href="/">{t.transparencyReports}</Link>
             </li>
