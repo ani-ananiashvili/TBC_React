@@ -11,12 +11,6 @@ export default function SignUpForm({ searchParams }: SignUpFormProps) {
   return (
     <form className="flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-6 h-full">
       <h1 className="text-2xl font-medium">Sign up</h1>
-      <p className="text-sm text-foreground">
-        Already have an account?{" "}
-        <Link className="text-primary font-medium underline" href="/sign-in">
-          Sign in
-        </Link>
-      </p>
       <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
         <label htmlFor="email">Email</label>
         <input
