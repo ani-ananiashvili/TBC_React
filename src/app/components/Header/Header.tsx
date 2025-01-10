@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useLanguageContext } from "../../context/LanguageContext";
 
 const Header = (): JSX.Element | null => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const { theme, changeTheme } = useThemeContext();
   const { language, toggleLanguage, translations } = useLanguageContext();
   const router = useRouter();
@@ -27,6 +27,7 @@ const Header = (): JSX.Element | null => {
   if (!isAuthChecked) return null;
 
   const t = translations[language];
+  const username = user ? user.user_metadata.username : "User";
 
   return (
     <header className="header">
@@ -49,11 +50,10 @@ const Header = (): JSX.Element | null => {
             <Link href="/profile">{t.profile}</Link>
           </li>
           <li>
-            <Link href="/create-products">Create Products</Link>
+            <Link href="/create-products">{t.createProducts}</Link>
           </li>
         </ul>
       </nav>
-   
 
       <div className="controls">
         <div className="theme-toggle">
@@ -61,8 +61,8 @@ const Header = (): JSX.Element | null => {
             className="toggle-track"
             onClick={() => changeTheme(theme === "light" ? "dark" : "light")}
           >
-              {theme === "light" ? "⛅" : "🌙"}
-              </div>
+            {theme === "light" ? "⛅" : "🌙"}
+          </div>
         </div>
 
         <div className="language-toggle">
@@ -75,15 +75,11 @@ const Header = (): JSX.Element | null => {
       <div className="auth">
         {isAuthenticated ? (
           <>
-            <span>Welcome, User!</span>
+            <span>Welcome, {user.email}!</span>
             <button onClick={handleLogout}>Logout</button>
           </>
         ) : (
-          <div className="auth-links flex space-x-7">
-          <Link href="/login">Sign In</Link>
-          <Link href="/login">Sign Up</Link>
-        </div>
-        
+          <></>
         )}
       </div>
     </header>
