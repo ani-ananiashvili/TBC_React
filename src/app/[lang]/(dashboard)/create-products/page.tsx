@@ -156,6 +156,7 @@ export default function CreateProducts() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex justify-between space-x-4">
             <input
+              data-cy="product-name"
               type="text"
               name="name"
               placeholder="Product Name"
@@ -172,6 +173,7 @@ export default function CreateProducts() {
                 $
               </span>
               <input
+                data-cy="product-price"
                 type="text"
                 name="price"
                 placeholder="Price"
@@ -187,6 +189,7 @@ export default function CreateProducts() {
           </div>
 
           <textarea
+            data-cy="product-description"
             name="description"
             placeholder="Product Description"
             value={formData.description}
@@ -199,6 +202,7 @@ export default function CreateProducts() {
           )}
 
           <input
+            data-cy="product-photo-url"
             type="text"
             name="photo"
             placeholder="Photo URL"
