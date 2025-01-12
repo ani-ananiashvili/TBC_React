@@ -11,9 +11,9 @@ interface Product {
 
 export async function GET(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ): Promise<NextResponse> {
-  const { id } = context.params;
+  const { id } = (await context.params);
 
   const language = req.cookies.get("language")?.value || "en";
 

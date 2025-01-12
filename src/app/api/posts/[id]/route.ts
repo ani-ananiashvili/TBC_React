@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import supabase from "../../../utils/supabase/supabase";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }): Promise<NextResponse> {
+export async function GET(req: NextRequest, props: { params: Promise<{ id: string }> }): Promise<NextResponse> {
+  const params = await props.params;
   try {
     const { id } = params; 
     const language = req.cookies.get("language")?.value || "en"; 
