@@ -1,5 +1,3 @@
-import "./home.css";
-
 interface Category {
   label: string;
   img: string;
@@ -20,29 +18,21 @@ const categories: Category[] = [
   { label: "Vitra", img: "/assets/vitra.jpg" },
 ];
 
-function MainContent(): JSX.Element {
+function Home(): JSX.Element {
   return (
-    <div className="main-content">
-      <img
-        src="/assets/furniture.jpg"
-        alt="Furniture logo"
-        className="main-logo"
-      />
-      <div className="categories">
+    <div className="text-center space-y-10 mb-10">
+      <img src="/assets/furniture.jpg" alt="Furniture logo" className="max-w-full h-auto" />
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 md:grid-cols-6">
         {categories.map((category) => (
           <a
             href={`/${category.label.toLowerCase().replace(/\s+/g, "-")}`}
-            className="category-link"
+            className="block rounded-lg overflow-hidden shadow-lg cursor-pointer"
             key={category.label}
           >
-            <article className="category-item">
-              <img
-                src={category.img}
-                alt={`Category: ${category.label}`}
-                className="category-img"
-              />
-              <div className="label">{category.label}</div>
-            </article>
+            <img src={category.img} alt={`Category: ${category.label}`} className="w-auto h-full object-contain hover:scale-105 transition-transform duration-300" />
+            <div className="bg-black bg-opacity-60 text-white text-center p-2 ">
+              {category.label}
+            </div>
           </a>
         ))}
       </div>
@@ -50,4 +40,4 @@ function MainContent(): JSX.Element {
   );
 }
 
-export default MainContent;
+export default Home;
