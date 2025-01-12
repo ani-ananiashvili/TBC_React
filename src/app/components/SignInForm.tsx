@@ -23,6 +23,7 @@ export default function SignInForm({ searchParams }: SignInFormProps) {
           name="email"
           placeholder="you@example.com"
           required
+          data-cy="sign-in-email"
         />
         <div className="flex justify-between items-center">
           <label htmlFor="password">Password</label>
@@ -39,6 +40,7 @@ export default function SignInForm({ searchParams }: SignInFormProps) {
           name="password"
           placeholder="Your password"
           required
+          data-cy="sign-in-password"
         />
         <SubmitButton
           className="bg-[#4a628a] hover:bg-[#3e4f6a] text-white rounded p-2 mt-4"

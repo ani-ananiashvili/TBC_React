@@ -1,7 +1,6 @@
 import { signUpAction } from "../actions";
 import { FormMessage } from "../components/form-message";
 import { SubmitButton } from "../components/submit-button";
-import Link from "next/link";
 
 interface SignUpFormProps {
   searchParams: Record<string, string | undefined>;
@@ -18,6 +17,7 @@ export default function SignUpForm({ searchParams }: SignUpFormProps) {
           name="email"
           placeholder="you@example.com"
           required
+          data-cy="sign-up-email"
         />
         <label htmlFor="password">Password</label>
         <input
@@ -27,6 +27,7 @@ export default function SignUpForm({ searchParams }: SignUpFormProps) {
           placeholder="Your password"
           minLength={6}
           required
+          data-cy="sign-up-password"
         />
         <SubmitButton
           className="bg-[#4a628a] hover:bg-[#3e4f6a] text-white rounded p-2 mt-4"
