@@ -1,6 +1,6 @@
-describe("Product", () => {
+describe("Add Product", () => {
   it("Product add successfully", () => {
-    cy.visit("http://localhost:3000/en/login", { failOnStatusCode: false });
+    cy.visit("http://localhost:3000/en/login");
 
     cy.get('input[data-cy="sign-in-email"]').type("tproject761@gmail.com");
     cy.get('input[data-cy="sign-in-password"]').type("Tproject2025");
@@ -8,9 +8,7 @@ describe("Product", () => {
 
     cy.url().should("include", "http://localhost:3000/home");
 
-    cy.visit("http://localhost:3000/en/create-products", {
-      failOnStatusCode: false,
-    });
+    cy.visit("http://localhost:3000/en/create-products");
 
     cy.get('input[data-cy="product-name"]').type("Frontend Developer");
     cy.get('input[data-cy="product-price"]').type("5000");
