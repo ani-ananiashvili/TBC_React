@@ -57,6 +57,23 @@ export default function CreateProductList() {
     }
   };
 
+  const handleDelete = async (productId: number) => {
+    try {
+      const response = await fetch(`/api/delete-product/${productId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setProducts(products.filter(product => product.id !== productId));
+      } else {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to delete product.");
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -90,9 +107,15 @@ export default function CreateProductList() {
             </p>
             <button
               onClick={() => handleBuy(product.id)}
-              className="px-4 py-2 bg-blue-500 text-white rounded mt-2"
+              className="px-4 py-2 bg-blue-500 text-white rounded mt-2 mr-2"
             >
               Buy
+            </button>
+            <button
+              onClick={() => handleDelete(product.id)}
+              className="px-4 py-2 bg-red-500 text-white rounded mt-2"
+            >
+              Delete
             </button>
           </div>
         ))}
