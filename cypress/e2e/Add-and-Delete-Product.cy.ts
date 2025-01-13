@@ -1,5 +1,5 @@
-describe("Add Product", () => {
-  it("Product add successfully", () => {
+describe("Add and Delete Product", () => {
+  it("Product add and delete successfully", () => {
     cy.visit("http://localhost:3000/en/login");
 
     cy.get('input[data-cy="sign-in-email"]').type("tproject761@gmail.com");
@@ -11,8 +11,8 @@ describe("Add Product", () => {
     cy.visit("http://localhost:3000/en/create-products");
 
     cy.get('input[data-cy="product-name"]').type("Frontend Developer");
-    cy.get('input[data-cy="product-price"]').type("5000");
-    cy.get('textarea[data-cy="product-description"]').type("HELP!");
+    cy.get('input[data-cy="product-price"]').type("10000");
+    cy.get('textarea[data-cy="product-description"]').type("HI GUGA!");
     cy.get('input[data-cy="product-photo-url"]').type(
       "https://www.acceseo.com/wp-content/uploads/2021/01/front-end-developer.png"
     );
@@ -30,5 +30,13 @@ describe("Add Product", () => {
     cy.get("a").contains("Product List").click();
 
     cy.url().should("include", "http://localhost:3000/en/create-product-list");
+
+    cy.intercept("DELETE", "/api/delete-product/*").as("deleteProduct");
+
+    cy.wait(2000);
+
+    cy.get("button").contains("Delete").first().click();
+
+    cy.wait("@deleteProduct").its("response.statusCode").should("eq", 200);
   });
 });
