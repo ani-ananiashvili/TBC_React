@@ -20,6 +20,7 @@
     "@supabase/supabase-js": "^2.47.13",
     "class-variance-authority": "^0.7.1",
     "cookie": "^1.0.1",
+    "glob": "^9.3.5",
     "js-cookie": "^3.0.5",
     "lodash.debounce": "^4.0.8",
     "next": "^15.1.4",
@@ -28,7 +29,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
     "stripe": "^17.5.0",
-    "use-debounce": "^10.0.4"
+    "use-debounce": "^10.0.4",
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
