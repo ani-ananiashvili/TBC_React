@@ -3,10 +3,14 @@ import { FormMessage } from "../../../components/form-message";
 import { SubmitButton } from "../../../components/submit-button";
 
 interface ForgotPasswordFormProps {
-  searchParams: Record<string, string | undefined>;
+  searchParams: {
+    [key: string]: string | null;
+  };
 }
 
-export default function ForgotPasswordForm({ searchParams }: ForgotPasswordFormProps) {
+export default function ForgotPasswordForm({
+  searchParams,
+}: ForgotPasswordFormProps) {
   return (
     <form className="flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-6 h-full m-20">
       <h1 className="text-2xl font-medium">Reset Password</h1>
