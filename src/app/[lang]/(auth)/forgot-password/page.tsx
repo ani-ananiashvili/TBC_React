@@ -2,11 +2,11 @@ import { forgotPasswordAction } from "../../../actions";
 import { FormMessage } from "../../../components/form-message";
 import { SubmitButton } from "../../../components/submit-button";
 
-interface ForgotPasswordFormProps {
-  searchParams: {
-    [key: string]: string | undefined;
-  };
+interface PageProps {
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
+
+interface ForgotPasswordFormProps extends PageProps {}
 
 export default function ForgotPasswordForm({
   searchParams,
@@ -30,7 +30,7 @@ export default function ForgotPasswordForm({
         >
           Reset Password
         </SubmitButton>
-        <FormMessage message={searchParams} />
+        <FormMessage message={searchParams?.message} />
       </div>
     </form>
   );
