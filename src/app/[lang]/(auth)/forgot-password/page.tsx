@@ -4,7 +4,7 @@ import { SubmitButton } from "../../../components/submit-button";
 
 interface ForgotPasswordFormProps {
   searchParams: {
-    [key: string]: string | null;
+    [key: string]: string | undefined;
   };
 }
 
