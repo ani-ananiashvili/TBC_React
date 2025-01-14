@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { createClient } from "../../../utils/supabase/client";
 import Spinner from "../../../components/Spinner/Spinner";
 import useAuth from "../../../hooks/useAuth";
-import "./profile.css";
 
 export default function Profile() {
   const { user, isLoading, isAuthenticated } = useAuth();
