@@ -7,6 +7,8 @@ interface SignUpFormProps {
 }
 
 export default function SignUpForm({ searchParams }: SignUpFormProps) {
+  const message = searchParams ? searchParams.message : undefined;
+
   return (
     <form className="flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-6 h-full">
       <h1 className="text-2xl font-medium">Sign up</h1>
@@ -36,7 +38,7 @@ export default function SignUpForm({ searchParams }: SignUpFormProps) {
         >
           Sign up
         </SubmitButton>
-        <FormMessage message={searchParams} />
+        <FormMessage message={message} />
       </div>
     </form>
   );
