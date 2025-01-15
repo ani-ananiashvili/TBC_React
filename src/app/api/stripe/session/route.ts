@@ -1,22 +1,42 @@
-import { NextApiRequest, NextApiResponse } from "next";
+"use server";
+
+import { headers } from "next/headers";
+import { CURRENCY } from "../../../../../config";
+import { formatAmountForStripe } from "../../../utils/stripe/stripe-helpers";
 import { stripe } from "../../../../../lib/stripe";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const { sessionId } = req.query;
+export async function POST(req: Request): Promise<Response> {
+  const headersList = await headers();
+  const origin = headersList.get("origin") as string;
 
-  if (req.method === "GET") {
-    try {
-      const session = await stripe.checkout.sessions.retrieve(sessionId as string);
+  try {
+    const body = await req.json();
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: [
+        {
+          quantity: 1,
+          price_data: {
+            currency: CURRENCY,
+            product_data: { name: "Premium Plan Subscription" },
+            unit_amount: formatAmountForStripe(50, CURRENCY),
+          },
+        },
+      ],
+      success_url: `${origin}/donate-with-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/donate-with-checkout`,
+    });
 
-      res.status(200).json(session);
-    } catch (error) {
-      console.error("Error fetching Stripe session:", error);
-      res.status(500).json({ error: "Failed to fetch session details." });
-    }
-  } else {
-    res.status(405).json({ error: "Method Not Allowed" });
+    return new Response(JSON.stringify({ url: session.url }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.error("Error creating Stripe checkout session:", error);
+
+    return new Response(
+      JSON.stringify({ error: "Error creating checkout session" }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
 }
