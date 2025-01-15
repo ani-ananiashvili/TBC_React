@@ -1,14 +1,22 @@
 import { NextResponse } from "next/server";
 import { supabase } from "../../../../../lib/supabase";
 
-export async function DELETE(req: Request, { params }: { params: { productId: string } }) {
-  const productId = parseInt(params.productId);
+export async function DELETE(req: Request) {
+  const url = new URL(req.url);
+  const productId = url.pathname.split("/").pop();
+
+  if (!productId || isNaN(Number(productId))) {
+    return NextResponse.json(
+      { error: "Invalid or missing productId parameter" },
+      { status: 400 }
+    );
+  }
 
   try {
     const { error } = await supabase
       .from("Create_Products")
       .delete()
-      .eq("id", productId);
+      .eq("id", Number(productId));
 
     if (error) {
       console.error("Supabase error:", error);
