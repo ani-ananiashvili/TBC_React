@@ -2,7 +2,7 @@ import SignInForm from "../../../components/SignInForm";
 import SignUpForm from "../../../components/SignUpForm";
 
 interface Props {
-  searchParams: Record<string, string | undefined>;
+  searchParams?: Message;
 }
 
 export default function Login({ searchParams }: Props) {
