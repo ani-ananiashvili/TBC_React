@@ -26,3 +26,7 @@ dist-ssr
 next-env.d.ts
 dist
 .vercel
+
+# testing
+/coverage
+/cypress/screenshots
