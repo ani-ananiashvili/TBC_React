@@ -2,14 +2,14 @@
 const nextConfig = {
   distDir: "./dist",
   images: {
-    domains: ['cdn.dummyjson.com'],
+    domains: [],
   },
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/home',
-        permanent: true, 
+        source: "/",
+        destination: "/home",
+        permanent: true,
       },
     ];
   },
