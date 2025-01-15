@@ -9,7 +9,7 @@
     "lint": "next lint",
     "preview": "vite preview",
     "test:e2e": "cypress open",
-    "test:2e2:ci": "cypress run",
+    "test:e2e:ci": "cypress run",
     "test:unit": "vitest",
     "prepare": "husky"
   },
