@@ -1,6 +1,6 @@
 describe("Add and Delete Product", () => {
   it("Product add and delete successfully", () => {
-    cy.visit("http://localhost:3000/en/login");
+    cy.visit("http://localhost:3000/en/sign-in");
 
     cy.get('input[data-cy="sign-in-email"]').type("tproject761@gmail.com");
     cy.get('input[data-cy="sign-in-password"]').type("Tproject2025");
