@@ -1,13 +1,13 @@
 "use client";
 
 import { signInAction } from "../actions";
-import { FormMessage } from "../components/form-message";
+import { FormMessage, Message } from "../components/form-message";
 import { SubmitButton } from "../components/submit-button";
 import Link from "next/link";
 import useAuth from "../hooks/useAuth";
 
 interface SignInFormProps {
-  searchParams: Record<string, string | undefined>;
+  searchParams?: Message;
 }
 
 export default function SignInForm({ searchParams }: SignInFormProps) {
