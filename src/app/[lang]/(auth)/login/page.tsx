@@ -1,5 +1,6 @@
 import SignInForm from "../../../components/SignInForm";
 import SignUpForm from "../../../components/SignUpForm";
+import { Message } from "../../../components/form-message";
 
 interface Props {
   searchParams?: Message;
