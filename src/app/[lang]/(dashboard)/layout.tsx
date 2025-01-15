@@ -10,7 +10,7 @@ export default async function DashboardLayout({
   const { data, error } = await supabase.auth.getUser();
 
   if (error || !data?.user) {
-    redirect("/login");
+    redirect("/sign-in");
   }
   return (
     <main className="main flex flex-col justify-center items-center gap-40 w-full max-w-[144rem] my-0 mx-auto px-16 py-0">

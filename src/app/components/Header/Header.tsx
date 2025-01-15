@@ -21,7 +21,7 @@ const Header = (): JSX.Element | null => {
 
   const handleLogout = (): void => {
     logout();
-    router.push("/login");
+    router.push("/sign-in");
   };
 
   if (!isAuthChecked) return null;

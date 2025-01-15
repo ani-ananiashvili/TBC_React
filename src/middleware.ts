@@ -63,7 +63,7 @@ export const updateSession = async (request: NextRequest) => {
     const user = await supabase.auth.getUser();
 
     if (request.nextUrl.pathname.startsWith("/home") && user.error) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL("/sign-in", request.url));
     }
 
     if (request.nextUrl.pathname === "/" && !user.error) {
