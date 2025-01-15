@@ -3,7 +3,7 @@ import { FormMessage } from "../components/form-message";
 import { SubmitButton } from "../components/submit-button";
 
 interface SignUpFormProps {
-  searchParams: Record<string, string | undefined>;
+  searchParams?: Record<string, string | undefined>;
 }
 
 export default function SignUpForm({ searchParams }: SignUpFormProps) {
