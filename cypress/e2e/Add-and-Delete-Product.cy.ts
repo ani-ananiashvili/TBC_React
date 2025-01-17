@@ -40,3 +40,5 @@ describe("Add and Delete Product", () => {
     cy.wait("@deleteProduct").its("response.statusCode").should("eq", 200);
   });
 });
+
+// არეულად ემატება პროდუქტი (გასასწორებელი მაქვს) და ამიტომ პირველივეს ვშლი და იშლება ჩვეულებრივ ბაზიდან.შეგიძლია ხელითაც სცადო.
