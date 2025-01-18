@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   createContext,
@@ -7,7 +7,7 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";  
 
 interface Translations {
   [key: string]: { [key: string]: string };
@@ -17,7 +17,7 @@ interface LanguageContextType {
   language: string;
   toggleLanguage: () => void;
   translations: Translations;
-  handleLanguageChange: (selectedLang: string) => void;
+  handleLanguageChange: (selectedLang: string) => void;  
 }
 
 const translations: Translations = {
@@ -61,17 +61,13 @@ const translations: Translations = {
   },
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined
-);
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 interface LanguageProviderProps {
   children: ReactNode;
 }
 
-const isBrowser = typeof window !== "undefined";
 const getCookie = (name: string): string | undefined => {
-  if (!isBrowser) return undefined;
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop()?.split(";").shift();
@@ -79,29 +75,25 @@ const getCookie = (name: string): string | undefined => {
 };
 
 const setCookie = (name: string, value: string, days: number): void => {
-  if (!isBrowser) return;
   const date = new Date();
   date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-  document.cookie = `${name}=${encodeURIComponent(
-    value
-  )};expires=${date.toUTCString()};path=/`;
+  document.cookie = `${name}=${encodeURIComponent(value)};expires=${date.toUTCString()};path=/`;
 };
 
 export const LanguageProvider = ({
   children,
 }: LanguageProviderProps): JSX.Element => {
   const [language, setLanguage] = useState<string>(() => {
-    return isBrowser ? getCookie("language") || "en" : "en";
+    return getCookie("language") || "en";
   });
 
-  const router = useRouter();
+  const router = useRouter();  
 
   const handleLanguageChange = (selectedLang: string): void => {
-    if (!isBrowser) return;
     const pathWithoutLang = window.location.pathname.replace(/^\/(en|ka)/, "");
     router.push(`/${selectedLang}${pathWithoutLang}`);
     setLanguage(selectedLang);
-    setCookie("language", selectedLang, 7);
+    setCookie("language", selectedLang, 7); // store for 7 days
   };
 
   const toggleLanguage = (): void => {
@@ -110,7 +102,6 @@ export const LanguageProvider = ({
   };
 
   useEffect(() => {
-    if (!isBrowser) return;
     const savedLanguage = getCookie("language");
     if (savedLanguage && savedLanguage !== language) {
       setLanguage(savedLanguage);
@@ -123,7 +114,7 @@ export const LanguageProvider = ({
         language,
         toggleLanguage,
         translations,
-        handleLanguageChange,
+        handleLanguageChange, 
       }}
     >
       {children}
@@ -134,9 +125,7 @@ export const LanguageProvider = ({
 export const useLanguageContext = (): LanguageContextType => {
   const context = useContext(LanguageContext);
   if (!context) {
-    throw new Error(
-      "useLanguageContext must be used within a LanguageProvider"
-    );
+    throw new Error("useLanguageContext must be used within a LanguageProvider");
   }
   return context;
 };
