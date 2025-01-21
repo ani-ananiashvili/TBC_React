@@ -1,12 +1,19 @@
-import type { Metadata } from "next";
+"use client";
+
 import CheckoutForm from "../../../components/Stripe/CheckoutForm";
-import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Upgrade to Premium | Stripe Integration",
-};
-
+import { useState } from "react";
 export default function PricingPage(): JSX.Element {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleUnsubscribeClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCancel = async () => {
+    setShowModal(false);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+  };
+
   return (
     <div className="pricing-page bg-gray-50 min-h-screen flex flex-col items-center justify-center p-6">
       <div className="max-w-4xl w-full bg-white p-8 rounded-xl shadow-lg">
@@ -52,13 +59,40 @@ export default function PricingPage(): JSX.Element {
         </section>
 
         <div className="text-center mt-6">
-          <Link
-            href="/unsubscribe"
+          <button
+            onClick={handleUnsubscribeClick}
             className="text-red-500 hover:text-red-700 text-lg"
           >
-            Unsubscribe
-          </Link>
+            Unsubscribe from Premium
+          </button>
         </div>
+
+        {showModal && (
+          <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+              <h3 className="text-xl font-semibold mb-4">
+                Confirm Unsubscription
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Are you sure you want to cancel your Premium subscription?
+              </p>
+              <div className="flex justify-end gap-4">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleCancel}
+                  className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+                >
+                  Yes, Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
