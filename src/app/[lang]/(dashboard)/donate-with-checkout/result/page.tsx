@@ -18,7 +18,7 @@ export default async function ResultPage({
   let session;
   try {
     session = await stripe.checkout.sessions.retrieve(session_id);
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Error retrieving session:", error);
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -36,7 +36,7 @@ export default async function ResultPage({
       premiumProduct = await stripe.products.retrieve(productId, {
         expand: ["default_price"],
       });
-    } catch (error: unknown) {
+    } catch (error) {
       console.error("Error retrieving product:", error);
       return (
         <div className="flex min-h-screen items-center justify-center">
