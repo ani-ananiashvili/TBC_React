@@ -15,7 +15,7 @@ export default async function ResultPage({
     );
   }
 
-  let session;
+  let session: any;
   try {
     session = await stripe.checkout.sessions.retrieve(session_id);
   } catch (error) {
@@ -31,7 +31,7 @@ export default async function ResultPage({
 
   if (session.payment_status === "paid") {
     const productId = "prod_RPZWrI5nwKuGIS";
-    let premiumProduct;
+    let premiumProduct: any;
     try {
       premiumProduct = await stripe.products.retrieve(productId, {
         expand: ["default_price"],
