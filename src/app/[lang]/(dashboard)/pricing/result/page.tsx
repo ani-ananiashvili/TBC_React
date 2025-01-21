@@ -1,5 +1,5 @@
 import type { Stripe } from "stripe";
-import { stripe } from "../../../../../../lib/stripe";
+import { stripe } from "../../../../lib/stripe";
 
 export default async function ResultPage(props: {
   searchParams: Promise<{ session_id: string }>;

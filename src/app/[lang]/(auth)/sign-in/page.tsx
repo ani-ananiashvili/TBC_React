@@ -1,6 +1,6 @@
-import { signInAction } from "../../../actions";
-import { FormMessage, Message } from "../../../components/form-message";
-import { SubmitButton } from "../../../components/submit-button";
+import { signInAction } from "../actions";
+import { FormMessage, Message } from "../../../components/Auth/form-message";
+import { SubmitButton } from "../../../components/Auth/submit-button";
 import Link from "next/link";
 
 export default async function SignIn(props: {

@@ -1,9 +1,9 @@
 "use server";
 
 import { headers } from "next/headers";
-import { CURRENCY } from "../../../config/index";
+import { CURRENCY } from "../config/index";
 import { formatAmountForStripe } from "../utils/stripe/stripe-helpers";
-import { stripe } from "../../../lib/stripe";
+import { stripe } from "../lib/stripe";
 
 export async function createCheckoutSession(
   data: FormData

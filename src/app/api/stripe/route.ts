@@ -1,9 +1,9 @@
 "use server";
 
 import { headers } from "next/headers";
-import { CURRENCY } from "../../../../config";
+import { CURRENCY } from "../../config";
 import { formatAmountForStripe } from "../../utils/stripe/stripe-helpers";
-import { stripe } from "../../../../lib/stripe";
+import { stripe } from "../../lib/stripe";
 
 export async function POST(req: Request): Promise<Response> {
   const headersList = await headers();
