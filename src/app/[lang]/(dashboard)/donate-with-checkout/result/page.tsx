@@ -15,13 +15,35 @@ export default async function ResultPage({
     );
   }
 
-  const session = await stripe.checkout.sessions.retrieve(session_id);
+  let session;
+  try {
+    session = await stripe.checkout.sessions.retrieve(session_id);
+  } catch (error) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <p className="text-lg text-red-500">
+          Error retrieving session: {error.message}
+        </p>
+      </div>
+    );
+  }
 
   if (session.payment_status === "paid") {
     const productId = "prod_RPZWrI5nwKuGIS";
-    const premiumProduct = await stripe.products.retrieve(productId, {
-      expand: ["default_price"],
-    });
+    let premiumProduct;
+    try {
+      premiumProduct = await stripe.products.retrieve(productId, {
+        expand: ["default_price"],
+      });
+    } catch (error) {
+      return (
+        <div className="flex min-h-screen items-center justify-center">
+          <p className="text-lg text-red-500">
+            Error retrieving product: {error.message}
+          </p>
+        </div>
+      );
+    }
 
     if (!premiumProduct) {
       return (
