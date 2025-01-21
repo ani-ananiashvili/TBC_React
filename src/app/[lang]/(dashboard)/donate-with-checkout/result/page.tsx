@@ -15,14 +15,15 @@ export default async function ResultPage({
     );
   }
 
-  let session;
+  let session: any;
   try {
     session = await stripe.checkout.sessions.retrieve(session_id);
-  } catch (error) {
+  } catch (error: unknown) {
+    console.error("Error retrieving session:", error);
     return (
       <div className="flex min-h-screen items-center justify-center">
         <p className="text-lg text-red-500">
-          Error retrieving session: {error.message}
+          Error retrieving session: {String(error)}
         </p>
       </div>
     );
@@ -30,16 +31,17 @@ export default async function ResultPage({
 
   if (session.payment_status === "paid") {
     const productId = "prod_RPZWrI5nwKuGIS";
-    let premiumProduct;
+    let premiumProduct: any;
     try {
       premiumProduct = await stripe.products.retrieve(productId, {
         expand: ["default_price"],
       });
-    } catch (error) {
+    } catch (error: unknown) {
+      console.error("Error retrieving product:", error);
       return (
         <div className="flex min-h-screen items-center justify-center">
           <p className="text-lg text-red-500">
-            Error retrieving product: {error.message}
+            Error retrieving product: {String(error)}
           </p>
         </div>
       );
