@@ -22,8 +22,8 @@ export async function createCheckoutSession(
         },
       },
     ],
-    success_url: `${origin}/donate-with-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/donate-with-checkout`,
+    success_url: `${origin}/pricing/result?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${origin}/pricing`,
   });
 
   return { url: session.url };

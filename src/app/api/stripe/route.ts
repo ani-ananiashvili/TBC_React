@@ -23,8 +23,8 @@ export async function POST(req: Request): Promise<Response> {
           },
         },
       ],
-      success_url: `${origin}/donate-with-checkout/result?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/donate-with-checkout`,
+      success_url: `${origin}/pricing/result?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/pricing`,
     });
 
     return new Response(JSON.stringify({ url: session.url }), {
