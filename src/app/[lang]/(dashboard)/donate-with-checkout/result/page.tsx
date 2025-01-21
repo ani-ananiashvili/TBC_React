@@ -15,7 +15,7 @@ export default async function ResultPage({
     );
   }
 
-  let session: any;
+  let session;
   try {
     session = await stripe.checkout.sessions.retrieve(session_id);
   } catch (error) {
@@ -23,7 +23,7 @@ export default async function ResultPage({
     return (
       <div className="flex min-h-screen items-center justify-center">
         <p className="text-lg text-red-500">
-          Error retrieving session: {String(error)}
+          Error retrieving session: {error.message}
         </p>
       </div>
     );
@@ -31,7 +31,8 @@ export default async function ResultPage({
 
   if (session.payment_status === "paid") {
     const productId = "prod_RPZWrI5nwKuGIS";
-    let premiumProduct: any;
+
+    let premiumProduct;
     try {
       premiumProduct = await stripe.products.retrieve(productId, {
         expand: ["default_price"],
@@ -41,78 +42,65 @@ export default async function ResultPage({
       return (
         <div className="flex min-h-screen items-center justify-center">
           <p className="text-lg text-red-500">
-            Error retrieving product: {String(error)}
+            Error retrieving product: {error.message}
           </p>
         </div>
       );
     }
 
-    if (!premiumProduct) {
+    if (!premiumProduct || !premiumProduct.default_price) {
       return (
         <div className="flex min-h-screen items-center justify-center">
-          <p className="text-lg text-red-500">Product not found.</p>
+          <p className="text-lg text-red-500">
+            Product not found or price unavailable.
+          </p>
         </div>
       );
     }
 
-    if (
-      premiumProduct.default_price &&
-      typeof premiumProduct.default_price === "object" &&
-      "unit_amount" in premiumProduct.default_price &&
-      premiumProduct.default_price.unit_amount !== null
-    ) {
-      const formattedProduct = {
-        id: premiumProduct.id,
-        name: premiumProduct.name,
-        description: premiumProduct.description || "No description available.",
-        price: new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: premiumProduct.default_price.currency.toUpperCase(),
-          minimumFractionDigits: 2,
-        }).format(premiumProduct.default_price.unit_amount / 100),
-        image: premiumProduct.images[0] || "",
-      };
+    const formattedProduct = {
+      id: premiumProduct.id,
+      name: premiumProduct.name,
+      description: premiumProduct.description || "No description available.",
+      price: new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: premiumProduct.default_price.currency.toUpperCase(),
+        minimumFractionDigits: 2,
+      }).format(premiumProduct.default_price.unit_amount / 100),
+      image: premiumProduct.images[0] || "",
+    };
 
-      return (
-        <div className="flex-col items-center justify-center m-5">
-          <h1 className="text-2xl text-center font-bold text-green-500 mb-4">
-            Payment Successful!
-          </h1>
-          <p className="text-gray-700 mb-4 text-center">
-            Enjoy your premium access:
-          </p>
-          <div className="max-w-md bg-white shadow-md rounded-lg p-6">
-            <div className="flex flex-col items-center">
-              <img
-                src={formattedProduct.image}
-                alt={formattedProduct.name}
-                className="w-32 h-32 object-cover rounded-md mb-4"
-              />
-              <h2 className="text-lg font-semibold">{formattedProduct.name}</h2>
-              <p className="text-gray-600 text-sm mb-2">
-                {formattedProduct.description}
-              </p>
-              <p className="text-lg font-bold text-gray-800">
-                {formattedProduct.price}
-              </p>
-            </div>
+    return (
+      <div className="flex-col items-center justify-center m-5">
+        <h1 className="text-2xl text-center font-bold text-green-500 mb-4">
+          Payment Successful!
+        </h1>
+        <p className="text-gray-700 mb-4 text-center">
+          Enjoy your premium access:
+        </p>
+        <div className="max-w-md bg-white shadow-md rounded-lg p-6">
+          <div className="flex flex-col items-center">
+            <img
+              src={formattedProduct.image}
+              alt={formattedProduct.name}
+              className="w-32 h-32 object-cover rounded-md mb-4"
+            />
+            <h2 className="text-lg font-semibold">{formattedProduct.name}</h2>
+            <p className="text-gray-600 text-sm mb-2">
+              {formattedProduct.description}
+            </p>
+            <p className="text-lg font-bold text-gray-800">
+              {formattedProduct.price}
+            </p>
           </div>
         </div>
-      );
-    } else {
-      return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-50">
-          <p className="text-lg text-red-500">
-            Error: Unable to retrieve price information for the product.
-          </p>
-        </div>
-      );
-    }
+      </div>
+    );
+  } else {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <p className="text-lg text-red-500">Payment not successful.</p>
+      </div>
+    );
   }
-
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <p className="text-lg text-red-500">Payment not successful.</p>
-    </div>
-  );
 }
