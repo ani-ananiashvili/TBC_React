@@ -63,7 +63,7 @@ export default function PostPage() {
   const description = language === "ka" ? post.Description_Ka : post.Description;
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center m-28">
     <div className="p-8 bg-white shadow-md rounded-lg max-w-md text-center">
       <h1 className="text-2xl font-bold mb-4">{title}</h1>
       <p className="text-gray-700">{description}</p>
