@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useLanguageContext } from "../../../context/LanguageContext";
 import Spinner from "../../../components/Spinner/Spinner";
 
-interface Post {
+interface Blog {
   id: number;
   Title?: string;
   Description?: string;
@@ -12,44 +12,44 @@ interface Post {
   Description_Ka?: string;
 }
 
-export default function PostsPage() {
+export default function BlogPage() {
   const { language } = useLanguageContext();
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [blog, setBlog] = useState<Blog[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const fetchPosts = async () => {
+  const fetchBlog = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/posts`);
-      const data: Post[] = await response.json();
+      const response = await fetch(`/api/blog`);
+      const data: Blog[] = await response.json();
 
-      const normalizedPosts = data.map((post) => ({
-        id: post.id,
-        Title: language === "ka" ? post.Title_Ka : post.Title,
-        Description: language === "ka" ? post.Description_Ka : post.Description,
+      const normalizedBlog = data.map((blog) => ({
+        id: blog.id,
+        Title: language === "ka" ? blog.Title_Ka : blog.Title,
+        Description: language === "ka" ? blog.Description_Ka : blog.Description,
       }));
 
-      setPosts(normalizedPosts);
+      setBlog(normalizedBlog);
     } catch (error) {
-      console.error("Error fetching posts:", error);
+      console.error("Error fetching blog:", error);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchPosts();
+    fetchBlog();
   }, [language]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredPosts = posts.filter(
-    (post) =>
-      post.Title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.Description?.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredBlog = blog.filter(
+    (blog) =>
+      blog.Title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      blog.Description?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   if (loading) {
@@ -59,7 +59,7 @@ export default function PostsPage() {
   return (
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-        {language === "ka" ? "პოსტები" : "Posts"}
+        {language === "ka" ? "ბლოგი" : "Blog"}
       </h1>
 
       <div className="mb-6">
@@ -73,21 +73,21 @@ export default function PostsPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredPosts.length > 0 ? (
-          filteredPosts.map((post) => (
+        {filteredBlog.length > 0 ? (
+          filteredBlog.map((blog) => (
             <div
-              key={post.id}
+              key={blog.id}
               className="bg-white border border-gray-200 shadow-md rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300"
             >
               <h2 className="text-lg font-semibold text-gray-800 mb-4">
-                {post.Title}
+                {blog.Title}
               </h2>
               <p className="text-gray-600 text-sm mb-6 leading-relaxed">
-                {post.Description}
+                {blog.Description}
               </p>
               <Link
                 className="text-headerColor font-medium transition-colors duration-200"
-                href={`/${language}/posts/${post.id}`}
+                href={`/${language}/blog/${blog.id}`}
               >
                 {language === "ka" ? "დაწვრილებით..." : "See more..."}
               </Link>
@@ -97,7 +97,7 @@ export default function PostsPage() {
           <p className="text-center text-gray-600">
             {language === "ka"
               ? "ასეთი პოსტი არ არსებობს"
-              : "No such post exists"}
+              : "No such blog exists"}
           </p>
         )}
       </div>
