@@ -36,7 +36,7 @@ const Footer = (): JSX.Element => {
           </ul>
           <ul>
             <li>
-              <Link href="/posts">{t.posts}</Link>
+              <Link href="/blog">{t.blog}</Link>
             </li>
             <li>
               <Link href="/products">{t.products}</Link>
