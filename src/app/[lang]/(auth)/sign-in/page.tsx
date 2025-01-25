@@ -7,8 +7,15 @@ export default async function SignIn(props: {
   searchParams: Promise<Message>;
 }) {
   const searchParams = await props.searchParams;
+
   return (
-    <form className=" m-12  flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-6 h-full">
+    <form
+      className="m-12 flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-6 h-full"
+      style={{
+        background: "linear-gradient(145deg, #f5f7fa, #e4ebf5)",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+      }}
+    >
       <h1 className="text-2xl font-medium">Sign in</h1>
       <p className="text-sm text-foreground">
         Don't have an account?{" "}

@@ -39,7 +39,7 @@ footer {
 
 main {
   flex-grow: 1;
-  background: linear-gradient(145deg, #f5f7fa, #e4ebf5);
+  /* background: linear-gradient(145deg, #f5f7fa, #e4ebf5); */
 }
 
 .dark main {

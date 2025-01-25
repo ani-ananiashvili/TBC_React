@@ -6,12 +6,16 @@ import "/global.css";
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body
+        style={{
+          background: "linear-gradient(145deg, #f5f7fa, #e4ebf5)",
+        }}
+      >
         <LanguageProvider>
           <ThemeProvider>
             <nav>
