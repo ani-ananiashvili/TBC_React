@@ -25,6 +25,7 @@
     "class-variance-authority": "^0.7.1",
     "cookie": "^1.0.1",
     "cypress": "^13.17.0",
+    "emailjs-com": "^3.2.0",
     "glob": "^9.3.5",
     "js-cookie": "^3.0.5",
     "lodash.debounce": "^4.0.8",
