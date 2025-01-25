@@ -1,20 +1,31 @@
 "use client";
 
 import { signInAction } from "../actions";
-// import { FormMessage } from "../../../components/Auth/form-message";
 import { SubmitButton } from "../../../components/Auth/submit-button";
 import Link from "next/link";
 import useAuth from "../../../hooks/useAuth";
+import { useEffect, useState } from "react";
 
-interface SignInFormProps {
-  searchParams: Record<string, string | undefined>;
-}
-
-export default function SignInForm({ searchParams }: SignInFormProps) {
+export default function SignInForm() {
   const { loginWithGitHub } = useAuth();
+  const [isClient, setIsClient] = useState(false);
+
+  const [searchParams, setSearchParams] = useState<any>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsClient(true);
+      const { searchParams } = new URL(window.location.href);
+      setSearchParams(searchParams);
+    }
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
-    <form className=" m-12 flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-6 h-full">
+    <form className="m-12 flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-6 h-full">
       <h1 className="text-2xl font-medium">Sign in</h1>
       <p className="text-sm text-foreground">
         Don't have an account?{" "}
@@ -37,13 +48,11 @@ export default function SignInForm({ searchParams }: SignInFormProps) {
             className="text-xs text-foreground underline"
             href="/forgot-password"
           >
-            
             Forgot Password?
           </Link>
         </div>
         <input
-                  data-cy="sign-in-password"
-
+          data-cy="sign-in-password"
           className="border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:border-blue-500"
           type="password"
           name="password"
