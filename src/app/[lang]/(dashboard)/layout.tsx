@@ -12,8 +12,13 @@ export default async function DashboardLayout({
   if (error || !data?.user) {
     redirect("/sign-in");
   }
+
   return (
-    <main className="main flex flex-col justify-center items-center gap-40 w-full max-w-[144rem] my-0 mx-auto px-16 py-0">
+    <main
+      style={{
+        background: "linear-gradient(145deg, #f5f7fa, #e4ebf5)",
+      }}
+    >
       {children}
     </main>
   );
