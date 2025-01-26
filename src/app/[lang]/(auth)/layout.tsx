@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useAuth from "../../hooks/useAuth";
 import Spinner from "../../components/Spinner/Spinner";
+import AuthHeader from "../../components/Header/AuthHeader";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -29,11 +30,12 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         className="absolute inset-0 bg-contain blur-[6px]"
         style={{
           backgroundImage:
-            "url('https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129804.jpg?semt=ais_hybrid')",
+            "url('https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129804.jpg?semt=ais_hybrid')", // Dynamic background image
         }}
       ></div>
 
       <main className="relative z-10">
+        <AuthHeader />
         {children}
       </main>
     </div>

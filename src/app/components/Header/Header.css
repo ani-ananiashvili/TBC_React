@@ -151,7 +151,7 @@ button {
 .logout {
   background-color: transparent;
   color: #d3d1d1;
-  border: 2px solid #d3d1d1;
+  border: px solid #d3d1d1;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 

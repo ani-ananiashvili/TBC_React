@@ -1,14 +1,22 @@
+"use client";
+
 import { LanguageProvider } from "./context/LanguageContext";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import { ThemeProvider } from "./context/ThemeContext";
 import "/global.css";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
+  const isAuthRoute =
+    pathname.includes("/sign-in") || pathname.includes("/sign-up");
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -18,9 +26,7 @@ export default function RootLayout({
       >
         <LanguageProvider>
           <ThemeProvider>
-            <nav>
-              <Header />
-            </nav>
+            <nav>{!isAuthRoute && <Header />}</nav>
             <main>
               <div>{children}</div>
             </main>
