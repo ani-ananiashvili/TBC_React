@@ -107,6 +107,7 @@
   align-items: center;
   gap: 1.5em;
   margin-left: 1em;
+  cursor: pointer;
 }
 
 .icon-link {
@@ -144,12 +145,13 @@ button {
   cursor: pointer;
   padding: 0.7em 1.3em;
   border-radius: 5px;
+  border: 1px solid #d3d1d1;
 }
 
 .logout {
   background-color: transparent;
   color: #d3d1d1;
-  border: 1px solid #d3d1d1;
+  border: 2px solid #d3d1d1;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
