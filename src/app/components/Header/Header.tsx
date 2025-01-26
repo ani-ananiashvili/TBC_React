@@ -7,9 +7,10 @@ import { useThemeContext } from "../../context/ThemeContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { FiMail, FiMapPin, FiShoppingCart, FiUser } from "react-icons/fi";
 
 const Header = (): JSX.Element | null => {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const { theme, changeTheme } = useThemeContext();
   const { language, toggleLanguage, translations } = useLanguageContext();
   const router = useRouter();
@@ -27,7 +28,10 @@ const Header = (): JSX.Element | null => {
   if (!isAuthChecked) return null;
 
   const t = translations[language];
-  const username = user ? user.user_metadata.username : "User";
+
+  const handleRedirect = (path: string) => {
+    router.push(path);
+  };
 
   return (
     <header className="header">
@@ -38,19 +42,19 @@ const Header = (): JSX.Element | null => {
       <nav className="nav">
         <ul>
           <li>
-            <Link href="/">{t.home}</Link>
+            <Link href="/">{t.HOME}</Link>
           </li>
           <li>
-            <Link href="/about">{t.about}</Link>
+            <Link href="/">{t.CATEGORIES}</Link>
           </li>
           <li>
-            <Link href="/contact">{t.contact}</Link>
+            <Link href="/pricing">{t.PREMIUM}</Link>
           </li>
           <li>
-            <Link href="/profile">{t.profile}</Link>
+            <Link href="/blog">{t.BLOG}</Link>
           </li>
           <li>
-            <Link href="/create-products">Create Products</Link>
+            <Link href="/">{t.SALE}</Link>
           </li>
         </ul>
       </nav>
@@ -67,19 +71,37 @@ const Header = (): JSX.Element | null => {
 
         <div className="language-toggle">
           <button onClick={toggleLanguage}>
-            {language === "en" ? "ES" : "EN"}
+            {language === "en" ? "KA" : "EN"}
           </button>
         </div>
       </div>
 
       <div className="auth">
+        <div className="icons">
+          <FiMail
+            title="Contact Us"
+            className="icon"
+            onClick={() => handleRedirect("/contact")}
+          />
+          <FiShoppingCart
+            title="Shopping Cart"
+            className="icon"
+            onClick={() => handleRedirect("/cart")}
+          />
+          <FiUser
+            title="Profile"
+            className="icon"
+            onClick={() => handleRedirect("/profile")}
+          />
+        </div>
         {isAuthenticated ? (
-          <>
-            <span>Welcome, {user.email}!</span>
-            <button onClick={handleLogout}>Logout</button>
-          </>
+          <button className="auth-button" onClick={handleLogout}>
+            LOGOUT
+          </button>
         ) : (
-          <></>
+          <Link href="/sign-in" className="auth-button">
+            LOGIN
+          </Link>
         )}
       </div>
     </header>

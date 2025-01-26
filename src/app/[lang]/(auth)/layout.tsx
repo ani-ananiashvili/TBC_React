@@ -26,14 +26,16 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="relative overflow-hidden">
       <div
-        className="absolute inset-0 bg-no-repeat bg-cover bg-center blur-[6px]"
+        className="absolute inset-0 bg-contain blur-[6px]"
         style={{
           backgroundImage:
-            "url('https://img.freepik.com/premium-photo/contemporary-living-room-with-green-accents_1123896-137824.jpg')",
+            "url('https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129804.jpg?semt=ais_hybrid')",
         }}
       ></div>
 
-      <main className="relative z-10">{children}</main>
+      <main className="relative z-10">
+        {children}
+      </main>
     </div>
   );
 }
