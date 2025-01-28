@@ -1,5 +1,6 @@
 "use client";
 
+import { CartProvider } from "./context/CartContext";
 import { LanguageProvider } from "./context/LanguageContext";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -26,11 +27,13 @@ export default function RootLayout({
       >
         <LanguageProvider>
           <ThemeProvider>
-            <nav>{!isAuthRoute && <Header />}</nav>
-            <main>
-              <div>{children}</div>
-            </main>
-            <Footer />
+            <CartProvider>
+              <nav>{!isAuthRoute && <Header />}</nav>
+              <main>
+                <div>{children}</div>
+              </main>
+              <Footer />
+            </CartProvider>
           </ThemeProvider>
         </LanguageProvider>
       </body>
