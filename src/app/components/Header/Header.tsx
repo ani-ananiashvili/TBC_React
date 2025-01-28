@@ -7,7 +7,8 @@ import { useThemeContext } from "../../context/ThemeContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLanguageContext } from "../../context/LanguageContext";
-import { FiMail, FiMapPin, FiShoppingCart, FiUser } from "react-icons/fi";
+import { FiMail, FiShoppingCart, FiUser } from "react-icons/fi";
+import { useCartContext } from "../../context/CartContext";
 
 const Header = (): JSX.Element | null => {
   const { isAuthenticated, logout } = useAuth();
@@ -15,6 +16,7 @@ const Header = (): JSX.Element | null => {
   const { language, toggleLanguage, translations } = useLanguageContext();
   const router = useRouter();
   const [isAuthChecked, setIsAuthChecked] = useState<boolean>(false);
+  const { cartCount } = useCartContext();
 
   useEffect(() => {
     setIsAuthChecked(true);
@@ -83,17 +85,21 @@ const Header = (): JSX.Element | null => {
             className="icon"
             onClick={() => handleRedirect("/contact")}
           />
-          <FiShoppingCart
-            title="Shopping Cart"
-            className="icon"
-            onClick={() => handleRedirect("/cart")}
-          />
+          <div className="cart-icon-wrapper">
+            <FiShoppingCart
+              title="Shopping Cart"
+              className="icon"
+              onClick={() => handleRedirect("/cart")}
+            />
+            {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+          </div>
           <FiUser
             title="Profile"
             className="icon"
             onClick={() => handleRedirect("/profile")}
           />
         </div>
+
         {isAuthenticated ? (
           <button className="auth-button" onClick={handleLogout}>
             LOGOUT
