@@ -7,6 +7,7 @@ import { FiTrash2 } from "react-icons/fi";
 interface Product {
   id: string;
   name: string;
+  brand: string;
   price: number;
   photo: string;
   description: string;
@@ -87,7 +88,9 @@ const GetFurnitureProducts = () => {
               className="w-full h-48 object-cover rounded-md mb-4"
             />
             <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
+            <p className="text-gray-600">Brand: {product.brand}</p>{" "}
             <p className="text-gray-600">${product.price}</p>
+            <p className="text-gray-600">{product.description}</p>{" "}
             <div className="flex justify-between items-center mt-4">
               <button
                 onClick={() => addToCart(product)}
