@@ -11,6 +11,7 @@ interface Product {
   photo: string;
   description: string;
   quantity: number;
+  active: boolean;
 }
 
 const GetFurnitureProducts = () => {
@@ -23,7 +24,9 @@ const GetFurnitureProducts = () => {
         const response = await fetch("/api/get-products");
         if (!response.ok) throw new Error("Failed to fetch products");
         const data = await response.json();
-        setProducts(data);
+        setProducts(
+          data.filter((product: Product) => product.active !== false)
+        );
       } catch (error) {
         console.error(error);
       }
@@ -31,6 +34,44 @@ const GetFurnitureProducts = () => {
 
     fetchProducts();
   }, []);
+
+  const handleDelete = async (productId: string) => {
+    try {
+      const response = await fetch(`/api/delete-product/${productId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setProducts(products.filter((product) => product.id !== productId));
+      } else {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to delete product.");
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
+  const disableProduct = async (productId: string) => {
+    try {
+      const response = await fetch(`/api/disable-product/${productId}`, {
+        method: "POST",
+      });
+
+      if (response.ok) {
+        setProducts(
+          products.map((product) =>
+            product.id === productId ? { ...product, active: false } : product
+          )
+        );
+      } else {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to disable product.");
+      }
+    } catch (error) {
+      console.error("Error disabling product:", error);
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -54,11 +95,13 @@ const GetFurnitureProducts = () => {
               >
                 Add to Cart
               </button>
-              <FiTrash2
-                className="cursor-pointer text-red-500"
-                onClick={() => product.id}
-                title="Remove from Cart"
-              />
+              <div>
+                <FiTrash2
+                  className="cursor-pointer text-red-500"
+                  onClick={() => handleDelete(product.id)}
+                  title="Disable Product"
+                />
+              </div>
             </div>
           </div>
         ))}
