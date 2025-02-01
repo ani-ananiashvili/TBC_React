@@ -10,6 +10,7 @@ interface Blog {
   Description?: string;
   Title_Ka?: string;
   Description_Ka?: string;
+  Image?: string;
 }
 
 export default function BlogPage() {
@@ -22,17 +23,27 @@ export default function BlogPage() {
     setLoading(true);
     try {
       const response = await fetch(`/api/blog`);
-      const data: Blog[] = await response.json();
+      const data = await response.json();
 
-      const normalizedBlog = data.map((blog) => ({
-        id: blog.id,
-        Title: language === "ka" ? blog.Title_Ka : blog.Title,
-        Description: language === "ka" ? blog.Description_Ka : blog.Description,
-      }));
+      if (Array.isArray(data)) {
+        const normalizedBlog = data.map((blog) => {
+          return {
+            id: blog.id,
+            Title: language === "ka" ? blog.Title_Ka : blog.Title,
+            Description:
+              language === "ka" ? blog.Description_Ka : blog.Description,
+            Image: blog.Image,
+          };
+        });
 
-      setBlog(normalizedBlog);
+        setBlog(normalizedBlog);
+      } else {
+        console.error("Expected an array but got:", data);
+        setBlog([]);
+      }
     } catch (error) {
       console.error("Error fetching blog:", error);
+      setBlog([]);
     } finally {
       setLoading(false);
     }
@@ -57,8 +68,10 @@ export default function BlogPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+    <div
+      className={`mx-auto p-6 min-h-screen ${"dark:bg-dark-gradient bg-white"}`}
+    >
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800 dark:text-white">
         {language === "ka" ? "ბლოგი" : "Blog"}
       </h1>
 
@@ -68,7 +81,7 @@ export default function BlogPage() {
           placeholder={language === "ka" ? "ძიება..." : "Search..."}
           value={searchQuery}
           onChange={handleSearchChange}
-          className="w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-headerColor"
+          className="mt-10 w-full border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-headerColor dark:bg-dark-gradient dark:text-white"
         />
       </div>
 
@@ -77,16 +90,35 @@ export default function BlogPage() {
           filteredBlog.map((blog) => (
             <div
               key={blog.id}
-              className="bg-white border border-gray-200 shadow-md rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300"
+              className={`${"dark:bg-dark-gradient bg-white"} border border-gray-200 shadow-md rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 dark:border-gray-600`}
             >
-              <h2 className="text-lg font-semibold text-gray-800 mb-4">
+              {blog.Image ? (
+                <img
+                  src={blog.Image}
+                  alt="Blog Image"
+                  className="w-full h-56 object-contain rounded-lg mb-4"
+                />
+              ) : (
+                <div
+                  className="w-full h-48 bg-gray-300 rounded-lg mb-4 flex items-center justify-center"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <span>No image available</span>
+                </div>
+              )}
+
+              <h2 className="text-lg font-semibold text-gray-800 mb-4 dark:text-white">
                 {blog.Title}
               </h2>
-              <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+              <p className="text-gray-600 text-sm mb-6 leading-relaxed dark:text-gray-400">
                 {blog.Description}
               </p>
               <Link
-                className="text-headerColor font-medium transition-colors duration-200"
+                className="text-headerColor font-medium transition-colors duration-200 dark:text-blue-300"
                 href={`/${language}/blog/${blog.id}`}
               >
                 {language === "ka" ? "დაწვრილებით..." : "See more..."}
@@ -94,7 +126,7 @@ export default function BlogPage() {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-600">
+          <p className="text-center text-gray-600 dark:text-gray-400">
             {language === "ka"
               ? "ასეთი პოსტი არ არსებობს"
               : "No such blog exists"}
