@@ -1,7 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
-import { CURRENCY } from "../config/index";
+import { CURRENCY } from "./config/index";
 import { formatAmountForStripe } from "../utils/stripe/stripe-helpers";
 import { stripe } from "../lib/stripe";
 
@@ -22,8 +22,8 @@ export async function createCheckoutSession(
         },
       },
     ],
-    success_url: `${origin}/pricing/result?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/pricing`,
+    success_url: `${origin}/premium/result?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${origin}/premium`,
   });
 
   return { url: session.url };

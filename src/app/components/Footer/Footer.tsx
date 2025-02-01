@@ -51,7 +51,7 @@ const Footer = (): JSX.Element => {
             </li>
            
             <li>
-            <Link href="/pricing">Pricing</Link>
+            <Link href="/premium">Premium</Link>
           </li>
             <li>
               <Link href="/">{t.transparencyReports}</Link>
