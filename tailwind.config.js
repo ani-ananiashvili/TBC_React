@@ -3,12 +3,13 @@ export default {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: "class",
   theme: {
-    
     extend: {
-      colors:{
-        'headerColor':'#4A628A',
-        
-      }
+      colors: {
+        headerColor: '#4A628A',
+      },
+      backgroundImage: {
+        'dark-gradient': 'linear-gradient(145deg, rgb(16, 16, 16), #2a2a2a)',
+      },
     },
   },
   plugins: [],
