@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { createCheckoutSession } from "../../actions/stripe";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 export default function CheckoutForm(): JSX.Element {
   const [loading, setLoading] = useState(false);
   const [subscribed, setSubscribed] = useState<boolean>(false);
+  const { language } = useLanguageContext();
 
   useEffect(() => {
     const isSubscribed = sessionStorage.getItem("isSubscribed") === "true";
@@ -44,7 +46,13 @@ export default function CheckoutForm(): JSX.Element {
             onClick={handleUnsubscribe}
             disabled={loading}
           >
-            {loading ? "Processing..." : "Unsubscribe from Pro Plan"}
+            {loading
+              ? language === "ka"
+                ? "მიმდინარეობს გადახდის პროცესი..."
+                : "Processing..."
+              : language === "ka"
+              ? "გამოწერის გაუქმება"
+              : "Unsubscribe from Pro Plan"}
           </button>
         </div>
       ) : (
@@ -54,7 +62,13 @@ export default function CheckoutForm(): JSX.Element {
             onClick={handleCheckout}
             disabled={loading}
           >
-            {loading ? "Processing..." : "Subscribe for $50"}
+            {loading
+              ? language === "ka"
+                ? "მიმდინარეობს გადახდის პროცესი..."
+                : "Processing..."
+              : language === "ka"
+              ? "გადახდა $50"
+              : "Subscribe for $50"}
           </button>
         </div>
       )}
