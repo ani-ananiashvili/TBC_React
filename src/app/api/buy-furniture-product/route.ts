@@ -8,10 +8,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
 
 export async function POST(req: Request) {
   try {
-    const { productId } = await req.json();
+    const { cart } = await req.json();
 
-    if (!productId) {
-      throw new Error("Product ID is required.");
+    if (!cart || cart.length === 0) {
+      throw new Error("Cart is empty.");
     }
 
     const supabase = await createClient();
@@ -27,39 +27,42 @@ export async function POST(req: Request) {
       );
     }
 
-    // Fetch product details from Supabase
-    const { data: product, error } = await supabase
-      .from("Furniture_Products")
-      .select("id, stripe_product_id, stripe_price_id")
-      .eq("id", productId)
-      .single();
-
-    if (error || !product) {
-      throw new Error("Product not found");
-    }
+    const lineItems = cart.map(
+      (item: { stripe_price_id: any; quantity: any }) => ({
+        price: item.stripe_price_id,
+        quantity: item.quantity,
+      })
+    );
 
     // Create a Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: [
-        {
-          price: product.stripe_price_id,
-          quantity: 1,
-        },
-      ],
+      line_items: lineItems,
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success-checkout`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/cancel`,
     });
 
-    // Record the purchase in the `orders` table
-    const { error: orderError } = await supabase.from("Orders").insert({
-      user_id: userId,
-      product_id: product.id,
-      stripe_product_id: product.stripe_product_id,
-      stripe_price_id: product.stripe_price_id,
-      stripe_purchase_id: session.id,
-    });
+    // Record the purchase in the 'Orders' table
+    const orderData = cart.map(
+      (item: {
+        id: any;
+        stripe_product_id: any;
+        stripe_price_id: any;
+        quantity: any;
+      }) => ({
+        user_id: userId,
+        product_id: item.id,
+        stripe_product_id: item.stripe_product_id,
+        stripe_price_id: item.stripe_price_id,
+        stripe_purchase_id: session.id,
+        quantity: item.quantity,
+      })
+    );
+
+    const { error: orderError } = await supabase
+      .from("Orders")
+      .insert(orderData);
 
     if (orderError) {
       console.error("Failed to record order:", orderError);

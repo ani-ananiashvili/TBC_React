@@ -14,14 +14,14 @@ const Cart = () => {
     0
   );
 
-  const handleBuy = async (productId: number) => {
+  const handleBuy = async () => {
     try {
       const response = await fetch("/api/buy-furniture-product", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ productId }),
+        body: JSON.stringify({ cart }),
       });
 
       const data = await response.json();
@@ -81,7 +81,7 @@ const Cart = () => {
       <div className="mt-8">
         <h2 className="text-xl font-semibold">Total: ${totalAmount}</h2>
         <button
-          onClick={() => handleBuy(Number(cart[0].id))}
+          onClick={handleBuy}
           className="px-4 py-2 bg-blue-500 text-white rounded mt-2 mr-2"
         >
           Buy
