@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success-checkout`,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/success-checkout?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/cancel`,
     });
 
