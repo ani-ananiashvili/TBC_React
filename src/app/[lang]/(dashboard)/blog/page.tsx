@@ -69,7 +69,7 @@ export default function BlogPage() {
 
   return (
     <div
-      className={`mx-auto p-6 min-h-screen ${"dark:bg-dark-gradient bg-white"}`}
+      className={`mx-auto p-6 min-h-screen bg-light-gradient dark:bg-dark-gradient`}
     >
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-800 dark:text-white">
         {language === "ka" ? "ბლოგი" : "Blog"}
@@ -90,7 +90,7 @@ export default function BlogPage() {
           filteredBlog.map((blog) => (
             <div
               key={blog.id}
-              className={`${"dark:bg-dark-gradient bg-white"} border border-gray-200 shadow-md rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 dark:border-gray-600`}
+              className={`dark:bg-dark-gradient bg-white border border-gray-200 shadow-md rounded-lg p-6 flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 dark:border-gray-600`}
             >
               {blog.Image ? (
                 <img
