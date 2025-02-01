@@ -22,8 +22,8 @@ export async function createCheckoutSession(
         },
       },
     ],
-    success_url: `${origin}/pricing/result?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/pricing`,
+    success_url: `${origin}/premium/result?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${origin}/premium`,
   });
 
   return { url: session.url };
