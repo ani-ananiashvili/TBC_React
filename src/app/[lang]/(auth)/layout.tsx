@@ -30,7 +30,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         className="absolute inset-0 bg-contain blur-[6px]"
         style={{
           backgroundImage:
-            "url('https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129804.jpg?semt=ais_hybrid')", // Dynamic background image
+            "url('https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129804.jpg?semt=ais_hybrid')",
         }}
       ></div>
 

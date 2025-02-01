@@ -14,9 +14,9 @@ export async function DELETE(req: Request) {
 
   try {
     const { error } = await supabase
-      .from("Create_Products")
+      .from("Furniture_Products")
       .delete()
-      .eq("id", Number(productId));
+      .eq("id", productId);
 
     if (error) {
       console.error("Supabase error:", error);

@@ -6,7 +6,7 @@ import { FiTrash2 } from "react-icons/fi";
 import getStripe from "../../../utils/stripe/get-stripejs";
 
 const Cart = () => {
-  const { cart, removeFromCart } = useCartContext();
+  const { cart, removeFromCart, clearCart } = useCartContext();
   const router = useRouter();
 
   const totalAmount = cart.reduce(
@@ -14,14 +14,14 @@ const Cart = () => {
     0
   );
 
-  const handleBuy = async (productId: number) => {
+  const handleBuy = async () => {
     try {
       const response = await fetch("/api/buy-furniture-product", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ productId }),
+        body: JSON.stringify({ cart }),
       });
 
       const data = await response.json();
@@ -30,6 +30,7 @@ const Cart = () => {
         const stripe = await getStripe();
         if (stripe) {
           stripe.redirectToCheckout({ sessionId: data.sessionId });
+          clearCart();
         }
       } else {
         throw new Error(data.error || "Failed to initiate purchase.");
@@ -80,7 +81,7 @@ const Cart = () => {
       <div className="mt-8">
         <h2 className="text-xl font-semibold">Total: ${totalAmount}</h2>
         <button
-          onClick={() => handleBuy(Number(cart[0].id))}
+          onClick={handleBuy}
           className="px-4 py-2 bg-blue-500 text-white rounded mt-2 mr-2"
         >
           Buy

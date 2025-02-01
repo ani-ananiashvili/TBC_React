@@ -94,11 +94,18 @@ const setCookie = (name: string, value: string, days: number): void => {
 export const LanguageProvider = ({
   children,
 }: LanguageProviderProps): JSX.Element => {
-  const [language, setLanguage] = useState<string>(() => {
-    return isBrowser ? getCookie("language") || "en" : "en";
-  });
+  const [language, setLanguage] = useState<string>("en");
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (isBrowser) {
+      const savedLanguage = getCookie("language");
+      if (savedLanguage && savedLanguage !== language) {
+        setLanguage(savedLanguage);
+      }
+    }
+  }, []);
 
   const handleLanguageChange = (selectedLang: string): void => {
     if (!isBrowser) return;
@@ -112,14 +119,6 @@ export const LanguageProvider = ({
     const newLanguage = language === "en" ? "ka" : "en";
     handleLanguageChange(newLanguage);
   };
-
-  useEffect(() => {
-    if (!isBrowser) return;
-    const savedLanguage = getCookie("language");
-    if (savedLanguage && savedLanguage !== language) {
-      setLanguage(savedLanguage);
-    }
-  }, []);
 
   return (
     <LanguageContext.Provider

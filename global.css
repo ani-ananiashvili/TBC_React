@@ -21,6 +21,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin-top: 80px; 
 }
 
 header {
@@ -42,6 +43,6 @@ main {
   /* background: linear-gradient(145deg, #f5f7fa, #e4ebf5); */
 }
 
-.dark main {
+/* .dark main {
   background: linear-gradient(145deg, rgb(16, 16, 16), #2a2a2a);
-}
+} */
