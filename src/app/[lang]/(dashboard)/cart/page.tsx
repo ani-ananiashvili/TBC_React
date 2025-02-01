@@ -6,7 +6,7 @@ import { FiTrash2 } from "react-icons/fi";
 import getStripe from "../../../utils/stripe/get-stripejs";
 
 const Cart = () => {
-  const { cart, removeFromCart } = useCartContext();
+  const { cart, removeFromCart, clearCart } = useCartContext();
   const router = useRouter();
 
   const totalAmount = cart.reduce(
@@ -30,6 +30,7 @@ const Cart = () => {
         const stripe = await getStripe();
         if (stripe) {
           stripe.redirectToCheckout({ sessionId: data.sessionId });
+          clearCart();
         }
       } else {
         throw new Error(data.error || "Failed to initiate purchase.");
