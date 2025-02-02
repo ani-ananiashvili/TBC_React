@@ -47,7 +47,7 @@ const Cart = () => {
   };
 
   return (
-    <div className=" p-28 bg-light-gradient dark:bg-dark-gradient">
+    <div className="pt-32 mx-auto px-12 py-8 dark:bg-dark-gradient bg-light-gradient min-h-screen">
       <h1 className="text-3xl font-bold mb-6 dark:text-white">Your Cart</h1>
       {cart.length === 0 ? (
         <p className="text-gray-700 dark:text-gray-300">
@@ -105,7 +105,7 @@ const Cart = () => {
         </h2>
         <button
           onClick={handleBuy}
-          className={`px-4 py-2 mt-2 mr-2 text-white rounded ${
+          className={` px-4 py-2 mt-2 mr-2 text-white rounded ${
             loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500"
           }`}
           disabled={loading}
