@@ -25,7 +25,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   }
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="p-20 relative overflow-hidden">
       <div
         className="absolute inset-0 bg-contain blur-[6px]"
         style={{
