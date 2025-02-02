@@ -10,6 +10,7 @@ interface Blog {
   Description: string;
   Title_Ka?: string;
   Description_Ka?: string;
+  Image?: string;
 }
 
 export default function BlogPage() {
@@ -84,14 +85,21 @@ export default function BlogPage() {
     language === "ka" ? blog.Description_Ka : blog.Description;
 
   return (
-    <div className="flex justify-center items-center m-28">
-      <div className="p-8 bg-white shadow-md rounded-lg max-w-md text-center">
-        <h1 className="text-2xl font-bold mb-4">{title}</h1>
-        <p className="text-gray-700">{description}</p>
+    <div className="flex justify-center items-center pt-28 pb-10 dark:bg-black">
+      <div className="p-8 bg-white dark:bg-black shadow-md rounded-lg max-w-md text-center">
+        <h1 className="text-2xl font-bold mb-4 dark:text-white">{title}</h1>
+        {blog.Image && (
+          <img
+            src={blog.Image}
+            alt={title}
+            className="w-full h-auto max-h-80 object-cover rounded-lg mb-4"
+          />
+        )}
+        <p className="text-gray-700 dark:text-gray-300">{description}</p>
         <div className="mt-4">
           <button
             onClick={handleDelete}
-            className="bg-red-500 text-white py-2 px-4 rounded"
+            className="bg-red-500 text-white py-2 px-4 rounded dark:bg-red-600"
           >
             Delete Blog
           </button>

@@ -64,29 +64,32 @@ const GetFurnitureProducts = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl text-center font-extrabold mb-6">
-        {clientLanguage === "ka" ? "მოწყობილობა" : "Furniture Products"}
+    <div className="pt-28 mx-auto px-4 py-8 dark:bg-dark-gradient bg-light-gradient min-h-screen">
+      <h1 className="text-3xl text-center font-extrabold mb-10 dark:text-white text-gray-900">
+        {clientLanguage === "ka" ? "პროდუქტები" : "Furniture Products"}
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => (
-          <div key={product.id} className="bg-white p-6 rounded-lg shadow-lg">
+          <div
+            key={product.id}
+            className="bg-white dark:bg-dark-gradient p-6 rounded-lg shadow-lg"
+          >
             <img
               src={product.photo}
               alt={product.name}
               className="w-full h-48 object-cover rounded-md mb-4"
             />
-            <h2 className="text-xl font-semibold mb-2">
+            <h2 className="text-xl font-semibold mb-2 dark:text-white">
               {clientLanguage === "ka" ? product.Name_Ka : product.name}
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               {clientLanguage === "ka" ? "ბრენდი: " : "Brand: "}
               {clientLanguage === "ka" ? product.Brand_Ka : product.brand}
             </p>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               {clientLanguage === "ka" ? "ფასი: " : "Price: "} ${product.price}
             </p>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               {clientLanguage === "ka"
                 ? product.Description_Ka
                 : product.description}
@@ -94,7 +97,7 @@ const GetFurnitureProducts = () => {
             <div className="flex justify-between items-center mt-4">
               <button
                 onClick={() => addToCart(product)}
-                className="bg-blue-500 text-white py-2 px-4 rounded"
+                className="bg-blue-500 dark:bg-blue-700 text-white py-2 px-4 rounded"
               >
                 {clientLanguage === "ka" ? "კალათში დამატება" : "Add to Cart"}
               </button>

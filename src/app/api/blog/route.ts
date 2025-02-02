@@ -7,8 +7,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     const columns =
       language === "ka"
-        ? "id, Title_Ka, Description_Ka"
-        : "id, Title, Description";
+        ? "id, Title_Ka, Description_Ka, Image"
+        : "id, Title, Description, Image";
 
     const { data: blog, error } = await supabase.from("Blog").select(columns);
 

@@ -36,7 +36,7 @@ function Home(): JSX.Element {
   };
 
   return (
-    <div className="text-center space-y-10 mb-10">
+    <div className="pt-16 text-center min-h-screen bg-light-gradient dark:bg-dark-gradient">
       <div className="relative">
         <img
           src={mainImage}
@@ -57,7 +57,7 @@ function Home(): JSX.Element {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 md:grid-cols-6">
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 md:grid-cols-6 p-10">
         {categories.map((category) => (
           <a
             href={`/${category.label.toLowerCase().replace(/\s+/g, "-")}`}
