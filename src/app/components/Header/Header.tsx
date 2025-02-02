@@ -11,12 +11,20 @@ import { FiMail, FiShoppingCart, FiUser } from "react-icons/fi";
 import { useCartContext } from "../../context/CartContext";
 
 const Header = (): JSX.Element | null => {
-  const { isAuthenticated, logout } = useAuth();
+  const { logout } = useAuth();
   const { theme, changeTheme } = useThemeContext();
   const { language, toggleLanguage, translations } = useLanguageContext();
   const router = useRouter();
   const [isAuthChecked, setIsAuthChecked] = useState<boolean>(false);
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const { cartCount } = useCartContext();
+  const [showCategoryDropdown, setShowCategoryDropdown] =
+    useState<boolean>(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
+  const handleCategoryToggle = (): void => {
+    setShowCategoryDropdown(!showCategoryDropdown);
+  };
 
   useEffect(() => {
     setIsAuthChecked(true);
@@ -35,20 +43,42 @@ const Header = (): JSX.Element | null => {
     router.push(path);
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <header className="header">
       <div className="logo">
         <img src="/assets/logo_aveji.png" alt="logo" />
       </div>
 
-      <nav className="nav">
+      <button
+        className={`burger-menu ${menuOpen ? "open" : ""}`}
+        onClick={toggleMenu}
+      >
+        {menuOpen ? "×" : "☰"}
+      </button>
+
+      <nav className={`nav ${menuOpen ? "open" : ""}`}>
         <ul>
           <li>
             <Link href="/">{t.HOME}</Link>
           </li>
-          <li>
-            <Link href="/">{t.CATEGORIES}</Link>
+          <li className="category-dropdown-wrapper">
+            <button onClick={handleCategoryToggle}>{t.CATEGORIES}</button>
+            {showCategoryDropdown && (
+              <ul className="category-dropdown">
+                <li>Chair</li>
+                <li>Table</li>
+                <li>Lamp</li>
+                <li>Sofa</li>
+                <li>Bed</li>
+                <li>Wardrobe</li>
+              </ul>
+            )}
           </li>
+
           <li>
             <Link href="/premium">{t.PREMIUM}</Link>
           </li>
@@ -56,7 +86,7 @@ const Header = (): JSX.Element | null => {
             <Link href="/blog">{t.BLOG}</Link>
           </li>
           <li>
-            <Link href="/">{t.SALE}</Link>
+            <Link href="/get-furniture-product">{t.PRODUCTS}</Link>
           </li>
         </ul>
       </nav>
@@ -80,6 +110,12 @@ const Header = (): JSX.Element | null => {
 
       <div className="auth">
         <div className="icons">
+          <div className="plus-button-wrapper">
+            <button onClick={() => handleRedirect("/create-furniture-product")}>
+              +
+            </button>
+          </div>
+
           <FiMail
             title="Contact Us"
             className="icon"
@@ -93,22 +129,22 @@ const Header = (): JSX.Element | null => {
             />
             {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
           </div>
-          <FiUser
-            title="Profile"
-            className="icon"
-            onClick={() => handleRedirect("/profile")}
-          />
+          <div className="profile-dropdown-wrapper">
+            <FiUser
+              title="Profile"
+              className="icon"
+              onClick={() => setShowDropdown(!showDropdown)}
+            />
+            {showDropdown && (
+              <div className="profile-dropdown">
+                <button onClick={() => handleRedirect("/profile")}>
+                  Profile
+                </button>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
+          </div>
         </div>
-
-        {isAuthenticated ? (
-          <button className="auth-button" onClick={handleLogout}>
-            LOGOUT
-          </button>
-        ) : (
-          <Link href="/sign-in" className="auth-button">
-            LOGIN
-          </Link>
-        )}
       </div>
     </header>
   );
