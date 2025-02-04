@@ -18,7 +18,7 @@ export async function createCheckoutSession(
         price_data: {
           currency: CURRENCY,
           product_data: { name: "Premium Plan Subscription" },
-          unit_amount: formatAmountForStripe(50, CURRENCY),
+          unit_amount: formatAmountForStripe(10, CURRENCY),
         },
       },
     ],
