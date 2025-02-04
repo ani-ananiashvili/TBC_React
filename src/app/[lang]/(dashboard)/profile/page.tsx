@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import { createClient } from "../../../utils/supabase/client";
 import Spinner from "../../../components/Spinner/Spinner";
 import useAuth from "../../../hooks/useAuth";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 export default function Profile() {
   const { user, isLoading, isAuthenticated } = useAuth();
   const [isError, setIsError] = useState<string | null>(null);
   const supabase = createClient();
+  const { language } = useLanguageContext();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -41,7 +43,9 @@ export default function Profile() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-          Please log in to view your profile.
+          {language === "ka"
+            ? "გთხოვთ, გაიარეთ ავტორიზაცია რომ შეძლოთ თქვენი პროფილის ნახვა"
+            : "Please log in to view your profile"}
         </h2>
       </div>
     );
@@ -55,15 +59,18 @@ export default function Profile() {
     );
   }
 
-  const userName = user?.user_metadata?.name || "User";
+  const userName =
+    user?.user_metadata?.name || (language === "ka" ? "მომხმარებელი" : "User");
   const avatarUrl =
     user?.user_metadata?.avatar_url ||
     "https://cdn-icons-png.flaticon.com/512/8188/8188359.png";
-  const email = user?.email || "No email available";
+  const email =
+    user?.email ||
+    (language === "ka" ? "ელ.ფოსტა მიუწვდომელია" : "No email available");
 
   return (
-    <div className="flex items-center justify-center p-20 min-h-screen bg-light-gradient dark:bg-dark-gradient">
-      <div className="bg-white dark:bg-dark-gradient p-6 rounded-lg shadow-lg w-full max-w-md">
+    <div className="flex items-center justify-center pt-36 pb-24 bg-light-gradient dark:bg-dark-gradient">
+      <div className="bg-white dark:bg-dark-gradient p-12 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold text-center text-gray-600 dark:text-gray-200 mb-4">
           {userName}
         </h1>
@@ -76,7 +83,7 @@ export default function Profile() {
         </div>
         <div className="mt-6">
           <p className="text-gray-600 dark:text-gray-300 mt-2 text-center">
-            Email: {email}
+            {language === "ka" ? "ელ.ფოსტა:" : "Email:"} {email}
           </p>
         </div>
       </div>
