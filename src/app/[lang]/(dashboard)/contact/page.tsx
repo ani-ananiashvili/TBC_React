@@ -169,6 +169,30 @@ const ContactPage = () => {
           </button>
         </div>
       </form>
+
+      <div>
+        <hr className="my-12 border-t-2 border-gray-300 w-5/6 mx-auto" />
+        <div className="flex justify-around mt-6">
+          <div className="flex items-center space-x-2">
+            <span className="text-gray-500">
+              <i className="fas fa-envelope"></i>
+            </span>
+            <p className="text-gray-600">chairish.store@gmail.com</p>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="text-gray-500">
+              <i className="fas fa-map-marker-alt"></i>
+            </span>
+            <p className="text-gray-600">01011 Street Name, City, Country</p>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="text-gray-500">
+              <i className="fas fa-phone-alt"></i>
+            </span>
+            <p className="text-gray-600">+001 011 010011</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
