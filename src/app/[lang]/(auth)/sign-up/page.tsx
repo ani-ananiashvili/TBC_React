@@ -10,20 +10,21 @@ export default async function SignUp(props: {
 
   return (
     <form
-      className="m-12 flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-6 h-full"
+      className="mt-24 mb-4 flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-4"
       style={{
         background: "linear-gradient(145deg, #f5f7fa, #e4ebf5)",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
       }}
     >
       <h1 className="text-2xl font-medium">Sign up</h1>
-      <p className="text-sm text text-foreground">
+      <p className="text-sm text-foreground">
         Already have an account?{" "}
         <Link className="text-primary font-medium underline" href="/sign-in">
           Sign in
         </Link>
       </p>
-      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-6">
+        {" "}
         <label htmlFor="email">Email</label>
         <input
           data-cy="sign-up-email"

@@ -11,7 +11,7 @@ export default async function ForgotPassword(props: {
 
   return (
     <form
-      className="m-20 flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-6 h-full"
+      className="mb-24 mt-36 flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-4"
       style={{
         background: "linear-gradient(145deg, #f5f7fa, #e4ebf5)",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
@@ -26,7 +26,7 @@ export default async function ForgotPassword(props: {
           </Link>
         </p>
       </div>
-      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-6">
         <Input
           name="email"
           placeholder="you@example.com"
