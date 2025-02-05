@@ -5,7 +5,7 @@ export async function DELETE(req: Request) {
   const url = new URL(req.url);
   const productId = url.pathname.split("/").pop();
 
-  if (!productId || isNaN(Number(productId))) {
+  if (!productId) {
     return NextResponse.json(
       { error: "Invalid or missing productId parameter" },
       { status: 400 }
@@ -20,7 +20,7 @@ export async function DELETE(req: Request) {
 
     if (error) {
       console.error("Supabase error:", error);
-      throw new Error(`Error deleting product: ${error.message}`);
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json({ message: "Product deleted successfully!" });
