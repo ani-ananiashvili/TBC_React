@@ -20,6 +20,7 @@ interface CartContextProps {
   addToCart: (product: Product) => void;
   removeFromCart: (id: string) => void;
   clearCart: () => void;
+  updateCart: (product: Product) => void;
   cartCount: number;
 }
 
@@ -55,6 +56,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setCart((prevCart) => prevCart.filter((product) => product.id !== id));
   };
 
+  const updateCart = (product: Product) => {
+    setCart((prevCart) => {
+      return prevCart.map((p) =>
+        p.id === product.id ? { ...p, quantity: product.quantity } : p
+      );
+    });
+  };
+
   const clearCart = () => {
     setCart([]);
   };
@@ -63,7 +72,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, clearCart, cartCount }}
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateCart,
+        clearCart,
+        cartCount,
+      }}
     >
       {children}
     </CartContext.Provider>
