@@ -1,11 +1,10 @@
 footer {
-  background-color: #4A628A;
-  padding: 1em 0 3em;
+  background-color: #4a628a;
   color: #d3d1d1;
 }
 
 .dark .footer {
-  background-color: black; 
+  background-color: black;
   color: #d3d1d1;
 }
 
@@ -25,7 +24,7 @@ footer {
 }
 
 .footer h2 {
-  font-size: 1.7em;
+  font-size: 1.5em;
   margin-bottom: 0.5em;
   color: #d3d1d1;
 }
@@ -36,7 +35,7 @@ footer {
 }
 
 .mobile-img a img {
-  width: 150px;
+  width: 130px;
   height: auto;
 }
 
@@ -47,9 +46,8 @@ footer {
 }
 
 .footer-links li {
-  margin: 1.3em 0 0;
-  font-size: 1.08em;
-
+  padding: 1.3em 0 0;
+  font-size: 1em;
 }
 
 .footer-links a {
@@ -58,7 +56,6 @@ footer {
 }
 
 .footer-links a:hover {
-  /* color: rgb(221, 106, 44); */
   text-decoration: underline;
 }
 
@@ -97,7 +94,6 @@ footer {
 
   .footer-links {
     justify-content: center;
-    gap: 2em;
   }
 
   .footer-links li {

@@ -25,36 +25,38 @@ const Footer = (): JSX.Element => {
         <div className="footer-links">
           <ul>
             <li>
-              <Link href="/">{t.legal}</Link>
+              <Link href="/">{t.faQs}</Link>
             </li>
+            <li>
+              <Link href="/">{t.shipping}</Link>
+            </li>
+            <li>
+              <Link href="/">{t.careAndSafety}</Link>
+            </li>
+          </ul>
+
+          <ul>
+            <li>
+              <Link href="/">{t.retailStockists}</Link>
+            </li>
+            <li>
+              <Link href="/">{t.stockistApplication}</Link>
+            </li>
+            <li>
+              <Link href="/">{t.tradeAccountApplication}</Link>
+            </li>
+          </ul>
+
+          <ul>
             <li>
               <Link href="/">{t.privacy}</Link>
             </li>
+
             <li>
-              <Link href="/">{t.artistResources}</Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link href="/blog">{t.blog}</Link>
+              <Link href="/">{t.returns}</Link>
             </li>
             <li>
-              <Link href="/products">{t.products}</Link>
-            </li>
-            <li>
-            <Link href="/create-product-list">Product List</Link>
-          </li>
-          </ul>
-          <ul>
-          <li>
-              <Link href="/">{t.charts}</Link>
-            </li>
-           
-            <li>
-            <Link href="/premium">Premium</Link>
-          </li>
-            <li>
-              <Link href="/">{t.transparencyReports}</Link>
+              <Link href="/">{t.termsOfService}</Link>
             </li>
           </ul>
         </div>
