@@ -67,8 +67,8 @@ export default function CheckoutForm(): JSX.Element {
                 ? "მიმდინარეობს გადახდის პროცესი..."
                 : "Processing..."
               : language === "ka"
-              ? "გადახდა $50"
-              : "Subscribe for $50"}
+              ? "გადახდა $10"
+              : "Subscribe for $10"}
           </button>
         </div>
       )}

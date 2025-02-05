@@ -10,7 +10,7 @@ export default async function SignIn(props: {
 
   return (
     <form
-      className="m-12 flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-6 h-full"
+      className="mt-24 mb-4 flex flex-col min-w-64 max-w-xs mx-auto border border-[#4a628a] rounded-lg p-4"
       style={{
         background: "linear-gradient(145deg, #f5f7fa, #e4ebf5)",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
@@ -23,7 +23,7 @@ export default async function SignIn(props: {
           Sign up
         </Link>
       </p>
-      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-6">
         <label htmlFor="email">Email</label>
         <input
           data-cy="sign-in-email"

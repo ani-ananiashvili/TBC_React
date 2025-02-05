@@ -1,3 +1,5 @@
+import { FiArchive } from "react-icons/fi";
+
 export default async function ResultPage(): Promise<JSX.Element> {
   const product = {
     id: "1",
@@ -49,7 +51,7 @@ export default async function ResultPage(): Promise<JSX.Element> {
   };
 
   return (
-    <div className="p-10">
+    <div className="p-28 pb-10 bg-light-gradient dark:bg-dark-gradient dark:text-slate-300">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold uppercase">Home Inspiration</h1>
         <p className="text-s text-gray-600">
@@ -76,6 +78,13 @@ export default async function ResultPage(): Promise<JSX.Element> {
             <p className="text-gray-600 text-justify">{section.description}</p>
           </div>
         ))}
+
+        <div className="flex justify-center mt-12">
+          <button className="flex items-center px-20 py- gap-2 bg-gray-500 text-white text-lg font-semibold rounded-lg hover:bg-gray-600 transition">
+            <FiArchive className="w-6 h-6 mr-1" />
+            Archive
+          </button>
+        </div>
       </div>
     </div>
   );

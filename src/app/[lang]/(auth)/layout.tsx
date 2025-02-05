@@ -25,18 +25,19 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   }
 
   return (
-    <div className="p-20 relative overflow-hidden">
+    <div className="relative flex flex-col">
       <div
-        className="absolute inset-0 bg-contain blur-[6px]"
+        className="absolute inset-0 bg-cover blur-[5px]"
         style={{
-          backgroundImage:
-            "url('https://img.freepik.com/free-photo/mid-century-modern-living-room-interior-design-with-monstera-tree_53876-129804.jpg?semt=ais_hybrid')",
+          backgroundImage: "url('/assets/cover-image.jpg')",
         }}
       ></div>
 
-      <main className="relative z-10">
-        <AuthHeader />
-        {children}
+      <main className="relative z-10 flex-grow flex justify-center items-center">
+        <div className="w-full max-w-md px-6 py-8 bg-opacity-80 rounded-lg">
+          <AuthHeader />
+          {children}
+        </div>
       </main>
     </div>
   );

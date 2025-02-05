@@ -23,10 +23,11 @@ const categories: Category[] = [
 ];
 
 const coverImages = [
-  "https://static.vecteezy.com/system/resources/previews/037/349/562/non_2x/ai-generated-a-blue-sofa-and-a-wooden-table-free-photo.jpg",
-  "https://www.brillianthomeliving.com.au/cdn/shop/files/Furniture_Protection_1000x500_0096b3ca-3d38-4df1-af60-86024ce54e0b.jpg?v=1658799058&width=2084",
-  "https://www.covermyfurniture.com/wp-content/uploads/2022/08/blue-sofa-3.jpg",
+  "/assets/cover-1.avif",
+  "/assets/cover-2.jpg",
+  "/assets/cover-3.jpg",
 ];
+
 
 function Home(): JSX.Element {
   const [mainImage, setMainImage] = useState<string>(coverImages[0]);

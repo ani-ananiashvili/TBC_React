@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useLanguageContext } from "../../context/LanguageContext";
 import { FiMail, FiShoppingCart, FiUser } from "react-icons/fi";
 import { useCartContext } from "../../context/CartContext";
+import { FiSun, FiMoon } from "react-icons/fi";
 
 const Header = (): JSX.Element | null => {
   const { logout } = useAuth();
@@ -97,7 +98,11 @@ const Header = (): JSX.Element | null => {
             className="toggle-track"
             onClick={() => changeTheme(theme === "light" ? "dark" : "light")}
           >
-            {theme === "light" ? "⛅" : "🌙"}
+            {theme === "light" ? (
+              <FiSun title="Light Mode" />
+            ) : (
+              <FiMoon title="Dark Mode" />
+            )}
           </div>
         </div>
 
