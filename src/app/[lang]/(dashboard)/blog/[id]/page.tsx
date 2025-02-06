@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useLanguageContext } from "../../../../context/LanguageContext";
 import Spinner from "../../../../components/Spinner/Spinner";
+import { FaTrash } from "react-icons/fa";
 
 interface Blog {
   id: number;
@@ -30,11 +31,9 @@ export default function BlogPage() {
         const response = await fetch(
           `/api/blog/${params.id}?language=${language}`
         );
-
         if (!response.ok) {
           throw new Error("Failed to fetch blog");
         }
-
         const data = await response.json();
         setBlog(data);
         setError(null);
@@ -47,7 +46,6 @@ export default function BlogPage() {
         setLoading(false);
       }
     };
-
     fetchBlog();
   }, [params.id, language]);
 
@@ -85,24 +83,37 @@ export default function BlogPage() {
     language === "ka" ? blog.Description_Ka : blog.Description;
 
   return (
-    <div className="flex justify-center items-center pt-28 pb-10 dark:bg-black">
-      <div className="p-8 bg-white dark:bg-black shadow-md rounded-lg max-w-md text-center">
-        <h1 className="text-2xl font-bold mb-4 dark:text-white">{title}</h1>
+    <div className="flex justify-center items-center pt-28 pb-10 dark:bg-dark-gradient">
+      <div className="p-8 bg-white dark:bg-dark-gradient shadow-md rounded-lg max-w-5xl w-full flex">
         {blog.Image && (
-          <img
-            src={blog.Image}
-            alt={title}
-            className="w-full h-auto max-h-80 object-cover rounded-lg mb-4"
-          />
+          <div className="w-1/2 p-4">
+            <img
+              src={blog.Image}
+              alt={title}
+              className="w-full h-auto max-h-96 object-cover rounded-lg"
+            />
+          </div>
         )}
-        <p className="text-gray-700 dark:text-gray-300">{description}</p>
-        <div className="mt-4">
-          <button
-            onClick={handleDelete}
-            className="bg-red-500 text-white py-2 px-4 rounded dark:bg-red-600"
-          >
-            Delete Blog
-          </button>
+        <div className="w-1/2 p-4 flex flex-col justify-between">
+          <h1 className="text-2xl font-bold mb-4 dark:text-white text-center">
+            {title}
+          </h1>
+          <p className="text-gray-700 dark:text-gray-300 mt-4 text-justify">
+            {description}
+          </p>
+          <div className="flex space-x-4 mt-6"></div>
+          <div className="flex space-x-4 mt-6">
+            <button className="bg-white border-2 border-[#4A628A] text-black py-2 w-96 rounded dark:bg-dark-gradient dark:text-white">
+              {language === "ka" ? "ბლოგის რედაქტირება" : "Edit Blog"}
+            </button>
+
+            <button
+              onClick={handleDelete}
+              className="bg-red-600 text-white py-2 w-9 rounded dark:bg-red-600 flex justify-center items-center"
+            >
+              <FaTrash />
+            </button>
+          </div>
         </div>
       </div>
     </div>
