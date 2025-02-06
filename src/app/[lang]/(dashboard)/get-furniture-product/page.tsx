@@ -5,7 +5,7 @@ import { useCartContext } from "../../../context/CartContext";
 import { useLanguageContext } from "../../../context/LanguageContext";
 import Link from "next/link";
 import Spinner from "../../../components/Spinner/Spinner";
-import { FiShoppingCart, FiFilter, FiX } from "react-icons/fi";
+import { FiShoppingCart, FiFilter } from "react-icons/fi";
 
 interface Product {
   id: string;
@@ -87,14 +87,15 @@ const GetFurnitureProducts = () => {
     }
   };
 
-  const handleBrandRemove = (brand: string) => {
-    setSelectedBrands(selectedBrands.filter((item) => item !== brand));
-  };
-
   const filteredProducts = products.filter(
     (product) =>
       (product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        product.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (clientLanguage === "ka" &&
+          (product.Name_Ka?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.Brand_Ka?.toLowerCase().includes(
+              searchQuery.toLowerCase()
+            )))) &&
       (selectedBrands.length > 0
         ? selectedBrands.includes(product.brand)
         : true)
@@ -161,45 +162,24 @@ const GetFurnitureProducts = () => {
 
       {/* Brand Dropdown */}
       {isBrandDropdownOpen && (
-        <div className="mb-6 bg-white dark:bg-dark-gradient border border-gray-300 rounded-lg w-full mt-2 p-2 z-10 dark:text-white">
-          {brands.map((brand) => (
-            <button
-              key={brand}
-              onClick={() => handleBrandSelect(brand)}
-              className="w-60 text-left py-2 hover:text-sky-800 dark:hover:text-slate-500"
-            >
-              {brand}
-            </button>
-          ))}
+        <div className="mb-6 w-full mt-2 p-2 z-10 dark:text-white">
+          <div className="flex flex-wrap gap-2 justify-center">
+            {brands.map((brand) => (
+              <button
+                key={brand}
+                onClick={() => handleBrandSelect(brand)}
+                className={`text-left py-2 px-4 hover:text-sky-800 dark:text-slate-500 border border-gray-300 rounded-lg ${
+                  selectedBrands.includes(brand) ? "bg-blue-100" : ""
+                }`}
+              >
+                {brand}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
-      {/* Selected Brands */}
-      <div className="mb-6">
-        <h3 className="font-semibold text-gray-800 dark:text-white pl-1">
-          {clientLanguage === "ka" ? "დარჩენილი ბრენდები" : "Selected Brands"}
-        </h3>
-        <div className="flex flex-wrap gap-2 mt-2">
-          {selectedBrands.map((brand) => (
-            <div
-              key={brand}
-              className="flex items-center bg-gray-200 dark:bg-gray-700 rounded-full px-4 py-2"
-            >
-              <span className="text-sm text-gray-800 dark:text-white">
-                {brand}
-              </span>
-              <button
-                onClick={() => handleBrandRemove(brand)}
-                className="ml-2 text-gray-500 dark:text-white"
-              >
-                <FiX className="w-4 h-4" />
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {sortedProducts.length > 0 ? (
           sortedProducts.map((product) => (
             <div
@@ -240,7 +220,7 @@ const GetFurnitureProducts = () => {
                   {clientLanguage === "ka" ? product.Brand_Ka : product.brand}
                 </p>
 
-                <p className="text-gray-600 dark:text-gray-300 mr-12">
+                <p className="text-gray-600 dark:text-gray-300">
                   {clientLanguage === "ka" ? "ფასი: " : "Price: "} $
                   {product.price}
                 </p>
