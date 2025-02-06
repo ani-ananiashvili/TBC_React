@@ -135,29 +135,40 @@ const ProductDetails = () => {
           <div className="mt-6 grid grid-cols-3">
             <div>
               <p className="text-gray-700 dark:text-gray-300">
-                Brand:{" "}
+                {language === "ka" ? "ბრენდი: " : "Brand: "}
                 {language === "ka"
                   ? product.Brand_Ka || product.brand
                   : product.brand}
               </p>
             </div>
+
             <div className="mb-4">
-              <p className="text-gray-700 dark:text-gray-300">Material: </p>
-            </div>
-            <div className="mb-4">
-              <p className="text-gray-700 dark:text-gray-300">Category: </p>
+              <p className="text-gray-700 dark:text-gray-300">
+                {language === "ka" ? "მასალა:" : "Material:"}
+              </p>
             </div>
 
             <div className="mb-4">
               <p className="text-gray-700 dark:text-gray-300">
+                {language === "ka" ? "კატეგორია:" : "Category:"}
+              </p>
+            </div>
+
+            <div className="mb-4">
+              <p className="text-gray-700 dark:text-gray-300">
+                {language === "ka" ? "ფასი:" : "Price:"}
                 Price: ${product.price}
               </p>
             </div>
             <div className="mb-4">
-              <p className="text-gray-700 dark:text-gray-300">Size: </p>
+              <p className="text-gray-700 dark:text-gray-300">
+                {language === "ka" ? "ზომა:" : "Size:"}
+              </p>
             </div>
             <div className="mb-4">
-              <p className="text-gray-700 dark:text-gray-300">Style: </p>
+              <p className="text-gray-700 dark:text-gray-300">
+                {language === "ka" ? "სტილი:" : "Style:"}
+              </p>
             </div>
           </div>
 
