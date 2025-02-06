@@ -5,12 +5,10 @@ import { useLanguageContext } from "../../../context/LanguageContext";
 import Spinner from "../../../components/Spinner/Spinner";
 
 interface Blog {
-  id: number;
-  Title?: string;
-  Description?: string;
-  Title_Ka?: string;
-  Description_Ka?: string;
-  Image?: string;
+  id: string;
+  Title: string;
+  Description: string;
+  Image: string;
 }
 
 export default function BlogPage() {
@@ -67,6 +65,8 @@ export default function BlogPage() {
     return <Spinner />;
   }
 
+  const maxDescriptionLength = 120; 
+
   return (
     <div
       className={`mx-auto p-6 min-h-screen bg-light-gradient dark:bg-dark-gradient`}
@@ -114,9 +114,13 @@ export default function BlogPage() {
               <h2 className="text-lg font-semibold text-gray-800 mb-4 dark:text-white">
                 {blog.Title}
               </h2>
+
               <p className="text-gray-600 text-sm mb-6 leading-relaxed dark:text-gray-400">
-                {blog.Description}
+                {blog.Description?.length > maxDescriptionLength
+                  ? `${blog.Description.slice(0, maxDescriptionLength)}...`
+                  : blog.Description}
               </p>
+
               <Link
                 className="text-headerColor font-medium transition-colors duration-200 dark:text-blue-300"
                 href={`/${language}/blog/${blog.id}`}

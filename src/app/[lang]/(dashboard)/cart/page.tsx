@@ -5,9 +5,20 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 import getStripe from "../../../utils/stripe/get-stripejs";
+import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
+
+type Product = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  photo: string;
+};
 
 const Cart = () => {
-  const { cart, removeFromCart, clearCart } = useCartContext();
+  const { cart, removeFromCart, clearCart, addToCart, updateCart } =
+    useCartContext();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -46,6 +57,17 @@ const Cart = () => {
     }
   };
 
+  const handleIncreaseQuantity = (item: Product) => {
+    addToCart(item);
+  };
+
+  const handleDecreaseQuantity = (item: Product) => {
+    if (item.quantity > 1) {
+      const updatedItem = { ...item, quantity: item.quantity - 1 };
+      updateCart(updatedItem);
+    }
+  };
+
   return (
     <div className="pt-32 mx-auto px-12 py-8 dark:bg-dark-gradient bg-light-gradient min-h-screen">
       <h1 className="text-3xl font-bold mb-6 dark:text-white">Your Cart</h1>
@@ -67,12 +89,33 @@ const Cart = () => {
               className="flex items-center justify-between p-4 bg-white dark:bg-dark-gradient shadow-md rounded-lg"
             >
               <div className="flex items-center">
-                <img
-                  src={item.photo}
-                  alt={item.name}
-                  className="h-16 w-16 object-cover mr-4"
-                />
                 <div>
+                  <div className="flex flex-col items-center">
+                    <img
+                      src={item.photo}
+                      alt={item.name}
+                      className="h-16 w-16 object-cover mt-4"
+                    />
+                    <div className="flex items-center justify-center gap-2 mt-2">
+                      <button
+                        onClick={() => handleDecreaseQuantity(item)}
+                        className="text-gray-600 dark:text-gray-300"
+                      >
+                        <FiMinusCircle size={20} />
+                      </button>
+                      <span className="text-gray-600 dark:text-gray-300">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => handleIncreaseQuantity(item)}
+                        className="text-gray-600 dark:text-gray-300"
+                      >
+                        <FiPlusCircle size={20} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="ml-4">
                   <h3 className="text-xl font-semibold dark:text-white">
                     {item.name}
                   </h3>
@@ -81,9 +124,6 @@ const Cart = () => {
                   </p>
                   <p className="text-gray-600 dark:text-gray-300">
                     Price: ${item.price}
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    Quantity: {item.quantity}
                   </p>
                 </div>
               </div>
