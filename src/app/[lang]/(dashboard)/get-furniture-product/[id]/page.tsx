@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Spinner from "../../../../components/Spinner/Spinner";
 import { useCartContext } from "../../../../context/CartContext";
 import { FaTrash } from "react-icons/fa";
+import { useLanguageContext } from "../../../../context/LanguageContext";
 
 interface Product {
   id: string;
@@ -25,6 +26,7 @@ const ProductDetails = () => {
   const router = useRouter();
   const [product, setProduct] = useState<Product | null>(null);
   const { addToCart } = useCartContext();
+  const { language } = useLanguageContext();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -121,16 +123,22 @@ const ProductDetails = () => {
 
         <div className="w-1/2 p-4 flex flex-col justify-between">
           <h1 className="text-2xl font-bold mb-4 dark:text-white">
-            {product.name}
+            {language === "ka" ? product.Name_Ka || product.name : product.name}
           </h1>
-          <p className="text-gray-700 dark:text-gray-300 mt-4">
-            {product.description}
+
+          <p className="text-gray-700 dark:text-gray-300 mt-4 text-justify">
+            {language === "ka"
+              ? product.Description_Ka || product.description
+              : product.description}
           </p>
 
           <div className="mt-6 grid grid-cols-3">
             <div>
               <p className="text-gray-700 dark:text-gray-300">
-                Brand: {product.brand}
+                Brand:{" "}
+                {language === "ka"
+                  ? product.Brand_Ka || product.brand
+                  : product.brand}
               </p>
             </div>
             <div className="mb-4">
