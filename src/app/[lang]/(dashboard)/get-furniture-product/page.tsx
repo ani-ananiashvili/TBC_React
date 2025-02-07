@@ -115,14 +115,14 @@ const GetFurnitureProducts = () => {
 
   return (
     <div className="pt-28 mx-auto px-4 py-8 dark:bg-dark-gradient bg-light-gradient min-h-screen">
-      <div className="flex justify-between items-center mb-6">
-        <div className="relative">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+        <div className="relative w-full md:w-auto">
           <input
             type="text"
             placeholder={clientLanguage === "ka" ? "ძიება..." : "Search..."}
             value={searchQuery}
             onChange={handleSearchChange}
-            className="pl-7 w-96 border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-headerColor dark:bg-dark-gradient dark:text-white"
+            className="pl-7 w-full sm:w-96 border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-headerColor dark:bg-dark-gradient dark:text-white"
           />
           <button
             onClick={() => setIsBrandDropdownOpen(!isBrandDropdownOpen)}
@@ -134,17 +134,17 @@ const GetFurnitureProducts = () => {
 
         {/* Sort Dropdown */}
         <select
-          className="w-80 border border-gray-300 rounded-lg py-3 px-3 dark:bg-neutral-900 dark:text-white"
+          className="w-full sm:w-80 border border-gray-300 rounded-lg py-3 px-3 dark:bg-neutral-900 dark:text-white"
           onChange={handleSortChange}
         >
           <option value="price-asc">
             {clientLanguage === "ka"
-              ? "ფასი (ქვემოდან-ზემოთ)"
+              ? "ფასი (ზრდადობით)"
               : "Price (Low to High)"}
           </option>
           <option value="price-desc">
             {clientLanguage === "ka"
-              ? "ფასი (ზემოდან-ქვემოთ)"
+              ? "ფასი (კლებადობით)"
               : "Price (High to Low)"}
           </option>
           <option value="name-asc">
@@ -191,7 +191,7 @@ const GetFurnitureProducts = () => {
                   <img
                     src={product.photo}
                     alt={product.name}
-                    className="w-auto h-auto object-contain rounded-lg mb-4"
+                    className="w-full h-auto object-contain rounded-lg mb-4"
                   />
                   <Link
                     href={`/get-furniture-product/${product.id}`}
@@ -237,7 +237,7 @@ const GetFurnitureProducts = () => {
             </div>
           ))
         ) : (
-          <p className=" pl-2 text-gray-600 dark:text-gray-400">
+          <p className="pl-2 text-gray-600 dark:text-gray-400">
             {clientLanguage === "ka"
               ? "არ არსებობს პროდუქტი"
               : "No products available"}
