@@ -43,7 +43,7 @@ export default function SuccessCheckout() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center w-full h-screen">
         <p className="text-xl font-semibold text-gray-700">
           Loading your order details...
         </p>
@@ -69,7 +69,7 @@ export default function SuccessCheckout() {
         />
       </Head>
 
-      <div className="m-10 flex flex-col items-center justify-center bg-gray-50 p-6 rounded-lg shadow-lg">
+      <div className="mt-10 flex flex-col items-center justify-center bg-gray-50 p-20 rounded-lg shadow-lg">
         <h1 className="text-4xl font-extrabold text-green-600 mb-6">
           Payment Successful!
         </h1>
