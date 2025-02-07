@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { createClient } from "../../../utils/supabase/server";
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id");
+export async function GET(
+  req: Request,
+  props: { params: Promise<{ id: string }> }
+): Promise<NextResponse> {
+  const params = await props.params;
+  const { id } = params;
 
   if (!id) {
     return NextResponse.json(

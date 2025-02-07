@@ -19,13 +19,7 @@ const Header = (): JSX.Element | null => {
   const [isAuthChecked, setIsAuthChecked] = useState<boolean>(false);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const { cartCount } = useCartContext();
-  const [showCategoryDropdown, setShowCategoryDropdown] =
-    useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-
-  const handleCategoryToggle = (): void => {
-    setShowCategoryDropdown(!showCategoryDropdown);
-  };
 
   useEffect(() => {
     setIsAuthChecked(true);
@@ -51,7 +45,7 @@ const Header = (): JSX.Element | null => {
   return (
     <header className="header">
       <div className="logo">
-        <img src="/assets/logo_aveji.png" alt="logo" />
+        <img src="/assets/logo_furniture.png" alt="logo" />
       </div>
 
       <button
@@ -66,20 +60,6 @@ const Header = (): JSX.Element | null => {
           <li>
             <Link href="/">{t.HOME}</Link>
           </li>
-          <li className="category-dropdown-wrapper">
-            <button onClick={handleCategoryToggle}>{t.CATEGORIES}</button>
-            {showCategoryDropdown && (
-              <ul className="category-dropdown">
-                <li>Chair</li>
-                <li>Table</li>
-                <li>Lamp</li>
-                <li>Sofa</li>
-                <li>Bed</li>
-                <li>Wardrobe</li>
-              </ul>
-            )}
-          </li>
-
           <li>
             <Link href="/premium">{t.PREMIUM}</Link>
           </li>

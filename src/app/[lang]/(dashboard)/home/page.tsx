@@ -8,26 +8,34 @@ interface Category {
 }
 
 const categories: Category[] = [
-  { label: "Ashley", img: "/assets/ashley.jpg" },
-  { label: "BoConcept", img: "/assets/boconcept.png" },
-  { label: "Herman Miller", img: "/assets/herman_miller.webp" },
-  { label: "Knoll", img: "/assets/knoll.svg" },
-  { label: "IKEA", img: "/assets/ikea.jpg" },
-  { label: "Natuzzi", img: "/assets/natuzzi.jpg" },
-  { label: "Restoration Hardware", img: "/assets/rh.jpg" },
-  { label: "Cassina", img: "/assets/cassina.jpg" },
-  { label: "Roche Bobois", img: "/assets/roche_bobois.png" },
-  { label: "West Elm", img: "/assets/west_elm.png" },
-  { label: "Flexform", img: "/assets/flexform.png" },
-  { label: "Vitra", img: "/assets/vitra.jpg" },
+  { label: "Ashley", img: "https://i.postimg.cc/7LBSyfxL/ashely.jpg" },
+  { label: "BoConcept", img: "https://i.postimg.cc/d0QGX8cX/boconcept.jpg" },
+  {
+    label: "Herman Miller",
+    img: "https://i.postimg.cc/PrGYhGk1/herman-miller.jpg",
+  },
+  { label: "Knoll", img: "https://i.postimg.cc/XY45GwqJ/knoll.jpg" },
+  { label: "IKEA", img: "https://i.postimg.cc/Qxp5d6Xw/Ikea.jpg" },
+  { label: "Natuzzi", img: "https://i.postimg.cc/RZdHcNJT/natuzzi.jpg" },
+  {
+    label: "Restoration Hardware",
+    img: "https://i.postimg.cc/cJJ8T0QG/rh.jpg",
+  },
+  { label: "Cassina", img: "https://i.postimg.cc/Y9hY2M9z/cassina.jpg" },
+  {
+    label: "Roche Bobois",
+    img: "https://i.postimg.cc/wBbRGZVy/roche-bobois.jpg",
+  },
+  { label: "West Elm", img: "https://i.postimg.cc/hjkzSmNK/west-elm.jpg" },
+  { label: "Flexform", img: "https://i.postimg.cc/63gRyg4J/flexfirm.jpg" },
+  { label: "Vitra", img: "https://i.postimg.cc/0QMKRnWt/vitra.jpg" },
 ];
 
 const coverImages = [
-  "/assets/cover-1.avif",
-  "/assets/cover-2.jpg",
-  "/assets/cover-3.jpg",
+  "https://i.postimg.cc/nc7KQF1d/cover-1.jpg",
+  "https://i.postimg.cc/4xg66DLX/cover-2.jpg",
+  "https://i.postimg.cc/fRfxB8pm/cover-3.jpg",
 ];
-
 
 function Home(): JSX.Element {
   const [mainImage, setMainImage] = useState<string>(coverImages[0]);
@@ -60,20 +68,20 @@ function Home(): JSX.Element {
 
       <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 md:grid-cols-6 p-10">
         {categories.map((category) => (
-          <a
-            href={`/${category.label.toLowerCase().replace(/\s+/g, "-")}`}
-            className="block rounded-lg overflow-hidden shadow-lg cursor-pointer"
+          <div
             key={category.label}
+            className="relative block rounded-lg overflow-hidden shadow-lg cursor-pointer group"
           >
             <img
               src={category.img}
               alt={`Category: ${category.label}`}
-              className="w-auto h-full object-contain hover:scale-105 transition-transform duration-300"
+              className="w-auto h-full object-contain transition-transform duration-300 group-hover:scale-105"
             />
-            <div className="bg-black bg-opacity-60 text-white text-center p-2 ">
+
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full text-center bg-slate-600 bg-opacity-60 text-white text-sm font-semibold py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               {category.label}
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </div>
