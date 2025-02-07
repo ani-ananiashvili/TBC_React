@@ -2,7 +2,7 @@
 const nextConfig = {
   // distDir: "./dist",
   images: {
-    domains: [],
+    domains: ['i.postimg.cc'], 
   },
   async redirects() {
     return [
