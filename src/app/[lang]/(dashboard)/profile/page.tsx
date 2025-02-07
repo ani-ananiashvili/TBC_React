@@ -69,7 +69,7 @@ export default function Profile() {
     (language === "ka" ? "ელ.ფოსტა მიუწვდომელია" : "No email available");
 
   return (
-    <div className="flex items-center justify-center pt-36 pb-24 bg-light-gradient dark:bg-dark-gradient">
+    <div className="flex items-center justify-center pt-40 pb-24 bg-light-gradient dark:bg-dark-gradient">
       <div className="bg-white dark:bg-dark-gradient p-12 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold text-center text-gray-600 dark:text-gray-200 mb-4">
           {userName}
