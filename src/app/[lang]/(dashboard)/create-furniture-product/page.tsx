@@ -7,6 +7,7 @@ export default function CreateProductForm() {
   const [message, setMessage] = useState<string | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
   const router = useRouter();
   const { language } = useLanguageContext();
 
@@ -120,9 +121,9 @@ export default function CreateProductForm() {
     <div className="p-24 pb-16 min-h-screen bg-light-gradient dark:bg-dark-gradient">
       <div className="text-center">
         <img
-          src="/assets/logo_aveji.png"
+          src="/assets/logo_blue.png"
           alt="logo"
-          className="mx-auto mb-4 w-20 bg-transparent bg-sky-600"
+          className="mx-auto mb-4 w-28 bg-transparent bg-sky-600"
         />
         <h2 className="text-2xl font-semibold text-[#4a628a] mb-6">
           {language === "ka" ? "დაამატეთ ახალი პროდუქტი" : "Add New Product"}
