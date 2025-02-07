@@ -15,6 +15,7 @@
 .auth-header .controls {
   display: flex;
   align-items: center;
+  margin-right: 0px;
 }
 
 .auth-header .language-toggle button,
@@ -27,4 +28,14 @@
 .auth-header .language-toggle button:hover {
   background-color: #d3d1d1;
   color: #4a628a;
+}
+
+@media (max-width: 343px) {
+  .auth-header .theme-toggle,
+  .auth-header .language-toggle {
+    width: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
